@@ -10,8 +10,11 @@
  * Tells WordPress to load the WordPress theme and output it.
  *
  * @var bool
+ * COPY this to vendor\ekino\wordpress-bundle\Wordpress\Wordpress.php (line 77)
  */
-define('WP_USE_THEMES', true);
+if ( !defined('WP_USE_THEMES') ) {
+    define('WP_USE_THEMES', true);
+}
 
 /** Loads the WordPress Environment and Template */
 require( dirname( __FILE__ ) . '/wp-blog-header.php' );

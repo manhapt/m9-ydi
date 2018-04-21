@@ -26,7 +26,7 @@ define('DB_NAME', 'ydi');
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'mysql');
+define('DB_PASSWORD', '111111');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -78,7 +78,15 @@ $table_prefix  = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', false);
+//Enable WP_DEBUG mode
+define('WP_DEBUG', true);
+//Enable Debug Logging to /wp-content/debug.log
+define('WP_DEBUG_LOG', true);
+//Supress errors and warnings to screen
+define('WP_DEBUG_DISPLAY', false);
+//Supress PHP errors to screen
+ini_set('display_errors', 0);
+
 
 /* That's all, stop editing! Happy blogging. */
 
