@@ -1,24 +1,4 @@
 <?php
-/**
- * Front to the WordPress application. This file doesn't do anything, but loads
- * wp-blog-header.php which does and tells WordPress to load the theme.
- *
- * @package WordPress
- */
-
-/**
- * Tells WordPress to load the WordPress theme and output it.
- *
- * @var bool
- * COPY this to vendor\ekino\wordpress-bundle\Wordpress\Wordpress.php (line 77)
- */
-if ( !defined('WP_USE_THEMES') ) {
-    define('WP_USE_THEMES', true);
-}
-
-/** Loads the WordPress Environment and Template */
-require( dirname( __FILE__ ) . '/wp-blog-header.php' );
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -44,6 +24,7 @@ function symfony($id)
 
 $loader = require __DIR__.'/../sf/vendor/autoload.php';
 require_once __DIR__.'/../sf/var/bootstrap.php.cache';
+require_once __DIR__.'/wp-load.php';
 
 // Load application kernel
 require_once __DIR__.'/../sf/app/AppKernel.php';

@@ -1,6 +1,7 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+    prefix: /e-learning/
 
 ekino_wordpress:
     resource: "@EkinoWordpressBundle/Resources/config/routing.xml"
