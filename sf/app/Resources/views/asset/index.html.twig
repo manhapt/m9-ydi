@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Assets list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Uuid</th>
+                <th>State</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Options</th>
+                <th>Formatoption</th>
+                <th>Uri</th>
+                <th>Storageaccountname</th>
+                <th>Alternateid</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for asset in assets %}
+            <tr>
+                <td><a href="{{ path('asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
+                <td>{{ asset.uuid }}</td>
+                <td>{{ asset.state }}</td>
+                <td>{{ asset.name }}</td>
+                <td>{{ asset.title }}</td>
+                <td>{{ asset.description }}</td>
+                <td>{{ asset.options }}</td>
+                <td>{{ asset.formatOption }}</td>
+                <td>{{ asset.uri }}</td>
+                <td>{{ asset.storageAccountName }}</td>
+                <td>{{ asset.alternateId }}</td>
+                <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if asset.modified %}{{ asset.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('asset_show', { 'id': asset.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('asset_edit', { 'id': asset.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('asset_new') }}">Create a new asset</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Courseoptions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Required</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for courseOption in courseOptions %}
+            <tr>
+                <td><a href="{{ path('courseoption_show', { 'id': courseOption.id }) }}">{{ courseOption.id }}</a></td>
+                <td>{{ courseOption.title }}</td>
+                <td>{% if courseOption.required %}Yes{% else %}No{% endif %}</td>
+                <td>{{ courseOption.position }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('courseoption_show', { 'id': courseOption.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('courseoption_edit', { 'id': courseOption.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('courseoption_new') }}">Create a new courseOption</a>
+        </li>
+    </ul>
+{% endblock %}

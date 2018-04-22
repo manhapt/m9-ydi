@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/default", name="homepage")
+     * @Route("/default222", name="homepage")
      */
     public function indexAction(Request $request)
     {
@@ -23,7 +23,10 @@ class DefaultController extends Controller
     * @Route ("/hello-manh") 
     */
     public function helloWorld () 
-    { 
-        return new Response ('Hello World With Symfony', 200); 
+    {
+        // replace this example code with whatever you need
+        return $this->render('hello/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
     }
 }
