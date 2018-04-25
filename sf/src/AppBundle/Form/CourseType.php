@@ -18,10 +18,11 @@ class CourseType extends AbstractType
         $builder->add('sku')
             ->add('name')
             ->add('price', HiddenType::class, ['data' => 0])
-            ->add('status')
+            ->add('status', null, ['data' => 1])
             ->add('typeId', HiddenType::class)
-            ->add('image', FileType::class)
-            ->add('description');
+            ->add('description')
+            ->add('image', FileType::class, ['required' => false])
+        ;
     }
 
     /**
