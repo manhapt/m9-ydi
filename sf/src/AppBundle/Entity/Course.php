@@ -120,6 +120,14 @@ class Course
      * )
      */
     private $roles;
+
+    /**
+     * @var \Ekino\WordpressBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="\Ekino\WordpressBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="ID", onDelete="SET NULL")
+     */
+    private $user;
     
     /**
      * Constructor
@@ -440,6 +448,22 @@ class Course
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * @return \Ekino\WordpressBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param \Ekino\WordpressBundle\Entity\User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }
 

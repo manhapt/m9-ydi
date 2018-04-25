@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,8 +14,18 @@ class RoleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('status')->add('name')->add('resource');
-    }/**
+        $builder->add('status')
+            ->add('name', ChoiceType::class, [
+                'choices' => [
+                    ucfirst(RoleTypes::SUBSCRIBER) => RoleTypes::SUBSCRIBER,
+                    ucfirst(RoleTypes::CONTRIBUTOR) => RoleTypes::CONTRIBUTOR
+                ],
+            ])
+            ->add('resource', null, ['data' => 'course'])
+        ;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

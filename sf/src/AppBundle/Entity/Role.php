@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Role
  *
- * @ORM\Table(name="ydi_role")
+ * @ORM\Table(name="ydi_role", uniqueConstraints={@ORM\UniqueConstraint(name="uq_role_resource", columns={"name", "resource"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RoleRepository")
+ * @UniqueEntity(fields={"name","resource"}, message="Roles should not be duplicated with the same resource")
  */
 class Role
 {
