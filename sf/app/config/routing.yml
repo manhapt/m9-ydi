@@ -1,7 +1,11 @@
 app:
-    resource: '@AppBundle/Controller/'
+    resource: '@AppBundle/Controller/Frontend/'
     type: annotation
     prefix: /e-learning/
+app_admin:
+    resource: '@AppBundle/Controller/Backend/'
+    type: annotation
+    prefix: /admin/e-learning/
 
 ekino_wordpress:
     resource: "@EkinoWordpressBundle/Resources/config/routing.xml"

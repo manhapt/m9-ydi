@@ -19,4 +19,4 @@
 /sf/web/bundles/
 !/wp/wp-content/uploads/courses
 /wp/wp-content/uploads/courses/*
-/wp/wp-content/*.log
+/wp/wp-content/debug.log

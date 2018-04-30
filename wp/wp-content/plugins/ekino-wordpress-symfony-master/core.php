@@ -16,7 +16,8 @@ function symfony_boot()
     $sfContainer = symfony_get_container();
 
     if (!$sfContainer) {
-        require_once sprintf('%s/app/bootstrap.php.cache', WP_SYMFONY_PATH);
+        require_once sprintf('%s/vendor/autoload.php', WP_SYMFONY_PATH);
+        require_once sprintf('%s/var/bootstrap.php.cache', WP_SYMFONY_PATH);
         require_once sprintf('%s/app/AppKernel.php', WP_SYMFONY_PATH);
 
         $kernel = new AppKernel(WP_SYMFONY_ENVIRONMENT, WP_SYMFONY_DEBUG);
@@ -24,10 +25,13 @@ function symfony_boot()
         $kernel->boot();
 
         $sfContainer = $kernel->getContainer();
-        $sfContainer->enterScope('request');
-        $sfContainer->set('request', new \Symfony\Component\HttpFoundation\Request(), 'request');
+        if (AppKernel::MAJOR_VERSION < 3) {
+            $sfContainer->enterScope('request');
+        }
+        $sfContainer->set('request', \Symfony\Component\HttpFoundation\Request::createFromGlobals(), 'request');
 
-        symfony_get_container($sfContainer);
+        symfony($sfContainer);
+//        symfony_get_container($sfContainer);
     }
 }
 
@@ -40,7 +44,7 @@ function symfony_boot()
  */
 function symfony_service($name)
 {
-    return symfony_get_container()->get($name);
+    return symfony($name);
 }
 
 /**
@@ -58,9 +62,22 @@ function symfony_get_container($sfContainer = null)
         $container = symfony_container();
     }
 
-    return $container = $sfContainer ?: $container;
+    return $sfContainer ? $sfContainer : $container;
 }
 
+if(!function_exists('symfony')) {
+    function symfony($id)
+    {
+        static $container;
+
+        if ($id instanceof \Symfony\Component\DependencyInjection\ContainerInterface) {
+            $container = $id;
+            return;
+        }
+
+        return $container->get($id);
+    }
+}
 /**
  * Dispatch an event using Symfony EventDispatcher service
  *

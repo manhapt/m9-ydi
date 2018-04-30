@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Backend;
 
 use AppBundle\Entity\Asset;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Asset controller.
  *
- * @Route("asset")
+ * @Route("asset", name="admin_")
  */
 class AssetController extends Controller
 {
@@ -27,7 +27,7 @@ class AssetController extends Controller
 
         $assets = $em->getRepository('AppBundle:Asset')->findAll();
 
-        return $this->render('asset/index.html.twig', array(
+        return $this->render('backend/asset/index.html.twig', array(
             'assets' => $assets,
         ));
     }
