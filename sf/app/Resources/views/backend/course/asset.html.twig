@@ -1,0 +1,46 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block body %}
+
+    {% set assetCounter = 0 %}
+    {% set optionCounter = 0 %}
+    {% for courseOption in courseOptions %}
+        {% set optionCounter = optionCounter+1  %}
+        <tr>
+            <td>
+                <h2>Phần  {{  optionCounter }}. {{ courseOption.title }}</h2>
+                {% for idx, deleteAssetForm in deleteAssetForms %}
+                    {% if idx ==  courseOption.id  %}
+                    {{ form_start(deleteAssetForm) }}
+                    <input class="button button-primary" type="submit" value="Delete">
+                    {{ form_end(deleteAssetForm) }}
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <ul>
+                    {% for asset in courseOption.assets %}
+                        {% set assetCounter = assetCounter+1  %}
+                        <li>Bài  {{  assetCounter }}. {{ asset.title }} - 01:30</li>
+                    {% endfor %}
+
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+
+    <h1>Tạo phần tiếp theo</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input class="button button-primary" type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li class="actions-toolbar">
+            <a class="button button-primary" href="{{ path('admin_course_edit', { 'id': course.id }) }}">
+                Back to Course Edit page
+            </a>
+        </li>
+    </ul>
+{% endblock %}

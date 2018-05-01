@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Backend;
 
+use AppBundle\Entity\Course;
 use AppBundle\Entity\CourseOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -18,10 +19,10 @@ class CourseOptionController extends Controller
     /**
      * Lists all courseOption entities.
      *
-     * @Route("/", name="admin_courseoption_index")
+     * @Route("/{id}/", name="admin_courseoption_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request, Course $course)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -35,12 +36,13 @@ class CourseOptionController extends Controller
     /**
      * Creates a new courseOption entity.
      *
-     * @Route("/new", name="admin_courseoption_new")
+     * @Route("/{id}/new", name="admin_courseoption_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Course $course)
     {
         $courseOption = new Courseoption();
+        $courseOption->setCourse($course);
         $form = $this->createForm('AppBundle\Form\CourseOptionType', $courseOption);
         $form->handleRequest($request);
 
@@ -61,7 +63,7 @@ class CourseOptionController extends Controller
     /**
      * Finds and displays a courseOption entity.
      *
-     * @Route("/{id}", name="admin_courseoption_show")
+     * @Route("/{id}/show", name="admin_courseoption_show")
      * @Method("GET")
      */
     public function showAction(CourseOption $courseOption)
@@ -116,7 +118,7 @@ class CourseOptionController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('admin_courseoption_index');
+        return $this->redirectToRoute('admin_course_asset', array('id' => $courseOption->getCourse()->getId()));
     }
 
     /**
@@ -129,7 +131,7 @@ class CourseOptionController extends Controller
     private function createDeleteForm(CourseOption $courseOption)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('courseoption_delete', array('id' => $courseOption->getId())))
+            ->setAction($this->generateUrl('admin_courseoption_delete', array('id' => $courseOption->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

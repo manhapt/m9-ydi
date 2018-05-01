@@ -2,6 +2,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Asset;
+use AppBundle\Entity\Course;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +19,21 @@ class CourseOptionType extends AbstractType
         $builder->add('title')
             ->add('required')
             ->add('position')
-            ->add('course')
-            ->add('assets');
+            ->add('course', EntityType::class, array(
+                'class' => Course::class,
+                'choice_label' => 'name',
+                'label'        => 'Course',
+                'multiple'     => false,
+                'disabled'     => true,
+            ))
+            ->add('assets', EntityType::class, array(
+                'class' => Asset::class,
+                'choice_label' => 'name',
+                'multiple'     => true,
+                'expanded'     => true,
+                'required'     => true,
+            ))
+        ;
     }
 
     /**

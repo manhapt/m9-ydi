@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Backend;
 
 use AppBundle\Entity\Course;
+use AppBundle\Entity\CourseOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -131,6 +132,48 @@ class CourseController extends Controller
     }
 
     /**
+     * Add or remove asset from course.
+     *
+     * @Route("/{id}/asset", name="admin_course_asset")
+     * @Method({"GET", "POST"})
+     */
+    public function assetAction(Request $request, Course $course)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $courseOptions = $em->getRepository('AppBundle:CourseOption')->findBy(
+            ['course' => $course],
+            ['position' => 'ASC']
+        );
+
+        $courseOption = new CourseOption();
+        $courseOption->setCourse($course);
+        $form = $this->createForm('AppBundle\Form\CourseOptionType', $courseOption);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($courseOption);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_course_edit', array('id' => $course->getId()));
+        }
+
+        $deleteForms = [];
+        /** @var CourseOption $courseOption */
+        foreach ($courseOptions as $courseOption) {
+            $deleteForm = $this->createDeleteAssetForm($courseOption);
+            $deleteForms[$courseOption->getId()] = $deleteForm->createView();
+        }
+
+        return $this->render('backend/course/asset.html.twig', array(
+            'courseOptions' => $courseOptions,
+            'course' => $course,
+            'form' => $form->createView(),
+            'deleteAssetForms' => $deleteForms,
+        ));
+    }
+
+    /**
      * Deletes a course entity.
      *
      * @Route("/{id}", name="admin_course_delete")
@@ -164,6 +207,22 @@ class CourseController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Creates a form to delete a courseOption entity.
+     *
+     * @param CourseOption $courseOption The courseOption entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteAssetForm(CourseOption $courseOption)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_courseoption_delete', array('id' => $courseOption->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 
     /**

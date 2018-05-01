@@ -13,6 +13,9 @@
 
     <ul>
         <li class="actions-toolbar">
+            <a class="button button-primary" href="{{ path('admin_course_asset', { 'id': course.id }) }}">
+                Manage Assets
+            </a>
             {{ form_start(delete_form) }}
             <input class="button button-primary" type="submit" value="Delete">
             {{ form_end(delete_form) }}

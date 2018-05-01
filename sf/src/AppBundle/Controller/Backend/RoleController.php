@@ -128,7 +128,7 @@ class RoleController extends Controller
     private function createDeleteForm(Role $role)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('role_delete', array('id' => $role->getId())))
+            ->setAction($this->generateUrl('admin_role_delete', array('id' => $role->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

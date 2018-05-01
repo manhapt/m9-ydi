@@ -21,6 +21,17 @@
                 <th>Position</th>
                 <td>{{ courseOption.position }}</td>
             </tr>
+            <tr>
+                <th>Assets</th>
+                <td>
+                    <ul>
+                {% for asset in courseOption.assets %}
+                    <li>Bài  {{ loop.index }}. {{ asset.title }} - 01:30</li>
+                {% endfor %}
+
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 
