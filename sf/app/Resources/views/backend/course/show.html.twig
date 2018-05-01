@@ -50,8 +50,8 @@
 
     <ul>
         <li class="actions-toolbar">
-            <a class="button button-primary" href="{{ path('course_index') }}">Back to the list</a>
-            <a class="button button-primary" href="{{ path('course_edit', { 'id': course.id }) }}">Edit</a>
+            <a class="button button-primary" href="{{ path('admin_course_index') }}">Back to the list</a>
+            <a class="button button-primary" href="{{ path('admin_course_edit', { 'id': course.id }) }}">Edit</a>
             {{ form_start(delete_form) }}
             <input class="button button-primary" type="submit" value="Delete">
             {{ form_end(delete_form) }}

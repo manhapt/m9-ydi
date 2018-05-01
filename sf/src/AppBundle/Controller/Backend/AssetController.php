@@ -11,14 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Asset controller.
  *
- * @Route("asset", name="admin_")
+ * @Route("asset")
  */
 class AssetController extends Controller
 {
     /**
      * Lists all asset entities.
      *
-     * @Route("/", name="asset_index")
+     * @Route("/", name="admin_asset_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -35,7 +35,7 @@ class AssetController extends Controller
     /**
      * Creates a new asset entity.
      *
-     * @Route("/new", name="asset_new")
+     * @Route("/new", name="admin_asset_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -49,10 +49,10 @@ class AssetController extends Controller
             $em->persist($asset);
             $em->flush();
 
-            return $this->redirectToRoute('asset_show', array('id' => $asset->getId()));
+            return $this->redirectToRoute('admin_asset_show', array('id' => $asset->getId()));
         }
 
-        return $this->render('asset/new.html.twig', array(
+        return $this->render('backend/asset/new.html.twig', array(
             'asset' => $asset,
             'form' => $form->createView(),
         ));
@@ -61,14 +61,14 @@ class AssetController extends Controller
     /**
      * Finds and displays a asset entity.
      *
-     * @Route("/{id}", name="asset_show")
+     * @Route("/{id}", name="admin_asset_show")
      * @Method("GET")
      */
     public function showAction(Asset $asset)
     {
         $deleteForm = $this->createDeleteForm($asset);
 
-        return $this->render('asset/show.html.twig', array(
+        return $this->render('backend/asset/show.html.twig', array(
             'asset' => $asset,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -77,7 +77,7 @@ class AssetController extends Controller
     /**
      * Displays a form to edit an existing asset entity.
      *
-     * @Route("/{id}/edit", name="asset_edit")
+     * @Route("/{id}/edit", name="admin_asset_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Asset $asset)
@@ -89,10 +89,10 @@ class AssetController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('asset_edit', array('id' => $asset->getId()));
+            return $this->redirectToRoute('admin_asset_edit', array('id' => $asset->getId()));
         }
 
-        return $this->render('asset/edit.html.twig', array(
+        return $this->render('backend/asset/edit.html.twig', array(
             'asset' => $asset,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -102,7 +102,7 @@ class AssetController extends Controller
     /**
      * Deletes a asset entity.
      *
-     * @Route("/{id}", name="asset_delete")
+     * @Route("/{id}", name="admin_asset_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Asset $asset)
@@ -116,7 +116,7 @@ class AssetController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('asset_index');
+        return $this->redirectToRoute('admin_asset_index');
     }
 
     /**
@@ -129,7 +129,7 @@ class AssetController extends Controller
     private function createDeleteForm(Asset $asset)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('asset_delete', array('id' => $asset->getId())))
+            ->setAction($this->generateUrl('admin_asset_delete', array('id' => $asset->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

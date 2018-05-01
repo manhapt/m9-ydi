@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Frontend;
+namespace AppBundle\Controller\Backend;
 
 use AppBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,7 +17,7 @@ class RoleController extends Controller
     /**
      * Lists all role entities.
      *
-     * @Route("/", name="role_index")
+     * @Route("/", name="admin_role_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -26,7 +26,7 @@ class RoleController extends Controller
 
         $roles = $em->getRepository('AppBundle:Role')->findAll();
 
-        return $this->render('role/index.html.twig', array(
+        return $this->render('backend/role/index.html.twig', array(
             'roles' => $roles,
         ));
     }
@@ -34,7 +34,7 @@ class RoleController extends Controller
     /**
      * Creates a new role entity.
      *
-     * @Route("/new", name="role_new")
+     * @Route("/new", name="admin_role_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -51,7 +51,7 @@ class RoleController extends Controller
             return $this->redirectToRoute('role_show', array('id' => $role->getId()));
         }
 
-        return $this->render('role/new.html.twig', array(
+        return $this->render('backend/role/new.html.twig', array(
             'role' => $role,
             'form' => $form->createView(),
         ));
@@ -60,14 +60,14 @@ class RoleController extends Controller
     /**
      * Finds and displays a role entity.
      *
-     * @Route("/{id}", name="role_show")
+     * @Route("/{id}", name="admin_role_show")
      * @Method("GET")
      */
     public function showAction(Role $role)
     {
         $deleteForm = $this->createDeleteForm($role);
 
-        return $this->render('role/show.html.twig', array(
+        return $this->render('backend/role/show.html.twig', array(
             'role' => $role,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -76,7 +76,7 @@ class RoleController extends Controller
     /**
      * Displays a form to edit an existing role entity.
      *
-     * @Route("/{id}/edit", name="role_edit")
+     * @Route("/{id}/edit", name="admin_role_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Role $role)
@@ -91,7 +91,7 @@ class RoleController extends Controller
             return $this->redirectToRoute('role_edit', array('id' => $role->getId()));
         }
 
-        return $this->render('role/edit.html.twig', array(
+        return $this->render('backend/role/edit.html.twig', array(
             'role' => $role,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -101,7 +101,7 @@ class RoleController extends Controller
     /**
      * Deletes a role entity.
      *
-     * @Route("/{id}", name="role_delete")
+     * @Route("/{id}", name="admin_role_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Role $role)

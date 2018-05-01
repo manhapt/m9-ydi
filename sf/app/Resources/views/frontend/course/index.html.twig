@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# UI - Couses List
+    <section id="courses-list">
+        <div class="container">
+            <div class="row">
+                <div class="title">
+                    <i class="fas fa-graduation-cap fa-2x fa-pull-left"></i>
+                    <h1>Các khóa học</h1>
+                    <p class="sub-title">Bồi dưỡng kiến thức và phương pháp giảng dạy chương trình Tin học ứng dung và Khoa học máy tính.</p>
+                </div>
+                <!-- asset item -->
+                <div class="grid carousel">
+                    <ul class="slides">
+                        {% for course in courses %}
+                            <li class="item">
+                                <a class="asset-card" href="{{ path('course_show', { 'id': course.id }) }}">
+                                    <img src="{{ course.image }}" alt="" />
+                                </a>
+                                <div class="details">
+                                    <figure>
+                                        <img src="{{ course.image }}" alt="Asset Author Image" />
+                                    </figure>
+                                    <div class="description">
+                                        <h3>{{ course.name }}</h3>
+                                        <p>{{ course.description }}</p>
+                                    </div>
+                                </div>
+                                <div class="actions">
+                                    <span class="count"><i class="fa fa-heart">200</i>Học viên tham gia</span>
+                                    <a href="{{ path('course_show', { 'id': course.id }) }}" class="primary">Tìm hiểu khóa học</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- end asset item -->
+
+            </div>
+        </div>
+    </section>
+    #}
+    {# todo : need to check user role #}
+        <h1>Danh sách khóa học</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="display: none;">Id</th>
+                    <th style="display: none;">Sku</th>
+                    <th>Name</th>
+                    <th style="display: none">Price</th> {# unuse field #}
+                    <th style="display: none">Typeid</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td style="display: none;"><a href="{{ path('course_show', { 'id': course.id }) }}">{{ course.id }}</a></td>
+                    <td style="display: none;">{{ course.sku }}</td>
+                    <td class="name">{{ course.name }}</td>
+                    <td style="display: none;">{{ course.price }}</td> {# unuse field #}
+                    <td style="display: none">{{ course.typeId }}</td>
+                    <td>
+                        {% if course.image %}
+                            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" alt="{{ course.name }}" />
+                        {% endif %}
+                    </td>
+                    <td>{{ course.description }}</td>
+                    <td>{% if course.created %}{{ course.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if course.modified %}{{ course.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ course.status }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a class="action" href="{{ path('course_show', { 'id': course.id }) }}">show</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

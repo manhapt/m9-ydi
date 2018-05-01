@@ -16,17 +16,17 @@
         <tbody>
         {% for courseOption in courseOptions %}
             <tr>
-                <td><a href="{{ path('courseoption_show', { 'id': courseOption.id }) }}">{{ courseOption.id }}</a></td>
+                <td><a href="{{ path('admin_courseoption_show', { 'id': courseOption.id }) }}">{{ courseOption.id }}</a></td>
                 <td>{{ courseOption.title }}</td>
                 <td>{% if courseOption.required %}Yes{% else %}No{% endif %}</td>
                 <td>{{ courseOption.position }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('courseoption_show', { 'id': courseOption.id }) }}">show</a>
+                            <a href="{{ path('admin_courseoption_show', { 'id': courseOption.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('courseoption_edit', { 'id': courseOption.id }) }}">edit</a>
+                            <a href="{{ path('admin_courseoption_edit', { 'id': courseOption.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -37,7 +37,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('courseoption_new') }}">Create a new courseOption</a>
+            <a href="{{ path('admin_courseoption_new') }}">Create a new courseOption</a>
         </li>
     </ul>
 {% endblock %}

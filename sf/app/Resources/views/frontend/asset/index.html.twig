@@ -43,19 +43,10 @@
                         <li>
                             <a href="{{ path('asset_show', { 'id': asset.id }) }}">Show</a>
                         </li>
-                        <li>
-                            <a href="{{ path('asset_edit', { 'id': asset.id }) }}">Edit</a>
-                        </li>
                     </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li class="actions-toolbar">
-            <a class="button button-primary" href="{{ path('asset_new') }}">Create a new asset</a>
-        </li>
-    </ul>
 {% endblock %}
