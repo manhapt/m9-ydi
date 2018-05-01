@@ -48,7 +48,7 @@ class RoleController extends Controller
             $em->persist($role);
             $em->flush();
 
-            return $this->redirectToRoute('role_show', array('id' => $role->getId()));
+            return $this->redirectToRoute('admin_role_show', array('id' => $role->getId()));
         }
 
         return $this->render('backend/role/new.html.twig', array(
@@ -88,7 +88,7 @@ class RoleController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('role_edit', array('id' => $role->getId()));
+            return $this->redirectToRoute('admin_role_edit', array('id' => $role->getId()));
         }
 
         return $this->render('backend/role/edit.html.twig', array(
@@ -115,7 +115,7 @@ class RoleController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('role_index');
+        return $this->redirectToRoute('admin_role_index');
     }
 
     /**

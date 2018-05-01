@@ -49,7 +49,7 @@ class CourseOptionController extends Controller
             $em->persist($courseOption);
             $em->flush();
 
-            return $this->redirectToRoute('courseoption_show', array('id' => $courseOption->getId()));
+            return $this->redirectToRoute('admin_courseoption_show', array('id' => $courseOption->getId()));
         }
 
         return $this->render('backend/courseoption/new.html.twig', array(
@@ -89,7 +89,7 @@ class CourseOptionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('courseoption_edit', array('id' => $courseOption->getId()));
+            return $this->redirectToRoute('admin_courseoption_edit', array('id' => $courseOption->getId()));
         }
 
         return $this->render('backend/courseoption/edit.html.twig', array(
@@ -116,7 +116,7 @@ class CourseOptionController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('courseoption_index');
+        return $this->redirectToRoute('admin_courseoption_index');
     }
 
     /**

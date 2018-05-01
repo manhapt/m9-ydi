@@ -42,7 +42,7 @@
     </section>
     #}
     {# todo : need to check user role #}
-        <h1>Danh sách khóa học</h1>
+        <h1>Danh sách khóa học cho giáo viên</h1>
 
         <table>
             <thead>
@@ -61,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for course in courses %}
+            {% for course in contributorCourses %}
                 <tr>
                     <td style="display: none;"><a href="{{ path('course_show', { 'id': course.id }) }}">{{ course.id }}</a></td>
                     <td style="display: none;">{{ course.sku }}</td>
@@ -70,7 +70,55 @@
                     <td style="display: none">{{ course.typeId }}</td>
                     <td>
                         {% if course.image %}
-                            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" alt="{{ course.name }}" />
+                            <img  width="50" src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
+                        {% endif %}
+                    </td>
+                    <td>{{ course.description }}</td>
+                    <td>{% if course.created %}{{ course.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if course.modified %}{{ course.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ course.status }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a class="action" href="{{ path('course_show', { 'id': course.id }) }}">show</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <h1>Danh sách khóa học cho thanh thiếu niên</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="display: none;">Id</th>
+                    <th style="display: none;">Sku</th>
+                    <th>Name</th>
+                    <th style="display: none">Price</th> {# unuse field #}
+                    <th style="display: none">Typeid</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for course in subscriberCourses %}
+                <tr>
+                    <td style="display: none;"><a href="{{ path('course_show', { 'id': course.id }) }}">{{ course.id }}</a></td>
+                    <td style="display: none;">{{ course.sku }}</td>
+                    <td class="name">{{ course.name }}</td>
+                    <td style="display: none;">{{ course.price }}</td> {# unuse field #}
+                    <td style="display: none">{{ course.typeId }}</td>
+                    <td>
+                        {% if course.image %}
+                            <img width="50" src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
                         {% endif %}
                     </td>
                     <td>{{ course.description }}</td>

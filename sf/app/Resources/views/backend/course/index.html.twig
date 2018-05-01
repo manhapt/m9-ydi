@@ -54,7 +54,7 @@
                     <th style="display: none">Typeid</th>
                     <th>Image</th>
                     <th>Description</th>
-                    <th>Created</th>
+                    <th>{{ knp_pagination_sortable(courses, 'created', 'c.created') }}</th>
                     <th>Modified</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -69,7 +69,7 @@
                     <td style="display: none;">{{ course.price }}</td> {# unuse field #}
                     <td style="display: none">{{ course.typeId }}</td>
                     <td>
-                        {% if course.image %}
+                        {% if 0 %}
                             <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" alt="{{ course.name }}" />
                         {% endif %}
                     </td>
@@ -91,6 +91,10 @@
             {% endfor %}
             </tbody>
         </table>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(courses) }}
+    </div>
 
         <ul>
             <li class="actions-toolbar">

@@ -23,14 +23,28 @@ class CourseController extends Controller
      * @Route("/", name="admin_course_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $courses = $em->getRepository('AppBundle:Course')->findAll();
+        $queryBuilder = $em->getRepository('AppBundle:Course')->createQueryBuilder('c');
+        $query = $queryBuilder->getQuery();
+        if ($request->query->getAlnum('filter')) {
+            $queryBuilder
+                ->where('c.name LIKE :name')
+                ->setParameter('name', '%' . $request->query->getAlnum('filter') . '%');
+        }
+
+        /** @var \Knp\Component\Pager\Paginator $paginator */
+        $paginator = $this->get('knp_paginator');
+        $paginatedCourses = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 5)
+        );
 
         return $this->render('backend/course/index.html.twig', array(
-            'courses' => $courses,
+            'courses' => $paginatedCourses,
         ));
     }
 
@@ -55,7 +69,7 @@ class CourseController extends Controller
             $em->persist($course);
             $em->flush();
 
-            return $this->redirectToRoute('course_show', array('id' => $course->getId()));
+            return $this->redirectToRoute('admin_course_show', array('id' => $course->getId()));
         }
 
         return $this->render('backend/course/new.html.twig', array(
@@ -106,7 +120,7 @@ class CourseController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('course_edit', array('id' => $course->getId()));
+            return $this->redirectToRoute('admin_course_edit', array('id' => $course->getId()));
         }
 
         return $this->render('backend/course/edit.html.twig', array(
@@ -133,7 +147,7 @@ class CourseController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('course_index');
+        return $this->redirectToRoute('admin_course_index');
     }
 
     /**
@@ -146,7 +160,7 @@ class CourseController extends Controller
     private function createDeleteForm(Course $course)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('course_delete', array('id' => $course->getId())))
+            ->setAction($this->generateUrl('admin_course_delete', array('id' => $course->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
