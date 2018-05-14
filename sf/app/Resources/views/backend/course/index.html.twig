@@ -1,47 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {# UI - Couses List
-    <section id="courses-list">
-        <div class="container">
-            <div class="row">
-                <div class="title">
-                    <i class="fas fa-graduation-cap fa-2x fa-pull-left"></i>
-                    <h1>Các khóa học</h1>
-                    <p class="sub-title">Bồi dưỡng kiến thức và phương pháp giảng dạy chương trình Tin học ứng dung và Khoa học máy tính.</p>
-                </div>
-                <!-- asset item -->
-                <div class="grid carousel">
-                    <ul class="slides">
-                        {% for course in courses %}
-                            <li class="item">
-                                <a class="asset-card" href="{{ path('admin_course_show', { 'id': course.id }) }}">
-                                    <img src="{{ course.image }}" alt="" />
-                                </a>
-                                <div class="details">
-                                    <figure>
-                                        <img src="{{ course.image }}" alt="Asset Author Image" />
-                                    </figure>
-                                    <div class="description">
-                                        <h3>{{ course.name }}</h3>
-                                        <p>{{ course.description }}</p>
-                                    </div>
-                                </div>
-                                <div class="actions">
-                                    <span class="count"><i class="fa fa-heart">200</i>Học viên tham gia</span>
-                                    <a href="{{ path('admin_course_show', { 'id': course.id }) }}" class="primary">Tìm hiểu khóa học</a>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <!-- end asset item -->
-
-            </div>
-        </div>
-    </section>
-    #}
-    {# todo : need to check user role #}
         <h1>Danh sách khóa học</h1>
 
         <table>
@@ -54,6 +13,7 @@
                     <th style="display: none">Typeid</th>
                     <th>Image</th>
                     <th>Description</th>
+                    <th>Short Description</th>
                     <th>{{ knp_pagination_sortable(courses, 'created', 'c.created') }}</th>
                     <th>Modified</th>
                     <th>Status</th>
@@ -74,6 +34,7 @@
                         {% endif %}
                     </td>
                     <td>{{ course.description }}</td>
+                    <td>{{ course.shortDescription }}</td>
                     <td>{% if course.created %}{{ course.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if course.modified %}{{ course.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{{ course.status }}</td>

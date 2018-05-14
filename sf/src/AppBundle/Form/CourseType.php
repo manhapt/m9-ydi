@@ -28,22 +28,7 @@ class CourseType extends AbstractType
             ->add('status', null, ['data' => 1])
             ->add('typeId', HiddenType::class)
             ->add('description')
-            ->add('roles', EntityType::class, array(
-                'class' => Role::class,
-                'choice_label' => 'name',
-                'multiple'     => true,
-                'expanded'     => true,
-            ))
-            ->add('user', EntityType::class, array(
-                'placeholder' => 'Choose an option',
-                'class' => User::class,
-                'choice_label' => 'email',
-                'choice_value' => function (User $entity = null) {
-                    return $this->filterByContributorUser($entity);
-                },
-                'label'        => 'Taught by',
-                'multiple'     => false,
-            ))
+            ->add('shortDescription')
             ->add('image', FileType::class, ['required' => false])
         ;
     }

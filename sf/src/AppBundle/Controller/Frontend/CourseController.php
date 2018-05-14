@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Course;
+use AppBundle\Entity\CourseDecorator;
 use AppBundle\Entity\Role;
 use AppBundle\Form\RoleTypes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,46 +27,31 @@ class CourseController extends Controller
      * @Method("GET")
      * @throws \Exception
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $contributorRole = $em->getRepository('AppBundle:Role')->findOneBy(
-            ['resource' => 'course', 'name' => RoleTypes::CONTRIBUTOR]
+        $queryBuilder = $em->getRepository('AppBundle:Course')->createQueryBuilder('c');
+        $queryBuilder->select(
+            'c.id, c.sku, c.name, c.image, c.description, c.shortDescription, 200 as totalParticipant'
         );
-        $subscriberRole = $em->getRepository('AppBundle:Role')->findOneBy(
-            ['resource' => 'course', 'name' => RoleTypes::SUBSCRIBER]
-        );
-
-        if (!$contributorRole || !$subscriberRole) {
-            throw new \Exception(
-                RoleTypes::CONTRIBUTOR . ' and ' . RoleTypes::SUBSCRIBER
-                . ' with "course" resource are required!'
-            );
+        $query = $queryBuilder->getQuery();
+        if ($request->query->getAlnum('filter')) {
+            $queryBuilder
+                ->where('c.name LIKE :name')
+                ->setParameter('name', '%' . $request->query->getAlnum('filter') . '%');
         }
 
-        $contributorCourses = [];
-        $subscriberCourses = [];
-        /** @var Course $course */
-        foreach ($em->getRepository('AppBundle:Course')->findAll() as $course) {
-            /** @var Role $role */
-            foreach ($course->getRoles() as $role) {
-                if ($role->getId() === $contributorRole->getId()) {
-                    $contributorCourses[] = $course;
-                }
-                if ($role->getId() === $subscriberRole->getId()) {
-                    $subscriberCourses[] = $course;
-                }
-
-                if (count($contributorCourses) > 9 && count($subscriberCourses) > 9 ) {
-                    break;
-                }
-            }
-        }
+        /** @var \Knp\Component\Pager\Paginator $paginator */
+        $paginator = $this->get('knp_paginator');
+        $paginatedCourses = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 6)
+        );
 
         return $this->render('frontend/course/index.html.twig', array(
-            'contributorCourses' => $contributorCourses,
-            'subscriberCourses' => $subscriberCourses,
+            'courses' => $paginatedCourses,
         ));
     }
 

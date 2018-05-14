@@ -22,6 +22,11 @@ Requirements: PHP 5.6+
 
 2. Setup wordpress
 - wp-config.php
+define('WP_SYMFONY_PATH', __DIR__.'/../sf/');
+define('WP_SYMFONY_ENVIRONMENT', 'dev');
+define('WP_SYMFONY_DEBUG', true);
+
+- Activate plugin "Ekino Wordpress Symfony"
 
 3. Setup symfony
 - Update database information in sf/app/config/parameters.yml
