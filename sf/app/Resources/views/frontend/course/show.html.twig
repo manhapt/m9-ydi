@@ -1,58 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Course</h1>
+    <h1>{{ course.name }}</h1>
+    <h4>{{ course.shortDescription }}</h4>
+
+    {% set assetCounter = 0 %}
+    {% set optionCounter = 0 %}
+    {% for courseOption in courseOptions %}
+        {% set optionCounter = optionCounter+1  %}
+        <tr>
+            <td>
+                <h2>Phần  {{  optionCounter }}. {{ courseOption.title }}</h2>
+            </td>
+            <td>
+                <ul>
+                    {% for asset in courseOption.assets %}
+                        {% set assetCounter = assetCounter+1  %}
+                        <li>Bài  {{  assetCounter }}. {{ asset.title }} - 01:30</li>
+                    {% endfor %}
+
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ course.id }}</td>
-            </tr>
-            <tr>
-                <th>Sku</th>
-                <td>{{ course.sku }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ course.name }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ course.price }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ course.status }}</td>
-            </tr>
-            <tr>
-                <th>Typeid</th>
-                <td>{{ course.typeId }}</td>
-            </tr>
-            <tr>
                 <th>Image</th>
-                <td>{{ course.image }}</td>
+                <td>
+                    {% if course.image %}
+                        <img  style="max-width:600px;" src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ course.description }}</td>
+                <td style="white-space: pre-wrap;">{{ course.description }}</td>
             </tr>
-            <tr>
-                <th>Short Description</th>
-                <td>{{ course.shortDescription }}</td>
-            </tr>
-            <tr>
-                <th>Created</th>
-                <td>{% if course.created %}{{ course.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Modified</th>
-                <td>{% if course.modified %}{{ course.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
+
         </tbody>
     </table>
 
     <ul>
+        <li class="actions-toolbar">
+            <a class="button button-primary" href="#">START LEARNING</a>
+        </li>
         <li class="actions-toolbar">
             <a class="button button-primary" href="{{ path('course_index') }}">Back to the list</a>
         </li>

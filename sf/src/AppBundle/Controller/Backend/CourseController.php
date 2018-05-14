@@ -155,7 +155,7 @@ class CourseController extends Controller
             $em->persist($courseOption);
             $em->flush();
 
-            return $this->redirectToRoute('admin_course_edit', array('id' => $course->getId()));
+            return $this->redirectToRoute('admin_course_asset', array('id' => $course->getId()));
         }
 
         $deleteForms = [];

@@ -61,9 +61,16 @@ class CourseController extends Controller
      * @Route("/{id}", name="course_show")
      * @Method("GET")
      */
-    public function showAction(Course $course)
+    public function showAction(Request $request, Course $course)
     {
+        $em = $this->getDoctrine()->getManager();
+        $courseOptions = $em->getRepository('AppBundle:CourseOption')->findBy(
+            ['course' => $course],
+            ['position' => 'ASC']
+        );
+
         return $this->render('frontend/course/show.html.twig', array(
+            'courseOptions' => $courseOptions,
             'course' => $course,
         ));
     }
