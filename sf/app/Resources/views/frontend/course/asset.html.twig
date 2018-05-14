@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script src="{{ absolute_url(asset('wp-includes/js/azure/dash.all.js')) }}" type="text/javascript" ></script>
+    <script>
+        jQuery( document ).ready(function() {
+            jQuery( window ).load(function() {
+                setupVideo();
+            });
+        });
+        // setup the video element and attach it to the Dash player
+        function setupVideo() {
+            var url = "http://ydimedia-aase.streaming.media.azure.net/42f25860-dc9c-401f-9cb8-0844bfd203e3/ydimedia.ism/manifest(format=mpd-time-csf)";
+            var url = "http://ydimedia-aase.streaming.media.azure.net/12dfb987-3ea1-44a3-8216-f1837fd571ab/Wildlife.ism/manifest(format=mpd-time-csf)";
+            var context = new Dash.di.DashContext();
+            var player = new MediaPlayer(context);
+            player.startup();
+            player.attachView(document.querySelector("#videoplayer"));
+            player.attachSource(url);
+        }
+    </script>
+    <style>
+        video {
+            width: 80%;
+            height: 80%;
+        }
+    </style>
+
+    <video id="videoplayer" controls></video>
+    <table>
+        <tbody>
+        <tr>
+            <th>Description</th>
+            <td>{{ asset.description }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Curriculum</p>
+    {% set assetLinkCounter = 0 %}
+    {% set optionCounter = 0 %}
+    {% for courseOption in courseOptions %}
+        {% set optionCounter = optionCounter+1  %}
+        <tr>
+            <td>
+                <h2>Part  {{  optionCounter }}. {{ courseOption.title }}</h2>
+            </td>
+            <td>
+                <ul>
+                    {% for assetLink in courseOption.assets %}
+                        {% set assetLinkCounter = assetLinkCounter+1  %}
+                        <li>
+                            <a href="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}">
+                                Topic  {{  assetLinkCounter }}. {{ assetLink.title }} - 01:30
+                            </a>
+                            {% if (asset.id == assetLink.id) %}
+                            --current-topic
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

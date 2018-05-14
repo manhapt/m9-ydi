@@ -16,7 +16,11 @@
                 <ul>
                     {% for asset in courseOption.assets %}
                         {% set assetCounter = assetCounter+1  %}
-                        <li>Bài  {{  assetCounter }}. {{ asset.title }} - 01:30</li>
+                        <li>
+                            <a href="{{ path('course_asset', { 'id': course.id, 'asset_id': asset.id }) }}">
+                                Bài  {{  assetCounter }}. {{ asset.title }} - 01:30
+                            </a>
+                        </li>
                     {% endfor %}
 
                 </ul>
@@ -43,9 +47,6 @@
     </table>
 
     <ul>
-        <li class="actions-toolbar">
-            <a class="button button-primary" href="{{ path('course_learn', { 'id': course.id }) }}">START LEARNING</a>
-        </li>
         <li class="actions-toolbar">
             <a class="button button-primary" href="{{ path('course_index') }}">Back to the list</a>
         </li>
