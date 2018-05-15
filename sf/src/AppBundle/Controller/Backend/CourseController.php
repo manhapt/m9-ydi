@@ -9,7 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\FileUploader;
 
 /**
  * Course controller.
@@ -33,7 +32,7 @@ class CourseController extends Controller
         if ($request->query->getAlnum('filter')) {
             $queryBuilder
                 ->where('c.name LIKE :name')
-                ->setParameter('name', '%' . $request->query->getAlnum('filter') . '%');
+                ->setParameter('name', '%'.$request->query->getAlnum('filter').'%');
         }
 
         /** @var \Knp\Component\Pager\Paginator $paginator */

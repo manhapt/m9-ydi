@@ -22,16 +22,16 @@ class CourseOptionType extends AbstractType
             ->add('course', EntityType::class, array(
                 'class' => Course::class,
                 'choice_label' => 'name',
-                'label'        => 'Course',
-                'multiple'     => false,
-                'disabled'     => true,
+                'label' => 'Course',
+                'multiple' => false,
+                'disabled' => true,
             ))
             ->add('assets', EntityType::class, array(
                 'class' => Asset::class,
                 'choice_label' => 'name',
-                'multiple'     => true,
-                'expanded'     => true,
-                'required'     => true,
+                'multiple' => true,
+                'expanded' => true,
+                'required' => true,
             ))
         ;
     }
@@ -42,7 +42,7 @@ class CourseOptionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\CourseOption'
+            'data_class' => 'AppBundle\Entity\CourseOption',
         ));
     }
 
@@ -53,6 +53,4 @@ class CourseOptionType extends AbstractType
     {
         return 'appbundle_courseoption';
     }
-
-
 }

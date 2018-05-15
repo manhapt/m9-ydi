@@ -3,11 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Role
+ * Role.
  *
  * @ORM\Table(name="ydi_role", uniqueConstraints={@ORM\UniqueConstraint(name="uq_role_resource", columns={"name", "resource"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RoleRepository")
@@ -45,9 +44,8 @@ class Role
      */
     private $resource;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -57,9 +55,9 @@ class Role
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param boolean $status
+     * @param bool $status
      *
      * @return Role
      */
@@ -71,7 +69,7 @@ class Role
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return bool
      */
@@ -81,7 +79,7 @@ class Role
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -95,7 +93,7 @@ class Role
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -105,7 +103,7 @@ class Role
     }
 
     /**
-     * Set resource
+     * Set resource.
      *
      * @param string $resource
      *
@@ -119,7 +117,7 @@ class Role
     }
 
     /**
-     * Get resource
+     * Get resource.
      *
      * @return string
      */
@@ -128,4 +126,3 @@ class Role
         return $this->resource;
     }
 }
-

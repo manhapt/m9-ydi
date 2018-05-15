@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Course
+ * Course.
  *
  * @ORM\Table(name="ydi_course")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CourseRepository")
@@ -117,6 +117,19 @@ class Course
     private $courseOptions;
 
     /**
+     * @var CourseParticipant[]
+     *
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="AppBundle\Entity\CourseParticipant",
+     *      mappedBy="course",
+     *      orphanRemoval=true,
+     *      cascade={"persist", "remove"}
+     * )
+     */
+    private $courseParticipants;
+
+    /**
      * @var Role[]
      *
      *
@@ -135,18 +148,19 @@ class Course
      * @ORM\JoinColumn(name="user_id", referencedColumnName="ID", onDelete="SET NULL")
      */
     private $user;
-    
+
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
         $this->courseOptions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->courseParticipants = new \Doctrine\Common\Collections\ArrayCollection();
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -156,7 +170,7 @@ class Course
     }
 
     /**
-     * Set sku
+     * Set sku.
      *
      * @param string $sku
      *
@@ -170,7 +184,7 @@ class Course
     }
 
     /**
-     * Get sku
+     * Get sku.
      *
      * @return string
      */
@@ -180,7 +194,7 @@ class Course
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -194,7 +208,7 @@ class Course
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -204,7 +218,7 @@ class Course
     }
 
     /**
-     * Set price
+     * Set price.
      *
      * @param string $price
      *
@@ -218,7 +232,7 @@ class Course
     }
 
     /**
-     * Get price
+     * Get price.
      *
      * @return string
      */
@@ -228,9 +242,9 @@ class Course
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param integer $status
+     * @param int $status
      *
      * @return Course
      */
@@ -242,7 +256,7 @@ class Course
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return int
      */
@@ -252,7 +266,7 @@ class Course
     }
 
     /**
-     * Set typeId
+     * Set typeId.
      *
      * @param string $typeId
      *
@@ -266,7 +280,7 @@ class Course
     }
 
     /**
-     * Get typeId
+     * Get typeId.
      *
      * @return string
      */
@@ -276,7 +290,7 @@ class Course
     }
 
     /**
-     * Set image
+     * Set image.
      *
      * @param string $image
      *
@@ -290,7 +304,7 @@ class Course
     }
 
     /**
-     * Get image
+     * Get image.
      *
      * @return string
      */
@@ -300,7 +314,7 @@ class Course
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -314,7 +328,7 @@ class Course
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -333,6 +347,7 @@ class Course
 
     /**
      * @param $shortDescription
+     *
      * @return $this
      */
     public function setShortDescription($shortDescription)
@@ -343,7 +358,7 @@ class Course
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -357,7 +372,7 @@ class Course
     }
 
     /**
-     * Get created
+     * Get created.
      *
      * @return \DateTime
      */
@@ -367,7 +382,7 @@ class Course
     }
 
     /**
-     * Set modified
+     * Set modified.
      *
      * @param \DateTime $modified
      *
@@ -381,7 +396,7 @@ class Course
     }
 
     /**
-     * Get modified
+     * Get modified.
      *
      * @return \DateTime
      */
@@ -389,8 +404,9 @@ class Course
     {
         return $this->modified;
     }
+
     /**
-     * Pre persist event listener
+     * Pre persist event listener.
      *
      * @ORM\PrePersist
      */
@@ -411,9 +427,10 @@ class Course
     }
 
     /**
-     * Add courseOption
+     * Add courseOption.
      *
      * @param \AppBundle\Entity\CourseOption $courseOption
+     *
      * @return $this
      */
     public function addCourseOption(\AppBundle\Entity\CourseOption $courseOption)
@@ -424,7 +441,7 @@ class Course
     }
 
     /**
-     * Remove courseOption
+     * Remove courseOption.
      *
      * @param \AppBundle\Entity\CourseOption $courseOption
      */
@@ -434,7 +451,7 @@ class Course
     }
 
     /**
-     * Get courseOptions
+     * Get courseOptions.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -444,9 +461,44 @@ class Course
     }
 
     /**
-     * Add role
+     * Add courseParticipant.
+     *
+     * @param \AppBundle\Entity\CourseParticipant $courseParticipant
+     *
+     * @return $this
+     */
+    public function addCourseParticipant(\AppBundle\Entity\CourseParticipant $courseParticipant)
+    {
+        $this->courseParticipants[] = $courseParticipant;
+
+        return $this;
+    }
+
+    /**
+     * Remove courseParticipant.
+     *
+     * @param \AppBundle\Entity\CourseParticipant $courseParticipant
+     */
+    public function removeCourseParticipant(\AppBundle\Entity\CourseParticipant $courseParticipant)
+    {
+        $this->courseParticipants->removeElement($courseParticipant);
+    }
+
+    /**
+     * Get courseParticipants.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCourseParticipants()
+    {
+        return $this->courseParticipants;
+    }
+
+    /**
+     * Add role.
      *
      * @param \AppBundle\Entity\Role $role
+     *
      * @return $this
      */
     public function addRole(\AppBundle\Entity\Role $role)
@@ -457,7 +509,7 @@ class Course
     }
 
     /**
-     * Remove role
+     * Remove role.
      *
      * @param \AppBundle\Entity\Role $role
      */
@@ -467,7 +519,7 @@ class Course
     }
 
     /**
-     * Get roles
+     * Get roles.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -492,4 +544,3 @@ class Course
         $this->user = $user;
     }
 }
-

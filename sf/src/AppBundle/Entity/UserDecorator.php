@@ -13,6 +13,7 @@ class UserDecorator
 
     /**
      * \Ekino\WordpressBundle\Model\User constructor.
+     *
      * @param \Ekino\WordpressBundle\Model\User $source
      */
     public function __construct(\Ekino\WordpressBundle\Model\User $source)
@@ -246,7 +247,7 @@ class UserDecorator
     /**
      * Sets Wordpress \Ekino\WordpressBundle\Model\User roles by prefixing them.
      *
-     * @param array $roles An array of roles
+     * @param array  $roles  An array of roles
      * @param string $prefix A role prefix
      *
      * @return \Ekino\WordpressBundle\Model\User
@@ -256,41 +257,26 @@ class UserDecorator
         return $this->source->setWordpressRoles($roles, $prefix);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPassword()
     {
         return $this->source->getPassword();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSalt()
     {
         return $this->source->getSalt();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUsername()
     {
         return $this->source->getUsername();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function eraseCredentials()
     {
         return $this->source->eraseCredentials();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return $this->source->__toString();

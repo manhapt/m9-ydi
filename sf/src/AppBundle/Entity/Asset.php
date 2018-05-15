@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Asset
+ * Asset.
  *
  * @ORM\Table(name="ydi_asset")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AssetRepository")
@@ -106,9 +106,8 @@ class Asset
      */
     private $modified;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -118,7 +117,7 @@ class Asset
     }
 
     /**
-     * Set uuid
+     * Set uuid.
      *
      * @param string $uuid
      *
@@ -132,7 +131,7 @@ class Asset
     }
 
     /**
-     * Get uuid
+     * Get uuid.
      *
      * @return string
      */
@@ -142,9 +141,9 @@ class Asset
     }
 
     /**
-     * Set state
+     * Set state.
      *
-     * @param integer $state
+     * @param int $state
      *
      * @return Asset
      */
@@ -156,7 +155,7 @@ class Asset
     }
 
     /**
-     * Get state
+     * Get state.
      *
      * @return int
      */
@@ -166,7 +165,7 @@ class Asset
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -180,7 +179,7 @@ class Asset
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -190,7 +189,7 @@ class Asset
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -204,7 +203,7 @@ class Asset
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -214,7 +213,7 @@ class Asset
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -228,7 +227,7 @@ class Asset
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -238,9 +237,9 @@ class Asset
     }
 
     /**
-     * Set options
+     * Set options.
      *
-     * @param integer $options
+     * @param int $options
      *
      * @return Asset
      */
@@ -252,7 +251,7 @@ class Asset
     }
 
     /**
-     * Get options
+     * Get options.
      *
      * @return int
      */
@@ -262,9 +261,9 @@ class Asset
     }
 
     /**
-     * Set formatOption
+     * Set formatOption.
      *
-     * @param integer $formatOption
+     * @param int $formatOption
      *
      * @return Asset
      */
@@ -276,7 +275,7 @@ class Asset
     }
 
     /**
-     * Get formatOption
+     * Get formatOption.
      *
      * @return int
      */
@@ -286,7 +285,7 @@ class Asset
     }
 
     /**
-     * Set uri
+     * Set uri.
      *
      * @param string $uri
      *
@@ -300,7 +299,7 @@ class Asset
     }
 
     /**
-     * Get uri
+     * Get uri.
      *
      * @return string
      */
@@ -310,7 +309,7 @@ class Asset
     }
 
     /**
-     * Set storageAccountName
+     * Set storageAccountName.
      *
      * @param string $storageAccountName
      *
@@ -324,7 +323,7 @@ class Asset
     }
 
     /**
-     * Get storageAccountName
+     * Get storageAccountName.
      *
      * @return string
      */
@@ -334,7 +333,7 @@ class Asset
     }
 
     /**
-     * Set alternateId
+     * Set alternateId.
      *
      * @param string $alternateId
      *
@@ -348,7 +347,7 @@ class Asset
     }
 
     /**
-     * Get alternateId
+     * Get alternateId.
      *
      * @return string
      */
@@ -358,7 +357,7 @@ class Asset
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -372,7 +371,7 @@ class Asset
     }
 
     /**
-     * Get created
+     * Get created.
      *
      * @return \DateTime
      */
@@ -382,7 +381,7 @@ class Asset
     }
 
     /**
-     * Set modified
+     * Set modified.
      *
      * @param \DateTime $modified
      *
@@ -396,7 +395,7 @@ class Asset
     }
 
     /**
-     * Get modified
+     * Get modified.
      *
      * @return \DateTime
      */
@@ -406,7 +405,7 @@ class Asset
     }
 
     /**
-     * Pre persist event listener
+     * Pre persist event listener.
      *
      * @ORM\PrePersist
      */
@@ -426,4 +425,3 @@ class Asset
         $this->modified = new \DateTime('now', new \DateTimeZone('UTC'));
     }
 }
-

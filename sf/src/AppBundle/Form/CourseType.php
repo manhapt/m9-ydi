@@ -2,10 +2,7 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Role;
-use Doctrine\ORM\EntityRepository;
 use Ekino\WordpressBundle\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -21,7 +18,7 @@ class CourseType extends AbstractType
     {
         $builder
             ->add('sku', null, [
-                'data' => strtoupper(hash('adler32', uniqid(rand(), true)))
+                'data' => strtoupper(hash('adler32', uniqid(rand(), true))),
             ])
             ->add('name')
             ->add('price', HiddenType::class, ['data' => 0])
@@ -39,7 +36,7 @@ class CourseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Course'
+            'data_class' => 'AppBundle\Entity\Course',
         ));
     }
 
@@ -53,12 +50,14 @@ class CourseType extends AbstractType
 
     /**
      * @param User $entity
+     *
      * @return string
      */
     private function filterByContributorUser(User $entity = null)
     {
         if ($entity) {
             $user = new \AppBundle\Entity\UserDecorator($entity);
+
             return in_array(RoleTypes::CONTRIBUTOR, $user->getRoles())
                 ? $user->getEmail() : '';
         }

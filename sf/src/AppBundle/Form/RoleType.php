@@ -18,7 +18,7 @@ class RoleType extends AbstractType
             ->add('name', ChoiceType::class, [
                 'choices' => [
                     ucfirst(RoleTypes::SUBSCRIBER) => RoleTypes::SUBSCRIBER,
-                    ucfirst(RoleTypes::CONTRIBUTOR) => RoleTypes::CONTRIBUTOR
+                    ucfirst(RoleTypes::CONTRIBUTOR) => RoleTypes::CONTRIBUTOR,
                 ],
             ])
             ->add('resource', null, ['data' => 'course'])
@@ -31,7 +31,7 @@ class RoleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Role'
+            'data_class' => 'AppBundle\Entity\Role',
         ));
     }
 

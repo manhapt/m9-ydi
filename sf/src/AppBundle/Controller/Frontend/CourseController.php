@@ -4,16 +4,15 @@ namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Asset;
 use AppBundle\Entity\Course;
-use AppBundle\Entity\CourseDecorator;
-use AppBundle\Entity\Role;
-use AppBundle\Form\RoleTypes;
+use AppBundle\Entity\CourseParticipant;
+use AppBundle\Repository\CourseRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\FileUploader;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Course controller.
@@ -27,27 +26,26 @@ class CourseController extends Controller
      *
      * @Route("/", name="course_index")
      * @Method("GET")
+     *
      * @throws \Exception
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        /** @var CourseRepository $courseRepository */
+        $courseRepository = $em->getRepository('AppBundle:Course');
 
-        $queryBuilder = $em->getRepository('AppBundle:Course')->createQueryBuilder('c');
-        $queryBuilder->select(
-            'c.id, c.sku, c.name, c.image, c.description, c.shortDescription, 200 as totalParticipant'
-        );
-        $query = $queryBuilder->getQuery();
+        $queryBuilder = $courseRepository->getCourseListQueryBuilder();
         if ($request->query->getAlnum('filter')) {
             $queryBuilder
                 ->where('c.name LIKE :name')
-                ->setParameter('name', '%' . $request->query->getAlnum('filter') . '%');
+                ->setParameter('name', '%'.$request->query->getAlnum('filter').'%');
         }
 
         /** @var \Knp\Component\Pager\Paginator $paginator */
         $paginator = $this->get('knp_paginator');
         $paginatedCourses = $paginator->paginate(
-            $query,
+            $queryBuilder->getQuery(),
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 6)
         );
@@ -81,10 +79,17 @@ class CourseController extends Controller
      * Finds and displays a course entity.
      *
      * @Route("/{id}/learn", name="course_learn")
+     * @Security("
+           has_role('ROLE_WP_SUBSCRIBER')
+        or has_role('ROLE_WP_ADMINISTRATOR')
+        or has_role('ROLE_WP_CONTRIBUTOR')
+     ")
      * @Method("GET")
      */
-    public function learnAction(Request $request, Course $course)
+    public function learnAction(UserInterface $user, Course $course)
     {
+        $this->registerCourseParticipant($user, $course);
+
         $em = $this->getDoctrine()->getManager();
         $courseOptions = $em->getRepository('AppBundle:CourseOption')->findBy(
             ['course' => $course],
@@ -117,5 +122,27 @@ class CourseController extends Controller
             'course' => $course,
             'asset' => $asset,
         ));
+    }
+
+    /**
+     * @param UserInterface $user
+     * @param Course        $course
+     */
+    private function registerCourseParticipant(UserInterface $user, Course $course): void
+    {
+        $em = $this->getDoctrine()->getManager();
+        $joinStatus = $em->getRepository('AppBundle:CourseParticipant')->findOneBy([
+            'username' => $user->getUsername(),
+            'course' => $course,
+        ]);
+
+        if (null === $joinStatus) {
+            $em->persist(
+                (new CourseParticipant())
+                    ->setCourse($course)
+                    ->setUsername($user->getUsername())
+            );
+            $em->flush();
+        }
     }
 }

@@ -31,7 +31,7 @@ class AssetType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Asset'
+            'data_class' => 'AppBundle\Entity\Asset',
         ));
     }
 
@@ -42,6 +42,4 @@ class AssetType extends AbstractType
     {
         return 'appbundle_asset';
     }
-
-
 }

@@ -25,10 +25,9 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
         secured_area:
-            pattern:    ^/admin
             access_denied_handler: ekino.wordpress.security.entry_point
             entry_point: ekino.wordpress.security.entry_point
             anonymous: ~
-            
+
     access_control:
         - { path: ^/admin, roles: ROLE_WP_ADMINISTRATOR }

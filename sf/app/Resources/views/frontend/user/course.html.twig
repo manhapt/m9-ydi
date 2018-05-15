@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Danh sách khóa học</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th style="display: none;">Id</th>
+            <th style="display: none;">Sku</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Short Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cp in courses %}
+            <tr>
+                <td style="display: none;"><a href="{{ path('course_show', { 'id': cp.course.id }) }}">{{ cp.course.id }}</a></td>
+                <td style="display: none;">{{ cp.course.sku }}</td>
+                <td class="name">{{ cp.course.name }}</td>
+                <td>
+                    {% if cp.course.image %}
+                        <img  width="50" src="{{ asset('wp-content/uploads/courses/' ~ cp.course.image) }}" alt="{{ cp.course.name }}" />
+                    {% endif %}
+                </td>
+                <td>{{ cp.course.description }}</td>
+                <td>{{ cp.course.shortDescription }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="action" href="{{ path('course_show', { 'id': cp.course.id }) }}">Learn more</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(courses) }}
+    </div>
+{% endblock %}

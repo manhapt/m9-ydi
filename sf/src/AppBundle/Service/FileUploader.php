@@ -13,6 +13,7 @@ class FileUploader
 
     /**
      * FileUploader constructor.
+     *
      * @param string $targetDir
      */
     public function __construct($targetDir)
@@ -22,6 +23,7 @@ class FileUploader
 
     /**
      * @param UploadedFile $file
+     *
      * @return string
      */
     public function upload(UploadedFile $file)

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * CourseOption
+ * CourseOption.
  *
  * @ORM\Table(name="ydi_course_option")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CourseOptionRepository")
@@ -51,7 +51,7 @@ class CourseOption
      * @Assert\NotNull(message="Course should not be null.")
      */
     private $course;
-    
+
     /**
      * @var Asset[]
      *
@@ -65,7 +65,7 @@ class CourseOption
     private $assets;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -73,7 +73,7 @@ class CourseOption
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -83,7 +83,7 @@ class CourseOption
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -97,7 +97,7 @@ class CourseOption
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -107,9 +107,9 @@ class CourseOption
     }
 
     /**
-     * Set required
+     * Set required.
      *
-     * @param boolean $required
+     * @param bool $required
      *
      * @return CourseOption
      */
@@ -121,7 +121,7 @@ class CourseOption
     }
 
     /**
-     * Get required
+     * Get required.
      *
      * @return bool
      */
@@ -131,9 +131,9 @@ class CourseOption
     }
 
     /**
-     * Set position
+     * Set position.
      *
-     * @param integer $position
+     * @param int $position
      *
      * @return CourseOption
      */
@@ -145,7 +145,7 @@ class CourseOption
     }
 
     /**
-     * Get position
+     * Get position.
      *
      * @return int
      */
@@ -155,9 +155,10 @@ class CourseOption
     }
 
     /**
-     * Set course
+     * Set course.
      *
      * @param \AppBundle\Entity\Course $course
+     *
      * @return $this
      */
     public function setCourse(\AppBundle\Entity\Course $course = null)
@@ -168,7 +169,7 @@ class CourseOption
     }
 
     /**
-     * Get course
+     * Get course.
      *
      * @return \AppBundle\Entity\Course
      */
@@ -178,9 +179,10 @@ class CourseOption
     }
 
     /**
-     * Add asset
+     * Add asset.
      *
      * @param \AppBundle\Entity\Asset $asset
+     *
      * @return $this
      */
     public function addAsset(\AppBundle\Entity\Asset $asset)
@@ -191,7 +193,7 @@ class CourseOption
     }
 
     /**
-     * Remove asset
+     * Remove asset.
      *
      * @param \AppBundle\Entity\Asset $asset
      */
@@ -201,7 +203,7 @@ class CourseOption
     }
 
     /**
-     * Get assets
+     * Get assets.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -210,4 +212,3 @@ class CourseOption
         return $this->assets;
     }
 }
-
