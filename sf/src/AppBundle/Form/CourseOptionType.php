@@ -4,10 +4,13 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Asset;
 use AppBundle\Entity\Course;
+use AppBundle\Repository\AssetRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class CourseOptionType extends AbstractType
 {
@@ -16,6 +19,8 @@ class CourseOptionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Course $course */
+        $course = $builder->getData()->getCourse();
         $builder->add('title')
             ->add('required')
             ->add('position')
@@ -28,9 +33,18 @@ class CourseOptionType extends AbstractType
             ))
             ->add('assets', EntityType::class, array(
                 'class' => Asset::class,
+                'query_builder' => function (AssetRepository $er) use ($course) {
+                    $associatedAssetIds = [];
+                    foreach ($er->findByCourse($course) as $asset) {
+                        $associatedAssetIds[] = $asset->getId();
+                    }
+                    return $er->createQueryBuilder('a')
+                        ->where('a.id NOT IN ('.implode(',', $associatedAssetIds).')')
+                        ->orderBy('a.created', 'DESC');
+                },
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true,
+                'expanded' => false,
                 'required' => true,
             ))
         ;

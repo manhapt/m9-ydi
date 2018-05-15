@@ -1,6 +1,9 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Asset;
+use AppBundle\Entity\Course;
+use AppBundle\Entity\CourseOption;
 
 /**
  * AssetRepository.
@@ -10,4 +13,20 @@ namespace AppBundle\Repository;
  */
 class AssetRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param Course $course
+     * @return Asset[]
+     */
+    public function findByCourse(Course $course)
+    {
+        $assets = [];
+        /** @var CourseOption $courseOption */
+        foreach ($course->getCourseOptions() as $courseOption) {
+            foreach ($courseOption->getAssets() as $asset) {
+                $assets[] = $asset;
+            }
+        }
+
+        return $assets;
+    }
 }

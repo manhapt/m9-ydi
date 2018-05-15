@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Backend;
 
+use AppBundle\Entity\Asset;
 use AppBundle\Entity\Course;
 use AppBundle\Entity\CourseOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -69,7 +70,7 @@ class CourseController extends Controller
             $em->persist($course);
             $em->flush();
 
-            return $this->redirectToRoute('admin_course_show', array('id' => $course->getId()));
+            return $this->redirectToRoute('admin_course_asset', array('id' => $course->getId()));
         }
 
         return $this->render('backend/course/new.html.twig', array(
@@ -146,7 +147,7 @@ class CourseController extends Controller
 
         $courseOption = new CourseOption();
         $courseOption->setCourse($course);
-        $form = $this->createForm('AppBundle\Form\CourseOptionType', $courseOption);
+        $form = $this->createForm('AppBundle\Form\CourseOptionType',$courseOption);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

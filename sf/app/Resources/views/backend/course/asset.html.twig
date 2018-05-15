@@ -29,7 +29,12 @@
         </tr>
     {% endfor %}
 
-    <h1>Tạo phần tiếp theo</h1>
+    {% if (optionCounter == 0) %}
+    <h3>Chưa có nội dung</h3>
+    <h1>Tạo phần giới thiệu</h1>
+    {% else %}
+    <h2>Tạo phần tiếp theo</h2>
+    {% endif %}
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
