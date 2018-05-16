@@ -26,7 +26,7 @@
                         <img  width="50" src="{{ asset('wp-content/uploads/courses/' ~ cp.course.image) }}" alt="{{ cp.course.name }}" />
                     {% endif %}
                 </td>
-                <td>{{ cp.course.description }}</td>
+                <td>{{ cp.course.description |raw }}</td>
                 <td>{{ cp.course.shortDescription }}</td>
                 <td>
                     <ul>

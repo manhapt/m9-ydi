@@ -23,7 +23,6 @@
             </td>
         </tr>
     {% endfor %}
-
     <table>
         <tbody>
             <tr>
@@ -36,7 +35,7 @@
             </tr>
             <tr>
                 <th>Description</th>
-                <td style="white-space: pre-wrap;">{{ course.description }}</td>
+                <td>{{ course.description |raw  }}</td>
             </tr>
 
         </tbody>

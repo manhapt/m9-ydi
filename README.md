@@ -33,11 +33,25 @@ define('WP_SYMFONY_DEBUG', true);
 - run composer install: 
 ```
 cd sf
-php ../composer.phar install
+php ../composer.phar install --no-progress --profile --prefer-dist --ignore-platform-reqs
+
 ```
 - run update db
 ```
 php bin/console doctrine:schema:update --force --dump-sql
 ```
 
-
+4. Setup CKEditor
+- Generate ckeditor + Symfony assets:
+```
+bin/console ckeditor:install
+bin/console assets:install
+```
+- Symlink or copy 
+{PATH_TO_m9-ydi}/sf/web/bundles
+TO
+{PATH_TO_m9-ydi}/wp
+```
+cd {PATH_TO_m9-ydi}/wp
+ln -s {PATH_TO_m9-ydi}/sf/web/bundles bundles
+```

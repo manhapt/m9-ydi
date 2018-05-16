@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Ekino\WordpressBundle\Entity\User;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -24,7 +25,11 @@ class CourseType extends AbstractType
             ->add('price', HiddenType::class, ['data' => 0])
             ->add('status', HiddenType::class, ['data' => 1])
             ->add('typeId', HiddenType::class)
-            ->add('description')
+            ->add('description', CKEditorType::class, array(
+                'config' => array(
+                    'uiColor' => '#ffffff'
+                )
+            ))
             ->add('shortDescription')
             ->add('image', FileType::class, ['required' => false])
         ;
