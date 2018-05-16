@@ -128,7 +128,7 @@ class CourseController extends Controller
      * @param UserInterface $user
      * @param Course        $course
      */
-    private function registerCourseParticipant(UserInterface $user, Course $course): void
+    private function registerCourseParticipant(UserInterface $user, Course $course)
     {
         $em = $this->getDoctrine()->getManager();
         $joinStatus = $em->getRepository('AppBundle:CourseParticipant')->findOneBy([
