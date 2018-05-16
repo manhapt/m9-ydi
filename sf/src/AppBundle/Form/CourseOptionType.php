@@ -38,9 +38,12 @@ class CourseOptionType extends AbstractType
                     foreach ($er->findByCourse($course) as $asset) {
                         $associatedAssetIds[] = $asset->getId();
                     }
-                    return $er->createQueryBuilder('a')
-                        ->where('a.id NOT IN ('.implode(',', $associatedAssetIds).')')
-                        ->orderBy('a.created', 'DESC');
+                    $qb = $er->createQueryBuilder('a');
+                    if (count($associatedAssetIds) > 0) {
+                        $qb->where('a.id NOT IN ('.implode(',', $associatedAssetIds).')');
+                    }
+
+                    return $qb->orderBy('a.created', 'DESC');
                 },
                 'choice_label' => 'name',
                 'multiple' => true,
