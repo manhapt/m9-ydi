@@ -6,6 +6,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <?php wp_head(); ?>
     <link rel='stylesheet' id='twentyfifteen-style-css'  href='<?php echo get_stylesheet_directory_uri(); ?>/style.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body id="body" class="html front not-logged-in one-sidebar sidebar-second page-node with-navigation with-subnav">
 <div id="fb-root"></div>

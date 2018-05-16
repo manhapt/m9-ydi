@@ -1,5 +1,5 @@
 .elearning-wrapper {
-    /*background: #f2fafd;*/
+    background: #f2fafd;
     position: relative;
 }
 
@@ -31,6 +31,8 @@
     color: #8e8071;
 }
 
+.grid .actions a:hover,
+.grid .actions a:active,
 .elearning-wrapper a:hover,
 .elearning-wrapper a:active,
 .elearning-wrapper a:focus {
@@ -207,4 +209,117 @@
     height: 40px;
     margin-bottom: 10px;
     font-size: 14px;
+}
+
+/********************************************* Course List *******************************************/
+#courses-list {
+    position: relative;
+}
+#courses-list:after,
+#courses-list:before {
+    position: absolute;
+    content: '';
+    /*background: #fff;*/
+    /*width: 10000px;*/
+    height: 100%;
+    top: 0;
+}
+#courses-list:before {
+    left: 0;
+}
+#courses-list:after {
+    right: 0;
+}
+#courses-list .title h1 {
+    color: #1f4475;
+    display: inline;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+#courses-list .title .fa-graduation-cap:before {
+    color: #1f4475;
+}
+#courses-list .title .sub-title {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+.grid .item {
+    -webkit-transition: opacity .75s ease-in-out;
+    -moz-transition: opacity .75s ease-in-out;
+    -ms-transition: opacity .75s ease-in-out;
+    -o-transition: opacity .75s ease-in-out;
+    transition: opacity .75s ease-in-out;
+}
+.grid .item:hover {
+    -webkit-box-shadow: 2px 5px #ddd;
+    -moz-box-shadow: 2px 5px #ddd;
+    box-shadow: 2px 5px #ddd;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+    zoom: 1;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+.grid .item .base-image img {
+    display: inline-block;
+    width: 100%;
+    max-height: 200px;
+}
+.grid .details {
+    background: #f9fdfe;
+    display: inline-block;
+    padding: 25px 15px;
+    width: 100%;
+}
+.grid .details figure {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20%;
+}
+.grid .details img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #999;
+    padding: 8px;
+}
+.grid .details .description {
+    display: inline-block;
+    vertical-align: top;
+    width: 70%;
+    padding-left: 10px;
+}
+
+.grid .description h3 {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.grid .description p {
+    font-size: 13px;
+    color: #8e8071;
+    font-style: italic;
+    margin-top: 8px;
+}
+.grid .item .fa-heart:before {
+    color: #e86741;
+}
+.grid .item .actions .count {
+    color: #333333;
+    padding-left: 6px;
+}
+.grid .actions a {
+    color: #ff3333;
+    font-weight: 600;
+    float: right;
+    text-decoration: underline;
 }
