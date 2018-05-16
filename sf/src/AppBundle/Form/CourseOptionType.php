@@ -8,6 +8,7 @@ use AppBundle\Repository\AssetRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -22,8 +23,8 @@ class CourseOptionType extends AbstractType
         /** @var Course $course */
         $course = $builder->getData()->getCourse();
         $builder->add('title')
-            ->add('required')
-            ->add('position')
+            ->add('required', HiddenType::class, ['data' => 0])
+            ->add('position', null, ['data' => 1])
             ->add('course', EntityType::class, array(
                 'class' => Course::class,
                 'choice_label' => 'name',
