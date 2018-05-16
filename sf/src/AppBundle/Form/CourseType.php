@@ -17,12 +17,12 @@ class CourseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sku', null, [
+            ->add('sku', HiddenType::class, [
                 'data' => strtoupper(hash('adler32', uniqid(rand(), true))),
             ])
             ->add('name')
             ->add('price', HiddenType::class, ['data' => 0])
-            ->add('status', null, ['data' => 1])
+            ->add('status', HiddenType::class, ['data' => 1])
             ->add('typeId', HiddenType::class)
             ->add('description')
             ->add('shortDescription')
