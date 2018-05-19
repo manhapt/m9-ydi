@@ -1,5 +1,28 @@
+/*****************************************************************************************************/
+/*****************************************************************************************************/
+/********************************************* Common ***********************************************/
+
+.section-setting {
+    background: #fff;
+    margin-top: 2%;
+    padding-left: 3%;
+    padding-bottom: 2%;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #464646;
+}
+.section-setting .title {
+    color: #333;
+}
+.section-setting .fas {
+    color: #68bf32;
+}
+
+/*****************************************************************************************************/
+/*****************************************************************************************************/
+/********************************************* Course List *******************************************/
 .elearning-wrapper {
-    background: #f2fafd;
+    /*background: #f2fafd;*/
     position: relative;
 }
 
@@ -14,12 +37,16 @@
     color: #fff;
     text-transform: capitalize;
     padding: 30px 0;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .elearning-wrapper .sub-title {
     font-size: 14px;
     color: #333;
     text-transform: none;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .elearning-wrapper h3 {
@@ -211,7 +238,7 @@
     font-size: 14px;
 }
 
-/********************************************* Course List *******************************************/
+/********************************************* Courses List *******************************************/
 #courses-list {
     position: relative;
 }
@@ -230,6 +257,7 @@
 #courses-list:after {
     right: 0;
 }
+.course-show .title h1,
 #courses-list .title h1 {
     color: #1f4475;
     display: inline;
@@ -237,9 +265,11 @@
     margin-bottom: 10px;
     text-transform: capitalize;
 }
+.course-show .title .fa-book-open:before,
 #courses-list .title .fa-graduation-cap:before {
     color: #1f4475;
 }
+.course-show .title .sub-title,
 #courses-list .title .sub-title {
     color: #333;
     font-size: 14px;
@@ -253,17 +283,14 @@
     transition: opacity .75s ease-in-out;
 }
 .grid .item:hover {
-    -webkit-box-shadow: 2px 5px #ddd;
-    -moz-box-shadow: 2px 5px #ddd;
-    box-shadow: 2px 5px #ddd;
     -webkit-transition: none;
     -moz-transition: none;
     -ms-transition: none;
     -o-transition: none;
     transition: none;
     zoom: 1;
-    filter: alpha(opacity=70);
-    opacity: 0.7;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
 }
 .grid .item .base-image img {
     display: inline-block;
@@ -272,6 +299,9 @@
 }
 .grid .details {
     background: #f9fdfe;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     display: inline-block;
     padding: 25px 15px;
     width: 100%;
@@ -322,4 +352,31 @@
     font-weight: 600;
     float: right;
     text-decoration: underline;
+}
+
+/********************************************* Course Show *******************************************/
+
+.course-show {
+    background: #1e597e;
+}
+.course-show .section-title {
+    margin-bottom: 2%;
+}
+.course-show .section-setting .title {
+    color: #333;
+    font-weight: 600;
+    padding-bottom: 0;
+    text-transform: none;
+}
+.course-show .section_author,
+.course-show .section_benefit {
+    margin-top: 0;
+}
+.course-show .section_author {
+    padding-left: 0;
+    padding-top: 20px;
+}
+.course-show .section_author .fa-heart {
+    color: #e86741;
+    margin-top: 10px;
 }

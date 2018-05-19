@@ -14,10 +14,25 @@ Mobile First
         height: auto;
         max-width: 100%;
     }
+    .col-left,
+    .col-right {
+        float: none;
+        width: 100%;
+    }
 }
 
 @media all and (min-width: 640px) {
+    .col-left {
+        float: left;
+        width: 18%;
+        text-align: center;
+    }
 
+    .col-right {
+        float: right;
+        width: 70%;
+        text-align: left;
+    }
 }
 
 
@@ -27,7 +42,17 @@ Tablet
 --------------------------------------------------------------*/
 
 @media all and (min-width: 960px) {
+    .col-left {
+        float: left;
+        width: 20%;
+        text-align: center;
+    }
 
+    .col-right {
+        float: right;
+        width: 78%;
+        text-align: left;
+    }
 }
 
 @media all and (min-width: 1024px) {
