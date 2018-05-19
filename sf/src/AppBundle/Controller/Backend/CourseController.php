@@ -29,6 +29,7 @@ class CourseController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $queryBuilder = $em->getRepository('AppBundle:Course')->createQueryBuilder('c');
+        $queryBuilder->orderBy('c.created', 'DESC');
         $query = $queryBuilder->getQuery();
         if ($request->query->getAlnum('filter')) {
             $queryBuilder

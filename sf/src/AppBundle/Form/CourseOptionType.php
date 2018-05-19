@@ -34,9 +34,9 @@ class CourseOptionType extends AbstractType
             ))
             ->add('assets', EntityType::class, array(
                 'class' => Asset::class,
-                'query_builder' => function (AssetRepository $er) use ($course) {
+                'query_builder' => function (AssetRepository $er) {
                     $associatedAssetIds = [];
-                    foreach ($er->findByCourse($course) as $asset) {
+                    foreach ($er->findByAllCourses() as $asset) {
                         $associatedAssetIds[] = $asset->getId();
                     }
                     $qb = $er->createQueryBuilder('a');
@@ -46,7 +46,7 @@ class CourseOptionType extends AbstractType
 
                     return $qb->orderBy('a.created', 'DESC');
                 },
-                'choice_label' => 'name',
+                'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => false,
                 'required' => true,

@@ -36,6 +36,7 @@ class CourseController extends Controller
         $courseRepository = $em->getRepository('AppBundle:Course');
 
         $queryBuilder = $courseRepository->getCourseListQueryBuilder();
+        $queryBuilder->orderBy('c.modified', 'DESC');
         if ($request->query->getAlnum('filter')) {
             $queryBuilder
                 ->where('c.name LIKE :name')

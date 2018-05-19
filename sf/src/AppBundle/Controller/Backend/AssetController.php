@@ -25,7 +25,10 @@ class AssetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $assets = $em->getRepository('AppBundle:Asset')->findAll();
+        $assets = $em->getRepository('AppBundle:Asset')->findBy(
+            [],
+            ['created' => 'DESC']
+        );
 
         return $this->render('backend/asset/index.html.twig', array(
             'assets' => $assets,

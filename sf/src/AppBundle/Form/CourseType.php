@@ -25,12 +25,12 @@ class CourseType extends AbstractType
             ->add('price', HiddenType::class, ['data' => 0])
             ->add('status', HiddenType::class, ['data' => 1])
             ->add('typeId', HiddenType::class)
+            ->add('shortDescription')
             ->add('description', CKEditorType::class, array(
                 'config' => array(
                     'uiColor' => '#ffffff'
                 )
             ))
-            ->add('shortDescription')
             ->add('image', FileType::class, ['required' => false])
         ;
     }

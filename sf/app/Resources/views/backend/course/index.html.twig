@@ -12,7 +12,6 @@
                     <th style="display: none">Price</th> {# unuse field #}
                     <th style="display: none">Typeid</th>
                     <th>Image</th>
-                    <th>Description</th>
                     <th>Short Description</th>
                     <th>{{ knp_pagination_sortable(courses, 'created', 'c.created') }}</th>
                     <th>Modified</th>
@@ -33,7 +32,6 @@
                             <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" alt="{{ course.name }}" />
                         {% endif %}
                     </td>
-                    <td>{{ course.description }}</td>
                     <td>{{ course.shortDescription }}</td>
                     <td>{% if course.created %}{{ course.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if course.modified %}{{ course.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
