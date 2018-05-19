@@ -18,6 +18,8 @@
 }
 #courses-index {
     background: #F4F3F2;
+    padding-bottom: 5%;
+    padding-top: 2%;
 }
 #courses-list {
     display: block;
@@ -313,7 +315,7 @@
     padding-left: 10px;
 }
 .grid .details .description p {
-    max-height: 150px;
+    max-height: 135px;
     overflow: hidden;
 }
 
