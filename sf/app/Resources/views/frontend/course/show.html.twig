@@ -22,9 +22,7 @@
                                     <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
                                 </figure>
                             {% endif %}
-                            {#{% if(course.totalParticipant) %}#}
-                                <i class="fa fa-heart"></i><span class="count">{#{{ course.totalParticipant }}#} 20 Học viên tham gia</span>
-                            {#{% endif %}#}
+                                <i class="fa fa-heart"></i><span class="count">{{ course.courseParticipants.count() }} Học viên tham gia</span>
                         </section>
                     </div>
                     <div class="details col-right">

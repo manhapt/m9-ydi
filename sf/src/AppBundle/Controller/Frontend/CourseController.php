@@ -86,9 +86,10 @@ class CourseController extends Controller
      ")
      * @Method("GET")
      */
-    public function learnAction(UserInterface $user, Course $course)
+    public function learnAction(Course $course)
     {
-        $this->registerCourseParticipant($user, $course);
+        $token = $this->get('security.token_storage')->getToken();
+        $this->registerCourseParticipant($token->getUser(), $course);
 
         $em = $this->getDoctrine()->getManager();
         $courseOptions = $em->getRepository('AppBundle:CourseOption')->findBy(
