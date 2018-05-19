@@ -380,3 +380,6 @@
     color: #e86741;
     margin-top: 10px;
 }
+.course-show .section_author img {
+    max-width: 100%;
+}
