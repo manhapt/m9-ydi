@@ -1,7 +1,6 @@
 /*****************************************************************************************************/
 /*****************************************************************************************************/
 /********************************************* Common ***********************************************/
-
 .section-setting {
     background: #fff;
     margin-top: 2%;
@@ -17,12 +16,8 @@
 .section-setting .fas {
     color: #68bf32;
 }
-
-/*****************************************************************************************************/
-/*****************************************************************************************************/
-/********************************************* Course List *******************************************/
 #courses-index {
-    background: #f2fafd;
+    background: #F4F3F2;
 }
 #courses-list {
     display: block;
@@ -91,8 +86,8 @@
     display: inline-block;
 }
 
-.elearning-wrapper .actions {
-    background: #f4f5f5;
+#courses-list .actions {
+    background: #cdcece;
     padding: 20px 15px;
 }
 
@@ -250,21 +245,6 @@
 #courses-list {
     position: relative;
 }
-#courses-list:after,
-#courses-list:before {
-    position: absolute;
-    content: '';
-    /*background: #fff;*/
-    /*width: 10000px;*/
-    height: 100%;
-    top: 0;
-}
-#courses-list:before {
-    left: 0;
-}
-#courses-list:after {
-    right: 0;
-}
 .course-show .title h1,
 #courses-list .title h1 {
     color: #1f4475;
@@ -409,4 +389,31 @@
 }
 .course-show .content_lecture .child .fas {
     margin-top: -8px;
+}
+
+/********************************************* Start Learning *******************************************/
+.course-show .content_lecture .child a {
+    text-decoration: none;
+    color: #333;
+}
+.learn-course .content_lecture .child:hover {
+    -webkit-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+}
+.learn-course .section_author > span {
+    display: inline-block;
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    cursor: pointer;
+}.learn-course .section_author > span:hover,
+.learn-course .section_author > span.active {
+    -webkit-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    border-left: 5px solid green;
 }
