@@ -15,7 +15,7 @@
                         {% for course in courses %}
                             <div class="item">
                                 <a class="base-image course-card" href="{{ path('course_show', { 'id': course.id }) }}">
-                                    <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
+                                    <img data-lazy="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
                                 </a>
                                 <div class="details">
                                     <figure>
@@ -46,14 +46,15 @@
                 dots: false,
                 infinite: true,
                 slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToScroll: 1,
+                lazyLoad: 'ondemand',
                 // autoplay: true,
                 responsive: [
                     {
                         breakpoint: 1024,
                         settings: {
                             slidesToShow: 3,
-                            slidesToScroll: 3,
+                            slidesToScroll: 1,
                             dots: true
                         }
                     },
@@ -61,7 +62,7 @@
                         breakpoint: 767,
                         settings: {
                             slidesToShow: 2,
-                            slidesToScroll: 2,
+                            slidesToScroll: 1,
                             dots: true
                         }
                     },

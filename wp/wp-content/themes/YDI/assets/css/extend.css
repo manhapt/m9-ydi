@@ -383,3 +383,22 @@
 .course-show .section_author img {
     max-width: 100%;
 }
+.course-show .section_author .count {
+    margin-left: 5px;
+}
+.course-show .content_lecture h4 {
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    margin-bottom: 0;
+}
+.course-show .content_lecture .child {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    font-size: 16px;
+}
+.course-show .content_lecture .child .fas {
+    margin-top: -8px;
+}

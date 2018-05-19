@@ -22,7 +22,7 @@
                                     <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
                                 </figure>
                             {% endif %}
-                                <i class="fa fa-heart"></i><span class="count">{{ course.courseParticipants.count() }} Học viên tham gia</span>
+                            <i class="fa fa-heart"></i><span class="count">{{ course.courseParticipants.count() }} Học viên tham gia</span>
                         </section>
                     </div>
                     <div class="details col-right">
@@ -58,17 +58,20 @@
                         </section>
                         <section class="section_lecture section-setting">
                             <p class="title">Giáo trình</p>
-                            <ul content="content_lecture">
+                            <ul class="content_lecture">
                                 {% set assetCounter = 0 %}
                                 {% set optionCounter = 0 %}
                                 {% for courseOption in courseOptions %}
                                     {% set optionCounter = optionCounter+1  %}
-                                    <li>
+                                    <li class="item">
                                         <h4>Phần  {{  optionCounter }}. {{ courseOption.title }}</h4>
                                         <ul>
                                             {% for asset in courseOption.assets %}
                                                 {% set assetCounter = assetCounter+1  %}
-                                                <li>Bài  {{  assetCounter }}. {{ asset.title }} - 01:30</li>
+                                                <li class="child">
+                                                    <i class="fas fa-2x fa-play-circle fa-pull-left"></i>
+                                                    Bài  {{  assetCounter }}. {{ asset.title }} - 01:30
+                                                </li>
                                             {% endfor %}
                                         </ul>
                                     </li>
