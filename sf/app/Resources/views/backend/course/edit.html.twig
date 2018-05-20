@@ -5,9 +5,11 @@
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        {% if course.image %}
-            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" width="400"/>
-        {% endif %}
+        <figure class="preview">
+            {% if course.image %}
+                <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" width="150"/>
+            {% endif %}
+        </figure>
         <input class="button button-primary" type="submit" value="Edit" style="display: block;"/>
     {{ form_end(edit_form) }}
 

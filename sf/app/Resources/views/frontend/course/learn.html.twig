@@ -19,7 +19,8 @@
                         <section class="section_author section-setting">
                             {% if course.image %}
                                 <figure>
-                                    <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
+                                    <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
+                                         alt="{{ course.name }}"/>
                                 </figure>
                             {% endif %}
                             <span>Khóa học của tôi</span>
@@ -41,16 +42,16 @@
                                 {% set assetCounter = 0 %}
                                 {% set optionCounter = 0 %}
                                 {% for courseOption in courseOptions %}
-                                    {% set optionCounter = optionCounter+1  %}
+                                    {% set optionCounter = optionCounter+1 %}
                                     <li class="item">
-                                        <h4>Phần  {{  optionCounter }}. {{ courseOption.title }}</h4>
+                                        <h4>Phần {{ optionCounter }}. {{ courseOption.title }}</h4>
                                         <ul>
                                             {% for asset in courseOption.assets %}
-                                                {% set assetCounter = assetCounter+1  %}
+                                                {% set assetCounter = assetCounter+1 %}
                                                 <li class="child">
                                                     <i class="fas fa-2x fa-play-circle fa-pull-left"></i>
                                                     <a href="{{ path('course_asset', { 'id': course.id, 'asset_id': asset.id }) }}">
-                                                        Bài {{  assetCounter }}. {{ asset.title }} - 01:30
+                                                        Bài {{ assetCounter }}. {{ asset.title }} - 01:30
                                                     </a>
                                                 </li>
                                             {% endfor %}

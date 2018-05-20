@@ -1,6 +1,17 @@
 /*****************************************************************************************************/
 /*****************************************************************************************************/
 /********************************************* Common ***********************************************/
+.no-padding {
+    padding: 0 !important;
+}
+
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+
 .section-setting {
     background: #fff;
     margin-top: 2%;
@@ -10,23 +21,28 @@
     font-size: 14px;
     color: #464646;
 }
+
 .section-setting .title {
     color: #333;
 }
+
 .section-setting .fas {
     color: #68bf32;
 }
+
 #courses-index {
     background: #F4F3F2;
     padding-bottom: 5%;
     padding-top: 2%;
 }
+
 #courses-list {
     display: block;
     max-width: 1110px;
     padding: 0;
     margin: 0 auto;
 }
+
 .elearning-wrapper {
     position: relative;
 }
@@ -109,9 +125,9 @@
 .elearning-wrapper table {
     background: #fff;
     border: 1px solid #e5e5e5;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
     border-spacing: 0;
     margin: 0;
     clear: both;
@@ -176,7 +192,7 @@
     box-shadow: 0 2px 0 #006799;
     color: #fff;
     text-decoration: none;
-    text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799;
+    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
     margin: 15px 13px 3px 0;
     padding: 12px 15px;
     height: auto;
@@ -189,6 +205,7 @@
     display: inline-block;
     margin-bottom: 15px;
     font-size: 14px;
+    vertical-align: top;
 }
 
 .elearning-wrapper form div > label {
@@ -205,7 +222,7 @@
 }
 
 .elearning-wrapper form input:not([type="submit"]) {
-    width: 50%;
+    width: 75%;
     background: #fff;
     color: #333 !important;
     height: 40px;
@@ -217,6 +234,7 @@
 .elearning-wrapper form #appbundle_course_roles_1 {
     margin-left: 0;
 }
+
 .elearning-wrapper form input[type="checkbox"] {
     width: auto;
     margin: 0 10px 0 20px;
@@ -224,8 +242,11 @@
 }
 
 .elearning-wrapper form input[type="file"] {
+    background: none;
+    color: #fff !important;
     width: auto;
     font-size: 14px;
+    margin-top: 10px;
 }
 
 .elearning-wrapper form textarea {
@@ -234,7 +255,7 @@
 
 .elearning-wrapper form select,
 .elearning-wrapper form textarea {
-    width: 50%;
+    width: 75%;
     background: #fff;
     color: #333 !important;
     padding: 0 0 0 10px;
@@ -243,10 +264,25 @@
     font-size: 14px;
 }
 
+.elearning-wrapper #cke_appbundle_asset_description,
+.elearning-wrapper #cke_appbundle_course_description {
+    display: inline-block;
+    width: 75%;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.elearning-wrapper form .preview {
+    display: inline-block;
+    margin-left: 20%;
+    width: auto;
+}
+
 /********************************************* Courses List *******************************************/
 #courses-list {
     position: relative;
 }
+
 .course-show .title h1,
 #courses-list .title h1 {
     color: #1f4475;
@@ -255,16 +291,22 @@
     margin-bottom: 10px;
     text-transform: capitalize;
 }
+
 .course-show .title .fa-book-open:before,
 #courses-list .title .fa-graduation-cap:before {
     color: #1f4475;
 }
+
 .course-show .title .sub-title,
 #courses-list .title .sub-title {
     color: #333;
     font-size: 14px;
     font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 5px;
+    padding-left: 70px;
 }
+
 .grid .item {
     -webkit-transition: opacity .75s ease-in-out;
     -moz-transition: opacity .75s ease-in-out;
@@ -272,6 +314,7 @@
     -o-transition: opacity .75s ease-in-out;
     transition: opacity .75s ease-in-out;
 }
+
 .grid .item:hover {
     -webkit-transition: none;
     -moz-transition: none;
@@ -282,11 +325,13 @@
     filter: alpha(opacity=60);
     opacity: 0.6;
 }
+
 .grid .item .base-image img {
     display: inline-block;
     width: 100%;
     max-height: 200px;
 }
+
 .grid .details {
     background: #f9fdfe;
     -webkit-box-sizing: border-box;
@@ -296,11 +341,13 @@
     padding: 25px 15px;
     width: 100%;
 }
+
 .grid .details figure {
     display: inline-block;
     vertical-align: middle;
     width: 20%;
 }
+
 .grid .details img {
     border-radius: 50%;
     width: 50px;
@@ -308,12 +355,14 @@
     border: 1px solid #999;
     padding: 8px;
 }
+
 .grid .details .description {
     display: inline-block;
     vertical-align: top;
     width: 70%;
     padding-left: 10px;
 }
+
 .grid .details .description p {
     max-height: 135px;
     overflow: hidden;
@@ -334,13 +383,16 @@
     font-style: italic;
     margin-top: 8px;
 }
+
 .grid .item .fa-heart:before {
     color: #e86741;
 }
+
 .grid .item .actions .count {
     color: #333333;
     padding-left: 6px;
 }
+
 .grid .actions a {
     color: #ff3333;
     font-weight: 600;
@@ -353,33 +405,45 @@
 .course-show {
     background: #1e597e;
 }
+
 .course-show .section-title {
     margin-bottom: 2%;
 }
+
+.course-show .section-title i {
+    margin-top: 10px;
+}
+
 .course-show .section-setting .title {
     color: #333;
     font-weight: 600;
     padding-bottom: 0;
     text-transform: none;
 }
+
 .course-show .section_author,
 .course-show .section_benefit {
     margin-top: 0;
 }
+
 .course-show .section_author {
     padding-left: 0;
     padding-top: 20px;
 }
+
 .course-show .section_author .fa-heart {
     color: #e86741;
     margin-top: 10px;
 }
+
 .course-show .section_author img {
     max-width: 100%;
 }
+
 .course-show .section_author .count {
     margin-left: 5px;
 }
+
 .course-show .content_lecture h4 {
     font-size: 16px;
     font-weight: 600;
@@ -387,12 +451,14 @@
     padding: 15px 0;
     margin-bottom: 0;
 }
+
 .course-show .content_lecture .child {
     padding: 15px;
     border-bottom: 1px solid #ddd;
     position: relative;
     font-size: 16px;
 }
+
 .course-show .content_lecture .child .fas {
     margin-top: -8px;
 }
@@ -402,6 +468,7 @@
     text-decoration: none;
     color: #333;
 }
+
 .learn-course .content_lecture .child:hover {
     -webkit-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
@@ -409,17 +476,179 @@
     border-radius: 3px;
     cursor: pointer;
 }
+
 .learn-course .section_author > span {
     display: inline-block;
     width: 100%;
     padding: 15px;
     text-align: left;
     cursor: pointer;
-}.learn-course .section_author > span:hover,
+}
+
+.learn-course .section_author > span:hover,
 .learn-course .section_author > span.active {
     -webkit-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     border-left: 5px solid green;
+}
+
+/********************************************* Asset Details *******************************************/
+.lecture-details.course-show {
+    background: none;
+}
+
+.lecture-details #videoplayer {
+    width: 100%;
+    height: 100%;
+}
+
+.lecture-details .lecture-player {
+    background-color: #2C2F37;
+    position: relative;
+    height: 100%;
+}
+
+.nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+    position: relative;
+    display: block;
+}
+
+.lecture-container-header li {
+    width: 33%;
+    text-align: center;
+    color: #464646;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 35px;
+    border-right: 1px solid #b6b6b6;
+    border-bottom: 3px solid #797979;
+}
+
+.lecture-container-header li:last-child {
+    border-right: none;
+}
+
+.lecture-container-header .active,
+.lecture-container-header li:hover {
+    border-bottom: 5px solid #FF8300;
+}
+
+.lecture-container-header li a {
+    padding: 0;
+    line-height: 40px;
+    color: #464646;
+    border: none !important;
+    text-decoration: none;
+}
+
+.nav-tabs > li > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    text-decoration: none;
+}
+
+.nav-tabs > li.active i,
+.nav-tabs > li.active > a {
+    color: #FF8300;
+    font-weight: 600;
+}
+
+.lecture-container-header i {
+    color: #727272;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.lecture-container-header {
+    height: auto;
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+}
+.tab-content {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 380px;
+    overflow-y: scroll;
+}
+
+.tab-content > .tab-pane {
+    display: none;
+}
+
+.tab-content > .active {
+    display: block;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+.lecture-details .list-lecture-container {
+    height: 450px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.list-lecture-container .chap-title {
+    background-color: #ccc;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 9px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #212121;
+}
+
+.list-lecture-container .chap-item.active {
+    background: #e4e4e4 !important;
+}
+
+.list-lecture-container .chap-item {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    float: left;
+    padding: 15px;
+    width: 100%;
+}
+.chap-item a {
+    text-decoration: none;
+    outline: none;
+}
+.chap-item .item-container .chap-item-status i {
+    margin-top: 8px;
+    color: green;
+}
+.chap-item .item-container .chap-item-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #868686;
+    font-size: 14px;
+    font-weight: 300;
+}
+.chap-item .item-container .chap-item-content:hover {
+    -webkit-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
 }

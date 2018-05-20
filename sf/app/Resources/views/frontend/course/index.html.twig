@@ -15,12 +15,15 @@
                         <div class="slides">
                             {% for course in courses %}
                                 <div class="item">
-                                    <a class="base-image course-card" href="{{ path('course_show', { 'id': course.id }) }}">
-                                        <img data-lazy="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
+                                    <a class="base-image course-card"
+                                       href="{{ path('course_show', { 'id': course.id }) }}">
+                                        <img data-lazy="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
+                                             alt="{{ course.name }}"/>
                                     </a>
                                     <div class="details">
                                         <figure>
-                                            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}" alt="{{ course.name }}" />
+                                            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
+                                                 alt="{{ course.name }}"/>
                                         </figure>
                                         <div class="description">
                                             <h3>{{ course.name }}</h3>
@@ -40,7 +43,7 @@
             </div>
         </section>
         <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script defer src="{{ absolute_url(asset('wp-includes/js/slick.min.js')) }}" type="text/javascript" ></script>
+        <script defer src="{{ absolute_url(asset('wp-includes/js/slick.min.js')) }}" type="text/javascript"></script>
         <script defer>
             jQuery(document).ready(function () {
                 jQuery('#courses-list .slides').slick({
