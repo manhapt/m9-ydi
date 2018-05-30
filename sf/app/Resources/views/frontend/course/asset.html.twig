@@ -10,8 +10,7 @@
         });
         // setup the video element and attach it to the Dash player
         function setupVideo() {
-            var url = "http://ydimedia-aase.streaming.media.azure.net/42f25860-dc9c-401f-9cb8-0844bfd203e3/ydimedia.ism/manifest(format=mpd-time-csf)";
-            var url = "http://ydimedia-aase.streaming.media.azure.net/12dfb987-3ea1-44a3-8216-f1837fd571ab/Wildlife.ism/manifest(format=mpd-time-csf)";
+            var url = "{{ asset.uri }}{{ asset.name }}.ism/manifest(format=mpd-time-csf)";
             var context = new Dash.di.DashContext();
             var player = new MediaPlayer(context);
             player.startup();

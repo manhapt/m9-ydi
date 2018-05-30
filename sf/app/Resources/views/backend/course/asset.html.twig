@@ -38,10 +38,8 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <div class="actions-toolbar">
-        <input class="button button-primary" type="submit" value="Create" />
-        <a class="button button-primary"  target="_blank" href="{{ path('admin_asset_new') }}">Create a new asset</a>
-    </div>
+    ( <a  target="_blank" href="{{ path('admin_asset_new') }}">Create a new asset</a> )<br/>
+    <input class="button button-primary" type="submit" value="Create" />
     {{ form_end(form) }}
 
     <ul>
