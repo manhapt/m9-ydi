@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller\Backend;
 
+use GuzzleHttp\Psr7;
 use AppBundle\Entity\Asset;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -49,8 +51,21 @@ class AssetController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $file = null;
+            if ($asset->getFile()) {
+                /** @var UploadedFile $file */
+                $file = $asset->getFile();
+                $fileName = $file->getClientOriginalName();
+                $name = substr($fileName, 0, strlen($fileName) - strlen('.' . $file->getClientOriginalExtension()));
+                $asset->setName($name);
+                $asset->setFile($fileName);
+            }
             $em->persist($asset);
             $em->flush();
+
+            if ($file) {
+                $this->get('azure.uploader.asset')->upload($file);
+            }
 
             return $this->redirectToRoute('admin_asset_show', array('id' => $asset->getId()));
         }

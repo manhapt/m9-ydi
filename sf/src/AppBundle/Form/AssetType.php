@@ -31,7 +31,8 @@ class AssetType extends AbstractType
             ->add('uri', null, ['data' => 'http://ydimedia-aase.streaming.media.azure.net/12dfb987-3ea1-44a3-8216-f1837fd571ab/'])
             ->add('name', null, ['data' => 'Wildlife'])
             ->add('storageAccountName', HiddenType::class)
-            ->add('alternateId', HiddenType::class);
+            ->add('alternateId', HiddenType::class)
+            ->add('file', FileType::class, ['required' => false]);
     }
 
     /**

@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Asset.
  *
  * @ORM\Table(name="ydi_asset")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AssetRepository")
+ * @UniqueEntity(fields={"file"}, message="File with the same name is existed.")
  * @ORM\HasLifecycleCallbacks()
  */
 class Asset
@@ -39,9 +42,26 @@ class Asset
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file", type="string", length=255, nullable=true, unique=true)
+     * @Assert\File(
+     *     maxSize = "1024M",
+     *     mimeTypes = {
+     *         "video/mp4",
+     *         "video/quicktime",
+     *         "video/x-msvideo",
+     *         "video/x-ms-wmv",
+     *     },
+     *     mimeTypesMessage = "Please upload a valid video"
+     * )
+     */
+    private $file;
 
     /**
      * @var string
@@ -186,6 +206,30 @@ class Asset
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set file.
+     *
+     * @param string $file
+     *
+     * @return $this
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**

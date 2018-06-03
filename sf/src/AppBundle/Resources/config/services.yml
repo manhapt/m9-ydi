@@ -1,0 +1,53 @@
+parameters:
+    azure.oauth2.client_id: ''
+    azure.oauth2.client_secret: ''
+    azure.oauth2.url_resource_owner_details: ''
+    azure.oauth2.resource: ''
+    azure.oauth2.tenant: ''
+    azure.oauth2.api_url: ''
+    azure.oauth2.api_version: ''
+
+services:
+    azure.oauth2.config:
+        class: AppBundle\AzureApi\OAuth2Config
+        arguments:
+            - '%azure.oauth2.client_id%'
+            - '%azure.oauth2.client_secret%'
+            - '%azure.oauth2.url_resource_owner_details%'
+            - '%azure.oauth2.resource%'
+            - '%azure.oauth2.tenant%'
+            - '%azure.oauth2.api_url%'
+            - '%azure.oauth2.api_version%'
+
+    azure.oauth2.factory.provider:
+        class: AppBundle\AzureApi\ProviderFactory
+
+    azure.oauth2.factory.access_token:
+        class: AppBundle\AzureApi\AccessTokenFactory
+
+    azure.provider:
+        class: TheNetworg\OAuth2\Client\Provider\Azure
+        public: true
+        factory: ["@azure.oauth2.factory.provider", create]
+        arguments:
+            - "@azure.oauth2.config"
+
+    azure.oauth2.access_token:
+        class: League\OAuth2\Client\Token\AccessToken
+        public: true
+        factory: ["@azure.oauth2.factory.access_token", create]
+        arguments:
+            - "@azure.provider"
+
+    azure.client:
+        class: AppBundle\AzureApi\Client
+        public: true
+        arguments:
+            - '@azure.provider'
+            - '@azure.oauth2.access_token'
+
+    azure.uploader.asset:
+        class: AppBundle\Service\AssetUploader
+        public: true
+        arguments:
+            - '@service_container'
