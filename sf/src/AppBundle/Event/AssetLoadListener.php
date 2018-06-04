@@ -123,8 +123,8 @@ class AssetLoadListener
      */
     private function createEncodeAssetJob($asset)
     {
-
-        $body = ['Name' => "Media Encoder Standard processing of {$asset->getFile()}"];
+        $name = "encoded-{$asset->getFile()}";
+        $body = ['Name' => $name];
         $body['InputMediaAssets'] = [
             [
                 '__metadata' => [
@@ -143,7 +143,7 @@ CBD;
             [
                 'Configuration' => 'Content Adaptive Multiple Bitrate MP4',
                 'MediaProcessorId' => "nb:mpid:UUID:ff4df607-d419-42f0-bc17-a481b1331e56",
-                'TaskBody' => $taskBody1 . $asset->getFile() . $taskBody2
+                'TaskBody' => $taskBody1 . $name . $taskBody2
             ]
         ];
 
