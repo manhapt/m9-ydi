@@ -2,11 +2,13 @@
 
 namespace AppBundle\Controller\Backend;
 
+use AppBundle\Event\AssetLoadEvent;
 use GuzzleHttp\Psr7;
 use AppBundle\Entity\Asset;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -84,6 +86,7 @@ class AssetController extends Controller
      */
     public function showAction(Asset $asset)
     {
+        $this->preloadAsset($asset);
         $deleteForm = $this->createDeleteForm($asset);
 
         return $this->render('backend/asset/show.html.twig', array(
@@ -100,6 +103,7 @@ class AssetController extends Controller
      */
     public function editAction(Request $request, Asset $asset)
     {
+        $this->preloadAsset($asset);
         $deleteForm = $this->createDeleteForm($asset);
         $editForm = $this->createForm('AppBundle\Form\AssetType', $asset);
         $editForm->handleRequest($request);
@@ -151,5 +155,20 @@ class AssetController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @param Asset $asset
+     */
+    public function preloadAsset(Asset $asset)
+    {
+        /** @var EventDispatcherInterface $eventDispatcher */
+        $eventDispatcher = $this->get('event_dispatcher');
+        $eventDispatcher->dispatch(
+            AssetLoadEvent::EVENT_NAME,
+            new AssetLoadEvent(
+                $asset
+            )
+        );
     }
 }

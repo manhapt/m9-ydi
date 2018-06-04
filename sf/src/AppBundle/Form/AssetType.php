@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Asset;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -16,6 +17,10 @@ class AssetType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Asset $asset */
+        $asset = $builder->getData();
+        $isEdit = $asset && $asset->getId();
+
         $builder->add('uuid', HiddenType::class, [
             'data' => strtoupper(hash('adler32', uniqid(rand(), true))),
         ])
@@ -28,11 +33,13 @@ class AssetType extends AbstractType
             ))
             ->add('options', HiddenType::class, ['data' => 1])
             ->add('formatOption', HiddenType::class, ['data' => 1])
-            ->add('uri', null, ['data' => 'http://ydimedia-aase.streaming.media.azure.net/12dfb987-3ea1-44a3-8216-f1837fd571ab/'])
-            ->add('name', null, ['data' => 'Wildlife'])
             ->add('storageAccountName', HiddenType::class)
             ->add('alternateId', HiddenType::class)
-            ->add('file', FileType::class, ['required' => false]);
+        ;
+
+        if (false === $isEdit) {
+            $builder->add('file', FileType::class, ['required' => false]);
+        }
     }
 
     /**

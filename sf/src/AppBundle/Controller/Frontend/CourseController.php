@@ -5,12 +5,14 @@ namespace AppBundle\Controller\Frontend;
 use AppBundle\Entity\Asset;
 use AppBundle\Entity\Course;
 use AppBundle\Entity\CourseParticipant;
+use AppBundle\Event\AssetLoadEvent;
 use AppBundle\Repository\CourseRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -113,6 +115,7 @@ class CourseController extends Controller
      */
     public function assetAction(Course $course, Asset $asset)
     {
+        $this->preloadAsset($asset);
         $em = $this->getDoctrine()->getManager();
         $courseOptions = $em->getRepository('AppBundle:CourseOption')->findBy(
             ['course' => $course],
@@ -146,5 +149,21 @@ class CourseController extends Controller
             );
             $em->flush();
         }
+    }
+
+
+    /**
+     * @param Asset $asset
+     */
+    public function preloadAsset(Asset $asset)
+    {
+        /** @var EventDispatcherInterface $eventDispatcher */
+        $eventDispatcher = $this->get('event_dispatcher');
+        $eventDispatcher->dispatch(
+            AssetLoadEvent::EVENT_NAME,
+            new AssetLoadEvent(
+                $asset
+            )
+        );
     }
 }

@@ -33,11 +33,34 @@ class Asset
     private $uuid;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="encoded_uuid", type="string", length=255, nullable=true)
+     */
+    private $encodedUuid;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="state", type="integer", options={"default" = 0})
      */
     private $state;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="job_uuid", type="string", length=255, nullable=true)
+     */
+    private $jobUuid;
+
+    /**
+     * Queued=0|Scheduled=1|Processing=2|Finished=3|Error=4|Canceled=5|Canceling=6
+     *
+     * @var int
+     *
+     * @ORM\Column(name="job_state", type="integer", options={"default" = 0})
+     */
+    private $jobState = 0;
 
     /**
      * @var string
@@ -161,6 +184,22 @@ class Asset
     }
 
     /**
+     * @return string
+     */
+    public function getEncodedUuid(): string
+    {
+        return $this->encodedUuid;
+    }
+
+    /**
+     * @param string $encodedUuid
+     */
+    public function setEncodedUuid(string $encodedUuid)
+    {
+        $this->encodedUuid = $encodedUuid;
+    }
+
+    /**
      * Set state.
      *
      * @param int $state
@@ -182,6 +221,38 @@ class Asset
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJobUuid()
+    {
+        return $this->jobUuid;
+    }
+
+    /**
+     * @param string $jobUuid
+     */
+    public function setJobUuid($jobUuid)
+    {
+        $this->jobUuid = $jobUuid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getJobState()
+    {
+        return $this->jobState;
+    }
+
+    /**
+     * @param int $jobState
+     */
+    public function setJobState($jobState)
+    {
+        $this->jobState = $jobState;
     }
 
     /**

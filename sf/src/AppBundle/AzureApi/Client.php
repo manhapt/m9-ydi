@@ -31,9 +31,18 @@ class Client
 
     private function post($ref, $body, &$accessToken, $headers = [])
     {
-        $headers['Accept'] = 'application/json';
-        
+        if (empty($headers['Accept'])) {
+            $headers['Accept'] = 'application/json';
+        }
+
         return $this->provider->post($ref, $body, $accessToken, $headers);
+    }
+
+    private function get($ref, &$accessToken, $headers = [])
+    {
+        $headers['Accept'] = 'application/json';
+
+        return $this->provider->get($ref, $accessToken, $headers);
     }
 
     /**
@@ -98,6 +107,30 @@ class Client
     }
 
     /**
+     * @param $accessPolicyId
+     * @param $assetId
+     * @param $startTime (format: 2014-05-17T16:45:53)
+     * @return null
+     */
+    public function postStreamingLocator($accessPolicyId, $assetId, $startTime)
+    {
+        return $this->post(
+            'Locators',
+            ["AccessPolicyId" => $accessPolicyId, "AssetId" => $assetId, 'StartTime' => $startTime, 'Type' => 2],
+            $this->token
+        );
+    }
+
+    /**
+     * @param string $uuid
+     * @return null
+     */
+    public function deleteLocator($uuid)
+    {
+        return $this->provider->delete("Locators('{$uuid}')", $this->token);
+    }
+
+    /**
      * @param string $assetId
      * @return mixed
      */
@@ -105,6 +138,46 @@ class Client
     {
         return $this->provider->get(
             "CreateFileInfos?assetid='{$assetId}'",
+            $this->token
+        );
+    }
+
+    /**
+     * @param array $body
+     * @return null
+     */
+    public function postJob($body)
+    {
+        return $this->post(
+            'Jobs',
+            $body,
+            $this->token,
+            [
+                'Accept' => 'application/json;odata=verbose',
+                'Content-Type' => 'application/json;odata=verbose',
+                'DataServiceVersion' => '3.0',
+                'MaxDataServiceVersion' => '3.0'
+            ]
+        );
+    }
+
+    /**
+     * @param string $uuid
+     * @return array
+     */
+    public function getJobState($uuid)
+    {
+        return $this->get("Jobs('{$uuid}')/State", $this->token);
+    }
+
+    /**
+     * @param string $uuid
+     * @return array
+     */
+    public function getJobOutputAsset($uuid)
+    {
+        return $this->get(
+            "Jobs('$uuid')/OutputMediaAssets",
             $this->token
         );
     }

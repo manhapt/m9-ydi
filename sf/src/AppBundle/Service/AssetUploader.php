@@ -58,13 +58,19 @@ class AssetUploader
      */
     public function upload(UploadedFile $file)
     {
-        $policy = $this->createUploadAccessPolicy();
+        //setup
+        $uploadPolicy = $this->createUploadAccessPolicy();
         $asset = $this->createAsset($file);
-        $uploadUrl = $this->createSasLocator($policy, $asset);
+        $sasLocator = $this->createSasLocator($uploadPolicy, $asset);
+        $uploadUrl = $this->createSASLocatorUrl($asset, $sasLocator);
 
+        //upload asset
         $body = fopen($file->getPathname(), 'r+');
         $this->getClient()->putAsset($uploadUrl, $body);
         $this->getClient()->postFileInfo($asset->getUuid());
+
+        //tear down
+        $this->getClient()->deleteLocator($sasLocator['Id']);
     }
 
     /**
@@ -115,16 +121,26 @@ class AssetUploader
     }
 
     /**
-     * Create the upload URL
+     * Create SAS Locator for upload
      *
      * @param AzureAccessPolicy $policy
      * @param Asset $asset
-     * @return string
+     * @return array
      */
     private function createSASLocator($policy, $asset)
     {
-        $response = $this->getClient()->postSASLocator($policy->getUuid(), $asset->getUuid());
+        return $this->getClient()->postSASLocator($policy->getUuid(), $asset->getUuid());
+    }
 
-        return $response['BaseUri'] . '/' . $asset->getFile() . $response['ContentAccessComponent'];
+    /**
+     * Create the upload URL
+     *
+     * @param Asset $asset
+     * @param array $sasLocator
+     * @return string
+     */
+    private function createSASLocatorUrl($asset, $sasLocator)
+    {
+        return $sasLocator['BaseUri'] . '/' . $asset->getFile() . $sasLocator['ContentAccessComponent'];
     }
 }
