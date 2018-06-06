@@ -8,13 +8,15 @@ $connectStr_dbPassword = $connectStr_dbPassword ?? 'password_here';
 
 function explodeConnectionStrings($env, &$connectStr_dbHost, &$connectStr_dbName, &$connectStr_dbUsername, &$connectStr_dbPassword) {
     foreach ($env as $key => $value) {
-        if (strpos($key, "MYSQLCONNSTR_") !== 0 ||
-            false === strpos($value, 'Data Source') || false === strpos($value, 'Database')
-            || false === strpos($value, 'Password') || false === strpos($value, 'User Id')) {
+        if (strpos($key, "MYSQLCONNSTR_") !== 0) {
             continue;
         }
 
         $value = rawurldecode($value);
+        if (false === strpos($value, 'Data Source') || false === strpos($value, 'Database')
+            || false === strpos($value, 'Password') || false === strpos($value, 'User Id')) {
+            continue;
+        }
         $connectStr_dbHost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
         $connectStr_dbName = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
         $connectStr_dbUsername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
