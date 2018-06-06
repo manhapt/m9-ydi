@@ -29,7 +29,7 @@ require_once __DIR__.'/wp-load.php';
 // Load application kernel
 require_once __DIR__.'/../sf/app/AppKernel.php';
 
-$sfKernel = new AppKernel('dev', true);
+$sfKernel = new AppKernel('prod', true);
 $sfKernel->loadClassCache();
 $sfKernel->boot();
 
