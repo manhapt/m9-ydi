@@ -7,7 +7,7 @@ $connectStr_dbUsername = $connectStr_dbUsername ?? 'username_here';
 $connectStr_dbPassword = $connectStr_dbPassword ?? 'password_here';
 
 foreach ($_SERVER as $key => $value) {
-    if (strpos($key, "MYSQLCONNSTR_localdb") !== 0) {
+    if (strpos($key, "MYSQLCONNSTR_") !== 0) {
         continue;
     }
 

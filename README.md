@@ -5,10 +5,10 @@ Requirements: PHP 5.6+
 - apache: enable mod rewrite
 ```
 <VirtualHost *:80>
-    DocumentRoot "C:/xampp/htdocs/www/wp"
+    DocumentRoot "C:/xampp/htdocs/www"
     ServerName ydi.local
     ServerAlias ydi.local
-	<Directory C:/xampp/htdocs/www/wp/>
+	<Directory C:/xampp/htdocs/www/>
 		Options Indexes FollowSymLinks Includes ExecCGI
 		AllowOverride All
 		Order allow,deny
