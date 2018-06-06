@@ -17,6 +17,7 @@
 !/sf/var/SymfonyRequirements.php
 /sf/vendor/
 /sf/web/bundles/
-!/wp/wp-content/uploads/courses
-/wp/wp-content/uploads/courses/*
-/wp/wp-content/debug.log
+!/wp-content/uploads/courses
+/wp-content/uploads/courses/*
+/wp-content/debug.log
+wp-config.php

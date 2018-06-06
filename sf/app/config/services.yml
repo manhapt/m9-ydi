@@ -1,7 +1,7 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
-    wp_upload_dir: '%kernel.project_dir%/../wp/wp-content/uploads/courses'
+    wp_upload_dir: '%kernel.project_dir%/../wp-content/uploads/courses'
     azure.oauth2.client_id: 'b6bc4bee-531d-4422-bc39-95b6bbf57f01'
     azure.oauth2.client_secret: '845w84SDbccifUW/2IeCZpYQ67GBKTNoANjlicu8vPQ='
     azure.oauth2.url_resource_owner_details: 'https://rest.media.azure.net'

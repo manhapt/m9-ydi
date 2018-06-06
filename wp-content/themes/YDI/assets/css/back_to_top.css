@@ -1,0 +1,10 @@
+#backtotop{background:url(../images/backtotop.png) no-repeat 0 0;bottom:20px;cursor:pointer;display:none;height:88px;position:fixed;right:20px;text-indent:-9999px;width:64px;z-index:1;}#backtotop:hover{background:url(../images/backtotop.png) no-repeat 0 bottom;}<!--[if lte IE 6]>
+html {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+* html #backtotop {
+  position:absolute;
+}
+<![endif]-->
