@@ -6,22 +6,24 @@ $connectStr_dbName = $connectStr_dbName ?? 'database_name_here';
 $connectStr_dbUsername = $connectStr_dbUsername ?? 'username_here';
 $connectStr_dbPassword = $connectStr_dbPassword ?? 'password_here';
 
-foreach ($_SERVER as $key => $value) {
-    if (strpos($key, "MYSQLCONNSTR_") !== 0) {
-        continue;
-    }
+function explodeConnectionStrings($env, &$connectStr_dbHost, &$connectStr_dbName, &$connectStr_dbUsername, &$connectStr_dbPassword) {
+    foreach ($env as $key => $value) {
+        if (strpos($key, "MYSQLCONNSTR_") !== 0 ||
+            false === strpos($value, 'Data Source') || false === strpos($value, 'Database')
+            || false === strpos($value, 'Password') || false === strpos($value, 'User Id')) {
+            continue;
+        }
 
-    if (false === strpos($value, 'Data Source') || false === strpos($value, 'Database')
-        || false === strpos($value, 'Password') || false === strpos($value, 'User Id')) {
-        continue;
+        $value = rawurldecode($value);
+        $connectStr_dbHost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
+        $connectStr_dbName = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
+        $connectStr_dbUsername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
+        $connectStr_dbPassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
     }
-
-    $value = rawurldecode($value);
-    $connectStr_dbHost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
-    $connectStr_dbName = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
-    $connectStr_dbUsername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
-    $connectStr_dbPassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
 }
+
+explodeConnectionStrings($_ENV, $connectStr_dbHost, $connectStr_dbName, $connectStr_dbUsername, $connectStr_dbPassword);
+explodeConnectionStrings($_SERVER, $connectStr_dbHost, $connectStr_dbName, $connectStr_dbUsername, $connectStr_dbPassword);
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
