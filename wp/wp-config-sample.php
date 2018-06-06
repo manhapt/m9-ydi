@@ -17,6 +17,12 @@
  *
  * @package WordPress
  */
+/** Configure your DB information here */
+//$connectStr_dbHost = 'localhost';
+//$connectStr_dbName = 'database_name_here';
+//$connectStr_dbUsername = 'username_here';
+//$connectStr_dbPassword = 'password_here';
+
 require_once 'wp-config-db.php';
 
 /**#@+

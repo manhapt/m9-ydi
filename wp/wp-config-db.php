@@ -1,10 +1,10 @@
 <?php
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-$connectStr_dbHost = 'localhost';
-$connectStr_dbName = 'database_name_here';
-$connectStr_dbUsername = 'username_here';
-$connectStr_dbPassword = 'password_here';
+$connectStr_dbHost = $connectStr_dbHost ?? 'localhost';
+$connectStr_dbName = $connectStr_dbName ?? 'database_name_here';
+$connectStr_dbUsername = $connectStr_dbUsername ?? 'username_here';
+$connectStr_dbPassword = $connectStr_dbPassword ?? 'password_here';
 
 foreach ($_SERVER as $key => $value) {
     if (strpos($key, "MYSQLCONNSTR_localdb") !== 0) {
