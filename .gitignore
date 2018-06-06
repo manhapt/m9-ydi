@@ -19,5 +19,5 @@
 /sf/web/bundles/
 !/wp-content/uploads/courses
 /wp-content/uploads/courses/*
-./wp-content/debug.log
+/wp-content/debug.log
 wp-config.php
