@@ -2,7 +2,8 @@
 /**
  * We use this file to use the MySQL Connection String from Azure
  */
-include_once('../../../wp/wp-config.php');
+$rootDir = $container->getParameter('kernel.root_dir') . DIRECTORY_SEPARATOR . '../..';
+include_once($rootDir . '/wp/wp-config-db.php');
 $container->setParameter('database_host', DB_HOST);
 $container->setParameter('database_port', null);
 $container->setParameter('database_name', DB_NAME);
