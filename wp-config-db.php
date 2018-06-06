@@ -11,6 +11,12 @@ foreach ($_SERVER as $key => $value) {
         continue;
     }
 
+    if (false === strpos($value, 'Data Source') || false === strpos($value, 'Database')
+        || false === strpos($value, 'Password') || false === strpos($value, 'User Id')) {
+        continue;
+    }
+
+    $value = rawurldecode($value);
     $connectStr_dbHost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
     $connectStr_dbName = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
     $connectStr_dbUsername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
