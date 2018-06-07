@@ -28,6 +28,19 @@
                         {% if(course.shortDescription) %}
                             <p class="sub-title">{{ course.shortDescription }}</p>
                         {% endif %}
+
+                        {% set assetCounter = 0 %}
+                        {% set learnedCounter = 0 %}
+                        {% for courseOption in courseOptions %}
+                            {% for assetLink in courseOption.assets %}
+                                {% set assetCounter = assetCounter+1 %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% for learnedAsset in learnedAssets %}
+                            {% set learnedCounter = learnedCounter+1 %}
+                        {% endfor %}
+
+                        <p class="sub-title">Complete: {{ learnedCounter }}/{{ assetCounter }}</p>
                     </div>
                 </section>
                 <!-- course item -->
@@ -76,10 +89,16 @@
                                     {% for courseOption in courseOptions %}
                                         {% set optionCounter = optionCounter+1 %}
                                         <div class="row chap-title">Phần {{ optionCounter }} . {{ courseOption.title }}</div>
-                                        {% for asset in courseOption.assets %}
+                                        {% for assetLink in courseOption.assets %}
                                             {% set assetCounter = assetCounter+1 %}
-                                            <div class="row chap-item">
-                                                <a href="{{ path('course_asset', { 'id': course.id, 'asset_id': asset.id }) }}">
+                                            {% set learned = "" %}
+                                            {% for learnedAsset in learnedAssets %}
+                                                {% if (learnedAsset.id == assetLink.id) %}
+                                                    {% set learned = "learned" %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <div class="row chap-item {{ learned }} {% if (asset.id == assetLink.id) %}current{% endif %}">
+                                                <a href="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}">
                                                     <div class="row item-container">
                                                         <div class="chap-item-status">
                                                             <div class="status-container">
@@ -88,7 +107,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="chap-item-content">
-                                                            Bài {{ assetCounter }}. {{ asset.title }} - 01:30
+                                                            Bài {{ assetCounter }}. {{ assetLink.title }} - 01:30
                                                         </div>
                                                     </div>
                                                 </a>

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Asset;
+use AppBundle\Entity\AssetParticipant;
 use AppBundle\Entity\Course;
 use AppBundle\Entity\CourseParticipant;
 use AppBundle\Event\AssetLoadEvent;
@@ -110,23 +111,50 @@ class CourseController extends Controller
      * Finds and displays a course entity.
      *
      * @Route("/{id}/asset/{asset_id}", name="course_asset")
+     * @Security("
+        has_role('ROLE_WP_SUBSCRIBER')
+        or has_role('ROLE_WP_ADMINISTRATOR')
+        or has_role('ROLE_WP_CONTRIBUTOR')
+    ")
      * @ParamConverter("asset", class="AppBundle:Asset", options={"id" = "asset_id"})
      * @Method("GET")
      */
     public function assetAction(Course $course, Asset $asset)
     {
         $this->preloadAsset($asset);
+        $token = $this->get('security.token_storage')->getToken();
         $em = $this->getDoctrine()->getManager();
         $courseOptions = $em->getRepository('AppBundle:CourseOption')->findBy(
             ['course' => $course],
             ['position' => 'ASC']
         );
 
-        return $this->render('frontend/course/asset.html.twig', array(
+        $assetParticipants = $em->getRepository('AppBundle:AssetParticipant')
+            ->findLearnedAssetsInCourse($course, $token->getUser());
+        $completedAssets = [];
+        foreach ($courseOptions as $courseOption) {
+            foreach ($courseOption->getAssets() as $courseAsset) {
+                /** @var AssetParticipant $assetParticipant */
+                foreach ($assetParticipants as $assetParticipant) {
+                    /** @var Asset $learnedAsset */
+                    $learnedAsset = $assetParticipant->getAsset();
+                    if ($learnedAsset->getId() == $courseAsset->getId()) {
+                        $completedAssets[] = $courseAsset;
+                    }
+                }
+            }
+        }
+        
+        $response = $this->render('frontend/course/asset.html.twig', array(
             'courseOptions' => $courseOptions,
             'course' => $course,
             'asset' => $asset,
+            'learnedAssets' => $completedAssets,
         ));
+
+        $this->registerAssetParticipant($token->getUser(), $asset, $course);
+
+        return $response;
     }
 
     /**
@@ -145,6 +173,31 @@ class CourseController extends Controller
             $em->persist(
                 (new CourseParticipant())
                     ->setCourse($course)
+                    ->setUsername($user->getUsername())
+            );
+            $em->flush();
+        }
+    }
+
+    /**
+     * @param UserInterface $user
+     * @param Asset $asset
+     * @param Course $course
+     */
+    private function registerAssetParticipant(UserInterface $user, Asset $asset, Course $course)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $joinStatus = $em->getRepository('AppBundle:AssetParticipant')->findOneBy([
+            'courseId' => $course->getId(),
+            'username' => $user->getUsername(),
+            'asset' => $asset,
+        ]);
+
+        if (null === $joinStatus) {
+            $em->persist(
+                (new AssetParticipant())
+                    ->setCourseId($course->getId())
+                    ->setAsset($asset)
                     ->setUsername($user->getUsername())
             );
             $em->flush();
