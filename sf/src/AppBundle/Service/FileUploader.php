@@ -22,23 +22,24 @@ class FileUploader
     }
 
     /**
-     * @param UploadedFile $file
-     *
-     * @return string
-     */
-    public function upload(UploadedFile $file)
-    {
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
-        $file->move($this->getTargetDir(), $fileName);
-
-        return $fileName;
-    }
-
-    /**
      * @return string
      */
     public function getTargetDir()
     {
         return $this->targetDir;
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param string $subDir
+     * @return string
+     */
+    public function upload(UploadedFile $file, $subDir = '')
+    {
+        $directory = str_replace('//', '/', $this->getTargetDir() . "/$subDir");
+        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $file->move($directory, $fileName);
+
+        return $fileName;
     }
 }

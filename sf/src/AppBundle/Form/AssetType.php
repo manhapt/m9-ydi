@@ -35,6 +35,8 @@ class AssetType extends AbstractType
             ->add('formatOption', HiddenType::class, ['data' => 1])
             ->add('storageAccountName', HiddenType::class)
             ->add('alternateId', HiddenType::class)
+            ->add('image', FileType::class, ['required' => false])
+            ->add('document', FileType::class, ['required' => false])
         ;
 
         if (false === $isEdit) {

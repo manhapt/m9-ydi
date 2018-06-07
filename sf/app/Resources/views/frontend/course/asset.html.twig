@@ -35,6 +35,18 @@
                     <div class="col-xs-12 col-sm-7 col-md-8 lecture-player no-padding">
                         <video id="videoplayer" controls></video>
                     </div>
+                    <div class="lecture-image hidden">
+                        {% if asset.image %}
+                            <figure>
+                                <img src="{{ asset('wp-content/uploads/courses/assets/' ~ asset.image) }}"/>
+                            </figure>
+                        {% endif %}
+                    </div>
+                    <div class="lecture-document hidden">
+                        {% if asset.document %}
+                            <figure>{{ asset('wp-content/uploads/courses/assets/' ~ asset.document) }}</figure>
+                        {% endif %}
+                    </div>
                     <div class="col-xs-0 col-sm-5 col-md-4 lecture-container no-padding">
                         <ul class="nav nav-tabs lecture-container-header">
                             <li class="active">

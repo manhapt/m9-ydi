@@ -65,7 +65,7 @@ class Asset
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true, unique=true)
      */
     private $name;
 
@@ -85,6 +85,35 @@ class Asset
      * )
      */
     private $file;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Assert\Image(
+     *     maxSize = "5M",
+     *     mimeTypes = {
+     *         "image/jpeg",
+     *         "image/pjpeg",
+     *         "image/png",
+     *         "image/jpg",
+     *         "image/gif",
+     *     }
+     * )
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="document", type="string", length=255, nullable=true)
+     * @Assert\File(
+     *     maxSize = "100M",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
+     */
+    private $document;
 
     /**
      * @var string
@@ -301,6 +330,38 @@ class Asset
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * @param string $document
+     */
+    public function setDocument($document)
+    {
+        $this->document = $document;
     }
 
     /**

@@ -46,6 +46,9 @@ class AssetLoadListener
     public function onAssetLoad(AssetLoadEvent $event)
     {
         $asset = $event->getAsset();
+        if (!$asset->getFile()) {
+            return;
+        }
 
         if (null == $asset->getJobUuid()) {
             //start encoding

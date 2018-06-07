@@ -47,6 +47,14 @@
                 <td>{{ asset.description |raw }}</td>
             </tr>
             <tr>
+                <th>Image</th>
+                <td>{{ asset.image }}</td>
+            </tr>
+            <tr>
+                <th>Document</th>
+                <td>{{ asset.document }}</td>
+            </tr>
+            <tr>
                 <th>File</th>
                 <td>{{ asset.file }}</td>
             </tr>
@@ -60,7 +68,11 @@
             </tr>
         </tbody>
     </table>
-
+    <figure class="preview">
+        {% if asset.image %}
+            <img src="{{ asset('wp-content/uploads/courses/assets/' ~ asset.image) }}" width="150"/>
+        {% endif %}
+    </figure>
     <ul>
         <li class="actions-toolbar">
             <a class="button button-primary" href="{{ path('admin_asset_index') }}">Back to the list</a>

@@ -3,12 +3,14 @@
 namespace AppBundle\Controller\Backend;
 
 use AppBundle\Event\AssetLoadEvent;
+use AppBundle\Service\FileUploader;
 use GuzzleHttp\Psr7;
 use AppBundle\Entity\Asset;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -52,7 +54,14 @@ class AssetController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $fileUploader = $this->get('AppBundle\Service\FileUploader');
+            if ($asset->getImage()) {
+                $asset->setImage($fileUploader->upload($asset->getImage(), 'assets'));
+            }
+            if ($asset->getDocument()) {
+                $asset->setDocument($fileUploader->upload($asset->getDocument(), 'assets'));
+            }
+
             $file = null;
             if ($asset->getFile()) {
                 /** @var UploadedFile $file */
@@ -62,8 +71,9 @@ class AssetController extends Controller
                 $asset->setName($name);
                 $asset->setFile($fileName);
             }
-            $em->persist($asset);
-            $em->flush();
+
+            $this->getDoctrine()->getManager()->persist($asset);
+            $this->getDoctrine()->getManager()->flush();
 
             if ($file) {
                 $this->get('azure.uploader.asset')->upload($file);
@@ -104,11 +114,36 @@ class AssetController extends Controller
     public function editAction(Request $request, Asset $asset)
     {
         $this->preloadAsset($asset);
+        /** @var FileUploader $fileUploader */
+        $fileUploader = $this->get('AppBundle\Service\FileUploader');
+        $wpUploadDirAsset = $fileUploader->getTargetDir() . '/assets';
+        $prevImage = $asset->getImage();
+        if ($prevImage) {
+            $asset->setImage(new File($wpUploadDirAsset.'/'.$prevImage));
+        }
+        $prevDocument = $asset->getDocument();
+        if ($prevDocument) {
+            $asset->setDocument(new File($wpUploadDirAsset.'/'.$prevDocument));
+        }
+
         $deleteForm = $this->createDeleteForm($asset);
         $editForm = $this->createForm('AppBundle\Form\AssetType', $asset);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if ($asset->getImage()) {
+                $asset->setImage($fileUploader->upload($asset->getImage(), 'assets'));
+            } else {
+                $asset->setImage($prevImage);
+            }
+
+            if ($asset->getDocument()) {
+                $asset->setDocument($fileUploader->upload($asset->getDocument(), 'assets'));
+            } else {
+                $asset->setDocument($prevDocument);
+            }
+
+            $this->getDoctrine()->getManager()->persist($asset);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_asset_edit', array('id' => $asset->getId()));
