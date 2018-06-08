@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-        <h1>Course Participant Report</h1>
+    <h1>Course Participant Report</h1>
+    <p>Course: {{ course.name }}</p>
+    <p>Short Description: {{ course.shortDescription |raw }}</p>
     <ul>
         <li class="actions-toolbar">
             <a class="button button-primary" href="{{ app.request.headers.get('referer') }}">
