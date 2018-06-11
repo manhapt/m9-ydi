@@ -7,6 +7,7 @@ use AppBundle\Entity\AssetParticipant;
 use AppBundle\Entity\Course;
 use AppBundle\Entity\CourseParticipant;
 use AppBundle\Event\AssetLoadEvent;
+use AppBundle\Form\RoleTypes;
 use AppBundle\Repository\CourseRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -35,27 +36,32 @@ class CourseController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var CourseRepository $courseRepository */
-        $courseRepository = $em->getRepository('AppBundle:Course');
-
-        $queryBuilder = $courseRepository->getCourseListQueryBuilder();
-        $queryBuilder->orderBy('c.modified', 'DESC');
-        if ($request->query->getAlnum('filter')) {
-            $queryBuilder
-                ->where('c.name LIKE :name')
-                ->setParameter('name', '%'.$request->query->getAlnum('filter').'%');
-        }
-
-        /** @var \Knp\Component\Pager\Paginator $paginator */
-        $paginator = $this->get('knp_paginator');
-        $paginatedCourses = $paginator->paginate(
-            $queryBuilder->getQuery(),
-            $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 6)
+        $contributorRole = $em->getRepository('AppBundle:Role')->findOneBy(
+            ['resource' => 'course', 'name' => RoleTypes::CONTRIBUTOR]
+        );
+        $subscriberRole = $em->getRepository('AppBundle:Role')->findOneBy(
+            ['resource' => 'course', 'name' => RoleTypes::SUBSCRIBER]
         );
 
+        if (!$contributorRole || !$subscriberRole) {
+            throw new \Exception(
+                RoleTypes::CONTRIBUTOR . ' and ' . RoleTypes::SUBSCRIBER
+                . ' with "course" resource are required!'
+            );
+        }
+
+
+        /** @var CourseRepository $courseRepository */
+        $qb = $em->getRepository('AppBundle:Course')->getCourseListQueryBuilder();
+        $qb->innerJoin('c.roles', 'role')
+            ->where('role.id = :role_id');
+
+        $contributorCourses = $qb->setParameter('role_id', $contributorRole->getId())->getQuery()->getResult();
+        $subscriberCourses = $qb->setParameter('role_id', $subscriberRole->getId())->getQuery()->getResult();
+
         return $this->render('frontend/course/index.html.twig', array(
-            'courses' => $paginatedCourses,
+            'contributorCourses' => $contributorCourses,
+            'subscriberCourses' => $subscriberCourses,
         ));
     }
 

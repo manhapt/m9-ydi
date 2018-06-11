@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Role;
 use Ekino\WordpressBundle\Entity\User;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -18,6 +20,13 @@ class CourseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('roles', EntityType::class, array(
+                'class' => Role::class,
+                'label' => 'Object',
+                'choice_label' => 'name',
+                'multiple'     => true,
+                'expanded'     => true,
+            ))
             ->add('sku', HiddenType::class, [
                 'data' => strtoupper(hash('adler32', uniqid(rand(), true))),
             ])
