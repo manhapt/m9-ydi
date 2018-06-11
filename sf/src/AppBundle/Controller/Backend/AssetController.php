@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Backend;
 
 use AppBundle\Event\AssetLoadEvent;
 use AppBundle\Service\FileUploader;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use GuzzleHttp\Psr7;
 use AppBundle\Entity\Asset;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -63,6 +64,7 @@ class AssetController extends Controller
             }
 
             $file = null;
+            $fileName = null;
             if ($asset->getFile()) {
                 /** @var UploadedFile $file */
                 $file = $asset->getFile();
@@ -72,14 +74,19 @@ class AssetController extends Controller
                 $asset->setFile($fileName);
             }
 
-            $this->getDoctrine()->getManager()->persist($asset);
-            $this->getDoctrine()->getManager()->flush();
+            try {
+                $this->getDoctrine()->getManager()->persist($asset);
+                $this->getDoctrine()->getManager()->flush();
 
-            if ($file) {
-                $this->get('azure.uploader.asset')->upload($file);
+                if ($file) {
+                    $this->get('azure.uploader.asset')->upload($file);
+                }
+
+                return $this->redirectToRoute('admin_asset_show', array('id' => $asset->getId()));
+
+            } catch (UniqueConstraintViolationException $exception) {
+                $this->addFlash('error', "Filename $fileName is existing in the system.");
             }
-
-            return $this->redirectToRoute('admin_asset_show', array('id' => $asset->getId()));
         }
 
         return $this->render('backend/asset/new.html.twig', array(
