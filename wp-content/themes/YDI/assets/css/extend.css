@@ -117,11 +117,6 @@
     color: #e86741;
 }
 
-.elearning-wrapper .carousel .item {
-    width: 33.33%;
-    padding-right: 15px;
-}
-
 .elearning-wrapper table {
     background: #fff;
     border: 1px solid #e5e5e5;
@@ -359,13 +354,11 @@
 .grid .details .description {
     display: inline-block;
     vertical-align: top;
-    width: 70%;
-    padding-left: 10px;
+    width: 100%;
 }
 
 .grid .details .description p {
-    max-height: 135px;
-    overflow: hidden;
+    height: 100px;
 }
 
 .grid .description h3 {

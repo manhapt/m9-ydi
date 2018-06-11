@@ -7,8 +7,8 @@
                 <div class="row">
                     <div class="title">
                         <i class="fa fa-graduation-cap fa-2x fa-pull-left"></i>
-                        <h1>Danh sách khóa học cho giáo viên</h1>
-                        <p class="sub-title">Bồi dưỡng kiến thức và phương pháp giảng dạy chương trình Tin học ứng dung và Khoa học máy tính.</p>
+                        <h1>Dành cho giáo viên tin học</h1>
+                        <p class="sub-title">Bồi dưỡng kiến thức và phương pháp giảng dạy chương trình Tin học ứng dung và Khoa học máy tính!</p>
                     </div>
                     <!-- course item -->
                     <div class="grid carousel">
@@ -21,10 +21,6 @@
                                              alt="{{ course.name }}"/>
                                     </a>
                                     <div class="details">
-                                        <figure>
-                                            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
-                                                 alt="{{ course.name }}"/>
-                                        </figure>
                                         <div class="description">
                                             <h3>{{ course.name }}</h3>
                                             <p>{{ course.shortDescription }}</p>
@@ -43,8 +39,8 @@
                 <div class="row">
                     <div class="title">
                         <i class="fa fa-graduation-cap fa-2x fa-pull-left"></i>
-                        <h1>Danh sách khóa học cho thanh thiếu niên</h1>
-                        <p class="sub-title">Trang bị kiến thức và kỹ năng CNTT và khoa học máy tính, phát triển tư duy, nâng cao hiệu quả học tập.</p>
+                        <h1>Dành cho Thanh thiếu niên</h1>
+                        <p class="sub-title">Trang bị kiến thức và kỹ năng CNTT và khoa học máy tính, phát triển tư duy, nâng cao hiệu quả học tập!</p>
                     </div>
                     <!-- course item -->
                     <div class="grid carousel">
@@ -57,10 +53,6 @@
                                              alt="{{ course.name }}"/>
                                     </a>
                                     <div class="details">
-                                        <figure>
-                                            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
-                                                 alt="{{ course.name }}"/>
-                                        </figure>
                                         <div class="description">
                                             <h3>{{ course.name }}</h3>
                                             <p>{{ course.shortDescription }}</p>
@@ -109,9 +101,9 @@
                         {
                             breakpoint: 479,
                             settings: {
-                                slidesToShow: 1,
+                                slidesToShow: 2,
                                 slidesToScroll: 1,
-                                dots: true
+                                dots: false
                             }
                         }
                     ]
