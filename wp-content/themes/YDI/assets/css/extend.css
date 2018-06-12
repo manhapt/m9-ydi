@@ -253,8 +253,8 @@
     width: 75%;
     background: #fff;
     color: #333 !important;
-    padding: 0 0 0 10px;
-    height: 40px;
+    padding: 15px 0 0 10px;
+    height: auto;
     margin-bottom: 10px;
     font-size: 14px;
 }
