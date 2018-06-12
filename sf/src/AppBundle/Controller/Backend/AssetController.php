@@ -150,10 +150,30 @@ class AssetController extends Controller
                 $asset->setDocument($prevDocument);
             }
 
-            $this->getDoctrine()->getManager()->persist($asset);
-            $this->getDoctrine()->getManager()->flush();
+            $file = null;
+            $fileName = null;
+            if ($asset->getFile()) {
+                /** @var UploadedFile $file */
+                $file = $asset->getFile();
+                $fileName = $file->getClientOriginalName();
+                $name = substr($fileName, 0, strlen($fileName) - strlen('.' . $file->getClientOriginalExtension()));
+                $asset->setName($name);
+                $asset->setFile($fileName);
+            }
 
-            return $this->redirectToRoute('admin_asset_edit', array('id' => $asset->getId()));
+            try {
+                $this->getDoctrine()->getManager()->persist($asset);
+                $this->getDoctrine()->getManager()->flush();
+
+                if ($file) {
+                    $this->get('azure.uploader.asset')->upload($file);
+                }
+
+                return $this->redirectToRoute('admin_asset_edit', array('id' => $asset->getId()));
+
+            } catch (UniqueConstraintViolationException $exception) {
+                $this->addFlash('error', "Filename $fileName is existing in the system.");
+            }
         }
 
         return $this->render('backend/asset/edit.html.twig', array(

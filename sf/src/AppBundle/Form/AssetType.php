@@ -39,7 +39,7 @@ class AssetType extends AbstractType
             ->add('document', FileType::class, ['required' => false])
         ;
 
-        if (false === $isEdit) {
+        if (null === $asset->getFile()) {
             $builder->add('file', FileType::class, ['required' => false]);
         }
     }

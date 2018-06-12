@@ -46,7 +46,7 @@ class AssetLoadListener
     public function onAssetLoad(AssetLoadEvent $event)
     {
         $asset = $event->getAsset();
-        if (!$asset->getFile()) {
+        if (!$asset->getFile() || !is_string($asset->getFile())) {
             return;
         }
 
