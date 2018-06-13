@@ -44,14 +44,14 @@
                                 {% for courseOption in courseOptions %}
                                     {% set optionCounter = optionCounter+1 %}
                                     <li class="item">
-                                        <h4>Phần {{ optionCounter }}. {{ courseOption.title }}</h4>
+                                        <h4>{{ courseOption.title }}</h4>
                                         <ul>
                                             {% for asset in courseOption.assets %}
                                                 {% set assetCounter = assetCounter+1 %}
                                                 <li class="child">
                                                     <i class="fas fa-2x fa-play-circle fa-pull-left"></i>
                                                     <a href="{{ path('course_asset', { 'id': course.id, 'asset_id': asset.id }) }}">
-                                                        Bài {{ assetCounter }}. {{ asset.title }} - 01:30
+                                                        {{ asset.title }}
                                                     </a>
                                                 </li>
                                             {% endfor %}
@@ -61,7 +61,7 @@
                                 {% endfor %}
                             </ul>
                         </section>
-                        <section content="section_actions section-setting actions-toolbar">
+                        <section class="section_actions section-setting actions-toolbar">
                             <a class="button button-primary" href="{{ path('course_index') }}">Quay lại</a>
                         </section>
                     </div>

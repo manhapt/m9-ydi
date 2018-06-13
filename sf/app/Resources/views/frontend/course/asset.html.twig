@@ -88,7 +88,7 @@
                                     {% set optionCounter = 0 %}
                                     {% for courseOption in courseOptions %}
                                         {% set optionCounter = optionCounter+1 %}
-                                        <div class="row chap-title">Phần {{ optionCounter }} . {{ courseOption.title }}</div>
+                                        <div class="row chap-title">{{ courseOption.title }}</div>
                                         {% for assetLink in courseOption.assets %}
                                             {% set assetCounter = assetCounter+1 %}
                                             {% set learned = "" %}
@@ -106,9 +106,7 @@
                                                                 <i class="material-icons"></i>
                                                             </div>
                                                         </div>
-                                                        <div class="chap-item-content">
-                                                            Bài {{ assetCounter }}. {{ assetLink.title }} - 01:30
-                                                        </div>
+                                                        <div class="chap-item-content">{{ assetLink.title }}</div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -120,7 +118,7 @@
                             <div class="tab-pane fade in" id="lecture-tab-discussion"></div>
                         </div>
                     </div>
-                    <div content="actions-toolbar">
+                    <div class="actions-toolbar">
                         <a class="button button-primary" href="{{ path('course_index') }}">Quay lại</a>
                     </div>
                 </div>
