@@ -3,10 +3,28 @@
 {% block body %}
     <script defer src="{{ absolute_url(asset('wp-includes/js/azure/dash.all.js')) }}" type="text/javascript"></script>
     <script>
-        jQuery(document).ready(function () {
+        jQuery(document).ready(function ($) {
             jQuery(window).load(function () {
                 setupVideo();
             });
+
+            var dataTab = $('.lecture-container-header a');
+            dataTab.on('click', function () {
+                var tabID = $(this).attr('data-toggle');
+                $('.lecture-container-header > li').removeClass('active');
+                $('.tab-pane').removeClass('active');
+                $(this).parent().addClass('active');
+                if (tabID == 1) {
+                    $('#lecture-tab-list').addClass('active');
+                }
+                if (tabID == 2) {
+                    $('#lecture-tab-download').addClass('active');
+                }
+                if (tabID == 3) {
+                    $('#lecture-tab-discussion').addClass('active');
+                }
+            });
+
         });
         // setup the video element and attach it to the Dash player
         function setupVideo() {
@@ -63,19 +81,19 @@
                     <div class="col-xs-0 col-sm-5 col-md-4 lecture-container no-padding">
                         <ul class="nav nav-tabs lecture-container-header">
                             <li class="active">
-                                <a data-toggle="tab" href="#lecture-tab-list">
+                                <a data-toggle="1" href="javascript:void(0)">
                                     <i class="fa fa-list"></i>
                                     <span>Giáo trình</span>
                                 </a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#lecture-tab-download">
+                                <a data-toggle="2" href="javascript:void(0)">
                                     <i class="fa fa-download"></i>
                                     <span>Tài liệu</span>
                                 </a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#lecture-tab-discussion">
+                                <a data-toggle="3" href="javascript:void(0)">
                                     <i class="fa fa-comments"></i>
                                     <span>Thảo luận</span>
                                 </a>
