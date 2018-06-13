@@ -10,15 +10,14 @@
 </head>
 <body id="body" class="html front not-logged-in one-sidebar sidebar-second page-node with-navigation with-subnav">
 <div id="fb-root"></div>
-<script>(function (d, s, id) {
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1443642219198207";
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.0';
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-
 <div id="page-wrapper">
     <div id="page">
         <header id="header" role="banner" class="clearfix">

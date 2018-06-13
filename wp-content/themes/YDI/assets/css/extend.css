@@ -606,17 +606,22 @@
     height: auto;
     overflow-y: scroll;
     width: 100%;
-    max-height: 450px;
+    max-height: 405px;
 }
 
 .list-lecture-container .chap-title {
     background-color: #ccc;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
     line-height: 30px;
     margin: 0;
     padding: 15px;
     font-weight: 500;
     font-size: 14px;
     color: #212121;
+    width: 100%;
 }
 
 .chap-item.current.learned .item-container .chap-item-status i,
@@ -629,7 +634,7 @@
 }
 
 .list-lecture-container .chap-item.learned {
-    background: #e4e4e4;
+    background: #f0f0f0;
 }
 
 .list-lecture-container .chap-item.current.learned {
