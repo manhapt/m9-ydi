@@ -70,3 +70,6 @@ TO
 cd {PATH_TO_m9-ydi}/wp
 ln -s {PATH_TO_m9-ydi}/sf/web/bundles bundles
 ```
+
+6. Generate translation files 
+ bin\console  translation:update vi --force
