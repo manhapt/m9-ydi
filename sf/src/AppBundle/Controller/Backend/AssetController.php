@@ -28,17 +28,29 @@ class AssetController extends Controller
      * @Route("/", name="admin_asset_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $assets = $em->getRepository('AppBundle:Asset')->findBy(
-            [],
-            ['created' => 'DESC']
+        $queryBuilder = $em->getRepository('AppBundle:Asset')->createQueryBuilder('c');
+        $queryBuilder->orderBy('c.created', 'DESC');
+        $query = $queryBuilder->getQuery();
+        if ($request->query->getAlnum('filter')) {
+            $queryBuilder
+                ->where('c.title LIKE :title')
+                ->setParameter('title', '%'.$request->query->getAlnum('filter').'%');
+        }
+
+        /** @var \Knp\Component\Pager\Paginator $paginator */
+        $paginator = $this->get('knp_paginator');
+        $paginatedAssets = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
         );
 
         return $this->render('backend/asset/index.html.twig', array(
-            'assets' => $assets,
+            'assets' => $paginatedAssets,
         ));
     }
 

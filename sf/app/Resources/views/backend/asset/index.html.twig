@@ -6,17 +6,10 @@
     <table>
         <thead>
             <tr>
-                <th style="display: none;">Id</th>
-                <th style="display: none;">Uuid</th>
-                <th>State</th>
-                <th>Name</th>
-                <th>Title</th>
-                <th>Options</th>
-                <th>Formatoption</th>
-                <th>Uri</th>
-                <th>Storageaccountname</th>
-                <th style="display: none;">Alternateid</th>
-                <th>Created</th>
+                <th>{{ 'Title'|trans }}</th>
+                <th>Video</th>
+                <th>PDF</th>
+                <th>{{ knp_pagination_sortable(assets, 'Created', 'c.created') }}</th>
                 <th>Modified</th>
                 <th>Actions</th>
             </tr>
@@ -24,25 +17,18 @@
         <tbody>
         {% for asset in assets %}
             <tr>
-                <td style="display: none;"><a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
-                <td style="display: none;">{{ asset.uuid }}</td>
-                <td>{{ asset.state }}</td>
-                <td>{{ asset.name }}</td>
                 <td>{{ asset.title }}</td>
-                <td>{{ asset.options }}</td>
-                <td>{{ asset.formatOption }}</td>
                 <td>{{ asset.uri }}</td>
-                <td>{{ asset.storageAccountName }}</td>
-                <td style="display: none;">{{ asset.alternateId }}</td>
+                <td>{{ asset.document }}</td>
                 <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if asset.modified %}{{ asset.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">Show</a>
+                            <a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">{{ 'Show'|trans }}</a>
                         </li>
                         <li>
-                            <a href="{{ path('admin_asset_edit', { 'id': asset.id }) }}">Edit</a>
+                            <a href="{{ path('admin_asset_edit', { 'id': asset.id }) }}">{{ 'Edit'|trans }}</a>
                         </li>
                     </ul>
                 </td>
@@ -50,6 +36,10 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(assets) }}
+    </div>
 
     <ul>
         <li class="actions-toolbar">
