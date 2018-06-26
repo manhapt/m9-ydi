@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Course</h1>
+    <h1>{{ 'Course'|trans }}</h1>
 
     <table>
         <tbody>
@@ -10,43 +10,27 @@
                 <td>{{ course.id }}</td>
             </tr>
             <tr>
-                <th>Sku</th>
-                <td>{{ course.sku }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+                <th>{{ 'Name'|trans }}</th>
                 <td>{{ course.name }}</td>
             </tr>
             <tr>
-                <th>Price</th>
-                <td>{{ course.price }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ course.status }}</td>
-            </tr>
-            <tr>
-                <th>Typeid</th>
-                <td>{{ course.typeId }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
+                <th>{{ 'Image'|trans }}</th>
                 <td>{{ course.image }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>{{ 'Description'|trans }}</th>
                 <td>{{ course.description |raw }}</td>
             </tr>
             <tr>
-                <th>Short Description</th>
+                <th>{{ 'Short Description'|trans }}</th>
                 <td>{{ course.shortDescription }}</td>
             </tr>
             <tr>
-                <th>Created</th>
+                <th>{{ 'Created'|trans }}</th>
                 <td>{% if course.created %}{{ course.created|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Modified</th>
+                <th>{{ 'Modified'|trans }}</th>
                 <td>{% if course.modified %}{{ course.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
@@ -54,11 +38,11 @@
 
     <ul>
         <li class="actions-toolbar">
-            <a class="button button-primary" href="{{ path('admin_course_index') }}">Back to the list</a>
-            <a class="button button-primary" href="{{ path('admin_course_edit', { 'id': course.id }) }}">Edit</a>
-            <a class="button button-primary" href="{{ path('admin_report_course', { 'id': course.id }) }}">Report</a>
+            <a class="button button-primary" href="{{ path('admin_course_index') }}">{{ 'Back to the list'|trans }}</a>
+            <a class="button button-primary" href="{{ path('admin_course_edit', { 'id': course.id }) }}">{{ 'Edit'|trans }}</a>
+            <a class="button button-primary" href="{{ path('admin_report_course', { 'id': course.id }) }}">{{ 'Report'|trans }}</a>
             {{ form_start(delete_form) }}
-            <input class="button button-primary" type="submit" value="Delete">
+            <input class="button button-primary" type="submit" value="{{ 'Delete'|trans }}">
             {{ form_end(delete_form) }}
         </li>
     </ul>

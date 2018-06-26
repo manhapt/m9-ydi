@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Asset edit</h1>
+    <h1>{{ 'Asset edit'|trans }}</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -21,7 +21,7 @@
             {{ form_start(delete_form) }}
             <input class="button button-primary" type="submit" value="Delete">
             {{ form_end(delete_form) }}
-            <a class="button button-primary" href="{{ path('admin_asset_index') }}">Back to the list</a>
+            <a class="button button-primary" href="{{ path('admin_asset_index') }}">{{ 'Back to the list'|trans }}</a>
         </li>
     </ul>
 {% endblock %}

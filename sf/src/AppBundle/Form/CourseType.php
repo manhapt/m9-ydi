@@ -24,6 +24,7 @@ class CourseType extends AbstractType
                 'class' => Role::class,
                 'label' => 'Object',
                 'choice_label' => 'name',
+                'choice_translation_domain' => true,
                 'multiple'     => true,
                 'expanded'     => true,
             ))
@@ -34,7 +35,7 @@ class CourseType extends AbstractType
             ->add('price', HiddenType::class, ['data' => 0])
             ->add('status', HiddenType::class, ['data' => 1])
             ->add('typeId', HiddenType::class)
-            ->add('shortDescription')
+            ->add('shortDescription', null, array('label' => 'Short Description'))
             ->add('description', CKEditorType::class, array(
                 'config' => array(
                     'uiColor' => '#ffffff'
