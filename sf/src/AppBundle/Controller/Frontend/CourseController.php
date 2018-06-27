@@ -74,6 +74,17 @@ class CourseController extends Controller
     public function showAction(Request $request, Course $course)
     {
         $em = $this->getDoctrine()->getManager();
+        $token = $this->get('security.token_storage')->getToken();
+        if ($token && $token->getUser() instanceof \Ekino\WordpressBundle\Entity\User) {
+            $joinStatus = $em->getRepository('AppBundle:CourseParticipant')->findOneBy([
+                'username' => $token->getUser()->getUsername(),
+                'course' => $course,
+            ]);
+            if ($joinStatus) {
+                return $this->redirectToRoute('course_learn', array('id' => $course->getId()));
+            }
+        }
+
         $courseOptions = $em->getRepository('AppBundle:CourseOption')->findBy(
             ['course' => $course],
             ['position' => 'ASC']
