@@ -1,26 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Course Participant Report</h1>
-    <p>Course: {{ course.name }}</p>
-    <p>Short Description: {{ course.shortDescription |raw }}</p>
+    <h1>{{ 'Course Participant Report'|trans }}</h1>
+    <p>{{ 'Course'|trans }}: {{ course.name }}</p>
+    <p>{{ 'Short Description'|trans }}: {{ course.shortDescription |raw }}</p>
     <ul>
         <li class="actions-toolbar">
             <a class="button button-primary" href="{{ app.request.headers.get('referer') }}">
-                Back to Course page
+                {{ 'Back to course page'|trans }}
             </a>
             <a class="button button-primary" href="{{ path('admin_report_course', { 'id': course.id }) }}?export=true">
-                Export to CSV
+                {{ 'Export to CSV'|trans }}
             </a>
         </li>
     </ul>
     <table>
         <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(users, 'Username', 'c.username') }}</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Complete</th>
+                <th>{{ knp_pagination_sortable(users, 'Username'|trans, 'c.username') }}</th>
+                <th>{{ 'Name'|trans }}</th>
+                <th>{{ 'Email'|trans }}</th>
+                <th>{{ 'Complete'|trans }}</th>
             </tr>
         </thead>
         <tbody>

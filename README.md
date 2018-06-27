@@ -20,6 +20,12 @@ Requirements: PHP 5.6+
 ```
 - Microsoft IIS: already configured in web.config file
 
+- MySQL 5.7: 
+/etc/my.cnf
+[mysqld]
+#MySQL 5.7 to fix error incompatible with sql_mode=only_full_group_by
+sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+
 2. Setup Azure (For Azure portal only)
 Menu choose App Services > Choose service > Application settings 
 > Application settings:
