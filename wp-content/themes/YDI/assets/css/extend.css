@@ -676,3 +676,7 @@
     border-radius: 3px;
     cursor: pointer;
 }
+
+#menu-item-2082 a {
+    background: url(../images/menu5.png) 0 0 no-repeat;
+}
