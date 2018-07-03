@@ -621,9 +621,10 @@
     margin: 0;
     padding: 15px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     color: #212121;
     width: 100%;
+    text-transform: uppercase;
 }
 
 .chap-item.current.learned .item-container .chap-item-status i,
@@ -631,10 +632,21 @@
     color: #ddd;
 }
 
-.chap-item.current .item-container .chap-item-status i {
-    color: #FF0000;
+.chap-item.current > a {
+    position: relative;
+}
+.chap-item.current > a:before {
+    position: absolute;
+    left: -5px;
+    top: 14px;
+    content: '\f061';
+    font-size: 14px;
+    color: #000;
 }
 
+.list-lecture-container .chap-item.learned i:before {
+    content: '\f058';
+}
 .list-lecture-container .chap-item.learned {
     background: #f0f0f0;
 }
@@ -654,9 +666,14 @@
     padding: 15px;
     width: 100%;
 }
+.list-lecture-container .chap-item:hover .item-container .chap-item-content {
+    color: #FF8300;
+    font-weight: 600;
+}
 .chap-item a {
     text-decoration: none;
     outline: none;
+    width: 100%;
 }
 .chap-item .item-container .chap-item-status i {
     margin-top: 8px;
