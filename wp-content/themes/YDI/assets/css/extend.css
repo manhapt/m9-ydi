@@ -478,14 +478,19 @@
     cursor: pointer;
 }
 
-.learn-course .section_author > span {
+.learn-course .section_author > span,
+.learn-course .section_author > a {
+    color: #000;
     display: inline-block;
     width: 100%;
     padding: 15px;
     text-align: left;
     cursor: pointer;
+    text-decoration: none;
 }
 
+.learn-course .section_author > a:hover,
+.learn-course .section_author > a.active,
 .learn-course .section_author > span:hover,
 .learn-course .section_author > span.active {
     -webkit-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
