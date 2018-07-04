@@ -58,7 +58,11 @@
                             {% set learnedCounter = learnedCounter+1 %}
                         {% endfor %}
 
-                        <p class="sub-title">{{ 'Complete'|trans }}: {{ learnedCounter }}/{{ assetCounter }}</p>
+                        <p class="sub-title process-text">{{ 'Complete'|trans }}: </p>
+                        <div class="process meter">
+                            {% set percent = (learnedCounter/assetCounter) * 100 %}
+                            <span style="width: {{ percent }}%"></span>
+                        </div>
                     </div>
                 </section>
                 <!-- course item -->
