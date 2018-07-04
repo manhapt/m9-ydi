@@ -303,6 +303,10 @@
     padding-left: 58px;
 }
 
+.course-show .title .sub-title.process-text {
+    padding-left: 0;
+}
+
 .grid .item {
     -webkit-transition: opacity .75s ease-in-out;
     -moz-transition: opacity .75s ease-in-out;
