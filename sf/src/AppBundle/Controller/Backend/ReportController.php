@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Report controller.
@@ -35,7 +36,10 @@ class ReportController extends Controller
         }
 
         if ($request->query->getAlnum('export')) {
-            return $this->generateCsvAction($query->getArrayResult());
+            $items = $query->getArrayResult();
+            if (!empty($items)) {
+                return $this->generateCsvAction($items);
+            }
         }
 
         /** @var \Knp\Component\Pager\Paginator $paginator */
@@ -62,14 +66,23 @@ class ReportController extends Controller
         $response = new StreamedResponse();
         $response->setCallback(function() use ($items, $headers) {
             $headers = empty($headers) ? array_keys(reset($items)) : $headers;
+            $translatedHeaders = [];
+            foreach ($headers as $header) {
+                $translatedHeaders[] = $this->get('translator')->trans(ucfirst($header));
+            }
 
             $handle = fopen('php://output', 'w+');
             // Add the header of the CSV file
-            fputcsv($handle, $headers,',');
+            fputcsv($handle, $translatedHeaders,',');
             foreach ($items as $item) {
                 $exportRow = [];
                 foreach ($headers as $field) {
-                    $exportRow[] = $item[$field];
+                    $value = $item[$field];
+                    if ('complete' === $field) {
+                        $value = number_format($value, 0) . '%';
+                    }
+
+                    $exportRow[] = $value;
                 }
                 fputcsv($handle, $exportRow, ',');
             }

@@ -15,6 +15,7 @@
 'Short Description': 'Mô tả ngắn'
 Actions: 'Nút lệnh'
 Asset: 'Bài giảng'
+Assets: 'Bài giảng'
 Complete: 'Hoàn thành'
 contributor: 'Giáo viên'
 Course: 'Khóa học'
@@ -37,3 +38,4 @@ Show: Xem
 subscriber: 'Học viên'
 Title: 'Tiêu đề'
 Username: 'Tài khoản'
+Position: 'Vị trí'

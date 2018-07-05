@@ -41,7 +41,7 @@ class AssetParticipantRepository extends \Doctrine\ORM\EntityRepository
         $queryBuilder
             ->select('
                 c.username, u.email, u.displayName as name
-                ,CONCAT(COUNT(c.asset), \'/'.count($currentCourseAssets).'\') AS complete
+                ,(COUNT(c.asset)/'.count($currentCourseAssets).'*100) AS complete
             ')
             ->innerJoin('EkinoWordpressBundle:User', 'u', 'WITH', 'u.login=c.username')
             ->where('c.courseId = :courseId')
