@@ -49,8 +49,22 @@ class AssetController extends Controller
             $request->query->getInt('limit', 10)
         );
 
+        $deleteForms = [];
+        /** @var Asset $asset */
+        foreach ($paginatedAssets as $asset) {
+            $deleteForms[$asset->getId()] = $this->createDeleteForm($asset)->createView();
+        }
+
+        $bulkForm = $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_asset_delete_bulk'))
+            ->setMethod('DELETE')
+            ->getForm()
+            ->createView();
+
         return $this->render('backend/asset/index.html.twig', array(
             'assets' => $paginatedAssets,
+            'deleteAssetForms' => $deleteForms,
+            'bulkForm' => $bulkForm,
         ));
     }
 
@@ -209,6 +223,30 @@ class AssetController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($asset);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin_asset_index');
+    }
+
+    /**
+     * Deletes a asset entity.
+     *
+     * @Route("/bulk/", name="admin_asset_delete_bulk")
+     * @Method("DELETE")
+     */
+    public function deleteBulkAction(Request $request)
+    {
+        $ids = $request->request->get('idx');
+        if (!empty($ids)) {
+            $em = $this->getDoctrine()->getManager();
+            foreach ($ids as $id) {
+                $asset = $em->getRepository('AppBundle:Asset')->find($id);
+                if ($asset) {
+                    $em->remove($asset);
+                }
+            }
+
             $em->flush();
         }
 

@@ -3,6 +3,8 @@
 {% block body %}
     <h1>{{ 'Asset list'|trans }}</h1>
 
+    {{ form_start(bulkForm) }}
+    <input class="button button-primary" type="submit" value="{{ 'Delete selected items'|trans }}">
     <table>
         <thead>
             <tr>
@@ -17,7 +19,10 @@
         <tbody>
         {% for asset in assets %}
             <tr>
-                <td>{{ asset.title }}</td>
+                <td>
+                    <input type="checkbox" name="idx[]" value="{{ asset.id }}" />
+                    {{ asset.title }}
+                </td>
                 <td>{{ asset.uri }}</td>
                 <td>{{ asset.document }}</td>
                 <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -30,12 +35,22 @@
                         <li>
                             <a href="{{ path('admin_asset_edit', { 'id': asset.id }) }}">{{ 'Edit'|trans }}</a>
                         </li>
+                        <li>
+                            {% for idx, deleteAssetForm in deleteAssetForms %}
+                                {% if idx ==  asset.id  %}
+                                    {{ form_start(deleteAssetForm) }}
+                                    <input class="button button-primary" type="submit" value="{{ 'Delete'|trans }}">
+                                    {{ form_end(deleteAssetForm) }}
+                                {% endif %}
+                            {% endfor %}
+                        </li>
                     </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {{ form_end(bulkForm) }}
 
     <div class="navigation text-center">
         {{ knp_pagination_render(assets) }}
