@@ -744,3 +744,32 @@
     position: relative;
     overflow: hidden;
 }
+.elearning-wrapper #asset-form td {
+    padding: 12px 10px;
+}
+#asset-form .actions {
+    position: relative;
+}
+#asset-form .actions > li {
+    float: left;
+}
+#asset-form .actions > li.edit-action {
+    width: 100%;
+}
+#asset-form .delete-action {
+    position: absolute;
+    top: -4px;
+    right: 0;
+}
+#asset-form .delete-action .button.button-primary {
+    margin-top: 0;
+    margin-right: 0;
+}
+.navigation.text-center {
+    text-align: center;
+    padding: 20px;
+}
+.navigation .pagination span {
+    padding: 10px;
+    font-size: 15px;
+}

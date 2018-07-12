@@ -5,7 +5,7 @@
 
     {{ form_start(bulkForm) }}
     <input class="button button-primary" type="submit" value="{{ 'Delete selected items'|trans }}">
-    <table>
+    <table id="asset-form">
         <thead>
             <tr>
                 <th>{{ 'Title'|trans }}</th>
@@ -28,14 +28,14 @@
                 <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if asset.modified %}{{ asset.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
+                    <ul class="actions">
+                        <li class="show-action">
                             <a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">{{ 'Show'|trans }}</a>
                         </li>
-                        <li>
+                        <li class="edit-action">
                             <a href="{{ path('admin_asset_edit', { 'id': asset.id }) }}">{{ 'Edit'|trans }}</a>
                         </li>
-                        <li>
+                        <li class="delete-action">
                             {% for idx, deleteAssetForm in deleteAssetForms %}
                                 {% if idx ==  asset.id  %}
                                     {{ form_start(deleteAssetForm) }}
