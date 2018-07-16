@@ -19,7 +19,7 @@
         <tbody>
         {% for asset in assets %}
             <tr>
-                <td>
+                <td class="first">
                     <input type="checkbox" name="idx[]" value="{{ asset.id }}" />
                     {{ asset.title }}
                 </td>
@@ -27,7 +27,7 @@
                 <td>{{ asset.document }}</td>
                 <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if asset.modified %}{{ asset.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
+                <td class="last">
                     <ul class="actions">
                         <li class="show-action">
                             <a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">{{ 'Show'|trans }}</a>

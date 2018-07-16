@@ -747,6 +747,15 @@
 .elearning-wrapper #asset-form td {
     padding: 12px 10px;
 }
+.elearning-wrapper #asset-form td.first {
+    white-space: nowrap;
+}
+.elearning-wrapper #asset-form td.first input {
+    margin-left: 0;
+}
+.elearning-wrapper #asset-form td.last {
+    width: 100px;
+}
 #asset-form .actions {
     position: relative;
 }
