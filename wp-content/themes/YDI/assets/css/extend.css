@@ -786,3 +786,22 @@
 .lecture-document {
     display: none;
 }
+#lecture-tab-download .item-container.fa {
+    font-size: 14px;
+    line-height: 24px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#lecture-tab-download .item-container.current {
+    position: relative;
+}
+#lecture-tab-download .item-container.current:before {
+    position: absolute;
+    left: -5px;
+    top: 11px;
+    content: '\f061';
+    font-size: 14px;
+    color: #000;
+}

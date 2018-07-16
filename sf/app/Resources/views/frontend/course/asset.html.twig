@@ -36,11 +36,13 @@
             player.attachSource(url);
         }
         // using embed to render document file type
-        $('#lecture-tab-download .chap-item > a').on('click', function () {
+        $('#lecture-tab-download .chap-item > a').on('click', function (e) {
+            e.preventDefault();
             var dataSrc = $(this).attr('href');
             $('.lecture-document .file-preview').attr('src', dataSrc);
             $('.preview').hide();
             $('.lecture-document').show();
+            $(this).find('.item-container.fa').addClass('current');
         })
     </script>
     <section class="course-show lecture-details">
@@ -127,7 +129,7 @@
                                             {% endfor %}
                                             <div class="row chap-item {{ learned }} {% if (asset.id == assetLink.id) %}current{% endif %}">
                                                 <a class="fa" href="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}">
-                                                    <div class="row item-container">
+                                                    <div class="row item-container fa">
                                                         <div class="chap-item-status">
                                                             <div class="status-container">
                                                                 <i class="fas fa-2x fa-play-circle fa-pull-left"></i>
