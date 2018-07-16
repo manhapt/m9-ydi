@@ -135,7 +135,35 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="tab-pane fade in" id="lecture-tab-download"></div>
+                            <div class="tab-pane fade in" id="lecture-tab-download">
+                                <div class="list-lecture-container">
+                                    {% set assetCounter = 0 %}
+                                    {% set optionCounter = 0 %}
+                                    {% for courseOption in courseOptions %}
+                                        {% set optionCounter = optionCounter+1 %}
+                                        <div class="row chap-title">{{ courseOption.title }}</div>
+                                        {% for assetLink in courseOption.assets %}
+
+                                            {% if assetLink.document %}
+                                                {% set assetCounter = assetCounter+1 %}
+
+                                                <div class="row chap-item  {% if (asset.id == assetLink.id) %}current{% endif %}">
+                                                    <a class="fa" target="_blank" href="{{ asset('wp-content/uploads/courses/assets/' ~ assetLink.document) }}">
+                                                        <div class="row item-container">
+                                                            <div class="chap-item-status">
+                                                                <div class="status-container">
+                                                                    <i class="fas fa-2x fa-file fa-pull-left"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="chap-item-content">{{ assetLink.title }}</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
                             <div class="tab-pane fade in" id="lecture-tab-discussion">
                                 <div class="fb-comments" data-href="http://digitalskill.azurewebsites.net/" data-width="375" data-numposts="5"></div>
                             </div>
