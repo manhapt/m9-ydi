@@ -35,6 +35,13 @@
             player.attachView(document.querySelector("#videoplayer"));
             player.attachSource(url);
         }
+        // using embed to render document file type
+        $('#lecture-tab-download .chap-item > a').on('click', function () {
+            var dataSrc = $(this).attr('href');
+            $('.lecture-document .file-preview').attr('src', dataSrc);
+            $('.preview').hide();
+            $('.lecture-document').show();
+        })
     </script>
     <section class="course-show lecture-details">
         <div class="container">
@@ -67,20 +74,19 @@
                 </section>
                 <!-- course item -->
                 <div class="content">
-                    <div class="col-xs-12 col-sm-7 col-md-8 lecture-player no-padding">
+                    <div class="preview col-xs-12 col-sm-7 col-md-8 lecture-player no-padding">
                         <video id="videoplayer" controls></video>
                     </div>
-                    <div class="lecture-image hidden">
+                    <div class="preview col-xs-12 col-sm-7 col-md-8 lecture-image no-padding lecture-image">
                         {% if asset.image %}
                             <figure>
                                 <img src="{{ asset('wp-content/uploads/courses/assets/' ~ asset.image) }}"/>
                             </figure>
                         {% endif %}
                     </div>
-                    <div class="lecture-document hidden">
-                        {% if asset.document %}
-                            <figure>{{ asset('wp-content/uploads/courses/assets/' ~ asset.document) }}</figure>
-                        {% endif %}
+                    <div class="preview col-xs-12 col-sm-7 col-md-8 lecture-document no-padding">
+                            <embed class="file-preview" src="" width="100%" height="450" alt="Document"
+                               pluginspage="http://www.adobe.com/products/acrobat/readstep2.html" internalinstanceid="15">
                     </div>
                     <div class="col-xs-0 col-sm-5 col-md-4 lecture-container no-padding">
                         <ul class="nav nav-tabs lecture-container-header">
@@ -148,7 +154,7 @@
                                                 {% set assetCounter = assetCounter+1 %}
 
                                                 <div class="row chap-item  {% if (asset.id == assetLink.id) %}current{% endif %}">
-                                                    <a class="fa" target="_blank" href="{{ asset('wp-content/uploads/courses/assets/' ~ assetLink.document) }}">
+                                                    <a class="fa" href="{{ asset('wp-content/uploads/courses/assets/' ~ assetLink.document) }}">
                                                         <div class="row item-container">
                                                             <div class="chap-item-status">
                                                                 <div class="status-container">
