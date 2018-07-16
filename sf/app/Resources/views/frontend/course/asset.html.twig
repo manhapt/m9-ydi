@@ -38,10 +38,9 @@
         // using embed to render document file type
         $('#lecture-tab-download .chap-item > a').on('click', function (e) {
             e.preventDefault();
-            var dataSrc = $(this).attr('href');
+            var dataSrc = $(this).attr('data-target');
             $('.lecture-document .file-preview').attr('src', dataSrc);
-            $('.preview').hide();
-            $('.lecture-document').show();
+            $('.preview').hide(); $('.lecture-document').show();
             $(this).find('.item-container.fa').addClass('current');
         })
     </script>
@@ -156,7 +155,7 @@
                                                 {% set assetCounter = assetCounter+1 %}
 
                                                 <div class="row chap-item  {% if (asset.id == assetLink.id) %}current{% endif %}">
-                                                    <a class="fa" href="{{ asset('wp-content/uploads/courses/assets/' ~ assetLink.document) }}">
+                                                    <a class="fa" data-target="{{ asset('wp-content/uploads/courses/assets/' ~ assetLink.document) }}" href="javascript:void(0);">
                                                         <div class="row item-container fa">
                                                             <div class="chap-item-status">
                                                                 <div class="status-container">
