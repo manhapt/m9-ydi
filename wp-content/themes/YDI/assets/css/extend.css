@@ -654,7 +654,7 @@
 }
 
 .list-lecture-container .chap-item.learned i:before {
-    content: '\f058';
+    /*content: '\f058';*/
 }
 .list-lecture-container .chap-item.learned {
     background: #f0f0f0;

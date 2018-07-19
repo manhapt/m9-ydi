@@ -31,7 +31,27 @@
                 $('.lecture-document #file-preview').attr('src', dataSrc);
                 $('.preview').hide(); $('.lecture-document').show();
                 $(this).find('.item-container.fa').addClass('current');
-            })
+            });
+
+            $('.lecture-container-header li:nth-child(2)').hide();
+            if ($('#lecture-tab-list .chap-item.current').hasClass('documentation')) {
+                $('.lecture-container-header li:nth-child(2)').show();
+                $('.documentation > a').click();
+            }
+
+            $('.documentation > a').on('click', function () {
+                // Stop video
+                $('#videoplayer').remove();
+                // Show the current document
+                var dataSrc = $(this).attr('data-target');
+                $('.lecture-document #file-preview').attr('src', dataSrc);
+                $('.preview').hide(); $('.lecture-document').show();
+                $('.chap-item').removeClass('current');
+                $(this).find('.item-container.fa').addClass('current');
+                $(this).parent().addClass('current');
+                $('.lecture-container-header li:nth-child(2) a').click();
+                $('.lecture-container-header li:nth-child(2)').show();
+            });
 
         });
         // setup the video element and attach it to the Dash player
@@ -125,12 +145,16 @@
                                                     {% set learned = "learned" %}
                                                 {% endif %}
                                             {% endfor %}
-                                            <div class="row chap-item {{ learned }} {% if (asset.id == assetLink.id) %}current{% endif %}">
-                                                <a class="fa" href="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}">
+                                            <div class="row chap-item {% if(assetLink.document) %} documentation {% endif %} {{ learned }} {% if (asset.id == assetLink.id) %}current{% endif %}">
+                                                <a class="fa"
+                                                    {% if(assetLink.document) %}
+                                                        data-target="{{ asset('wp-content/uploads/courses/assets/' ~ assetLink.document) }}"
+                                                    {% else %}
+                                                        href="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}" {% endif %}">
                                                     <div class="row item-container">
                                                         <div class="chap-item-status">
                                                             <div class="status-container">
-                                                                <i class="fas fa-2x fa-play-circle fa-pull-left"></i>
+                                                                <i class="fas fa-2x {% if(assetLink.document) %} fa-file {% else %} fa-play-circle {% endif %} fa-pull-left"></i>
                                                             </div>
                                                         </div>
                                                         <div class="chap-item-content">{{ assetLink.title }}</div>
