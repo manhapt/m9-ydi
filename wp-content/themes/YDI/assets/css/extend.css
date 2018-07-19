@@ -543,7 +543,15 @@
 .lecture-container-header li:hover {
     border-bottom: 5px solid #FF8300;
 }
-
+.lecture-container-header li.disabled a,
+.lecture-container-header li.disabled {
+    background: #ddd;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.lecture-container-header li.disabled:hover {
+    border-bottom: none;
+}
 .lecture-container-header li a {
     padding: 0;
     line-height: 40px;
@@ -617,7 +625,7 @@
     height: auto;
     overflow-y: scroll;
     width: 100%;
-    max-height: 405px;
+    max-height: 435px;
 }
 
 .list-lecture-container .chap-title {

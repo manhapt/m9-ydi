@@ -87,6 +87,9 @@ Mobile First
     #courses-index {
         overflow: hidden;
     }
+    #courses-list .grid .details .description p {
+        height: auto;
+    }
 }
 
 /*
