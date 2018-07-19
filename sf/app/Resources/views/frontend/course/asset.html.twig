@@ -6,6 +6,10 @@
         jQuery(document).ready(function ($) {
             jQuery(window).load(function () {
                 setupVideo();
+                if ($('#lecture-tab-list .chap-item.current').hasClass('documentation')) {
+                    $('.lecture-container-header li:nth-child(2)').show();
+                    $('.documentation > a').click();
+                }
             });
 
             var dataTab = $('.lecture-container-header a');
@@ -34,11 +38,6 @@
             });
 
             $('.lecture-container-header li:nth-child(2)').hide();
-            if ($('#lecture-tab-list .chap-item.current').hasClass('documentation')) {
-                $('.lecture-container-header li:nth-child(2)').show();
-                $('.documentation > a').click();
-            }
-
             $('.documentation > a').on('click', function () {
                 // Stop video
                 $('#videoplayer').remove();
