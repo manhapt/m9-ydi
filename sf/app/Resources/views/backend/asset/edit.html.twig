@@ -5,6 +5,7 @@
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
+    <p>
         <figure class="preview">
             {% if asset.image %}
                 <img src="{{ asset('wp-content/uploads/courses/assets/' ~ asset.image.filename) }}" width="150"/>
@@ -12,7 +13,11 @@
             {% if asset.document %}
                 <p>Document path: {{ asset('wp-content/uploads/courses/assets/' ~ asset.document.filename) }}</p>
             {% endif %}
+            {% if scorm_path %}
+                <p>Scorm path: {{ scorm_path }}</p>
+            {% endif %}
         </figure>
+    </p>
         <input class="button button-primary" type="submit" value="Save" />
     {{ form_end(edit_form) }}
 

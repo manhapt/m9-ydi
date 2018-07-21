@@ -11,6 +11,7 @@
                 <th>{{ 'Title'|trans }}</th>
                 <th>Video</th>
                 <th>PDF</th>
+                <th>Scorm</th>
                 <th>{{ knp_pagination_sortable(assets, 'Created'|trans, 'c.created') }}</th>
                 <th>{{ 'Modified'|trans }}</th>
                 <th>{{ 'Actions'|trans }}</th>
@@ -25,6 +26,7 @@
                 </td>
                 <td>{{ asset.uri }}</td>
                 <td>{{ asset.document }}</td>
+                <td>{{ asset.scormPath }}</td>
                 <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if asset.modified %}{{ asset.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td class="last">

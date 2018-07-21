@@ -26,3 +26,11 @@ DirectoryIndex index.php
 </IfModule>
 # END WordPress
 
+php_value upload_max_filesize 200M
+php_value post_max_size 250M
+php_value memory_limit 1024M
+php_value max_execution_time 180
+php_value max_input_time 180
+php_value opcache.max_accelerated_files 20000
+php_value realpath_cache_size 4096K
+php_value realpath_cache_ttl 600

@@ -42,6 +42,10 @@ class AssetType extends AbstractType
         if (null === $asset->getFile()) {
             $builder->add('file', FileType::class, ['required' => false]);
         }
+        $builder
+            ->add('scorm', FileType::class, ['required' => false])
+            ->add('scormPath', null, ['required' => false])
+        ;
     }
 
     /**

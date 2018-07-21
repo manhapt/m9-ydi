@@ -118,6 +118,25 @@ class Asset
     /**
      * @var string
      *
+     * @ORM\Column(name="scorm", type="string", length=255, nullable=true)
+     * @Assert\File(
+     *     maxSize = "200M",
+     *     mimeTypes = {"application/zip", "application/octet-stream", "application/x-zip-compressed", "multipart/x-zip"},
+     *     mimeTypesMessage = "Please upload a zip file"
+     * )
+     */
+    private $scorm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="scorm_path", type="string", length=255, nullable=true)
+     */
+    private $scormPath;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -215,7 +234,7 @@ class Asset
     /**
      * @return string
      */
-    public function getEncodedUuid(): string
+    public function getEncodedUuid()
     {
         return $this->encodedUuid;
     }
@@ -223,7 +242,7 @@ class Asset
     /**
      * @param string $encodedUuid
      */
-    public function setEncodedUuid(string $encodedUuid)
+    public function setEncodedUuid($encodedUuid)
     {
         $this->encodedUuid = $encodedUuid;
     }
@@ -362,6 +381,46 @@ class Asset
     public function setDocument($document)
     {
         $this->document = $document;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScorm()
+    {
+        return $this->scorm;
+    }
+
+    /**
+     * @param string $scorm
+     */
+    public function setScorm($scorm)
+    {
+        $this->scorm = $scorm;
+    }
+
+    /**
+     * Set scormPath.
+     *
+     * @param string $scormPath
+     *
+     * @return Asset
+     */
+    public function setScormPath($scormPath)
+    {
+        $this->scormPath = $scormPath;
+
+        return $this;
+    }
+
+    /**
+     * Get scormPath.
+     *
+     * @return string
+     */
+    public function getScormPath()
+    {
+        return $this->scormPath;
     }
 
     /**

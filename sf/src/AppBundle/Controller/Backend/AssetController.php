@@ -88,6 +88,9 @@ class AssetController extends Controller
             if ($asset->getDocument()) {
                 $asset->setDocument($fileUploader->upload($asset->getDocument(), 'assets'));
             }
+            if ($asset->getScorm()) {
+                $asset->setScorm($fileUploader->upload($asset->getScorm(), 'assets'));
+            }
 
             $file = null;
             $fileName = null;
@@ -158,6 +161,10 @@ class AssetController extends Controller
         if ($prevDocument) {
             $asset->setDocument(new File($wpUploadDirAsset.'/'.$prevDocument));
         }
+        $prevScorm = $asset->getScorm();
+        if (is_string($prevScorm)) {
+            $asset->setScorm(null);
+        }
 
         $deleteForm = $this->createDeleteForm($asset);
         $editForm = $this->createForm('AppBundle\Form\AssetType', $asset);
@@ -174,6 +181,12 @@ class AssetController extends Controller
                 $asset->setDocument($fileUploader->upload($asset->getDocument(), 'assets'));
             } else {
                 $asset->setDocument($prevDocument);
+            }
+
+            if ($asset->getScorm()) {
+                $asset->setScorm($fileUploader->upload($asset->getScorm(), 'assets'));
+            } else {
+                $asset->setScorm($prevScorm);
             }
 
             $file = null;
@@ -202,8 +215,12 @@ class AssetController extends Controller
             }
         }
 
+        $scormPath = $prevScorm. DIRECTORY_SEPARATOR . $asset->getScormPath();
+        $scormPath = DIRECTORY_SEPARATOR == $scormPath ? '' : $scormPath;
+
         return $this->render('backend/asset/edit.html.twig', array(
             'asset' => $asset,
+            'scorm_path' => $scormPath,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));

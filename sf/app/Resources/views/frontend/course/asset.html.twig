@@ -124,7 +124,11 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="lecture-video">
-                                <video id="videoplayer" controls></video>
+                                {% if asset.file %}
+                                    <video id="videoplayer" controls></video>
+                                {% elseif asset.scorm %}
+                                    <iframe style="width: 100%; height: 450px"  height="450" src="{{ app.request.getSchemeAndHttpHost() }}/wp-content/uploads/courses/assets/{{ asset.scorm }}/{{ asset.scormPath }}"></iframe>
+                                {% endif %}
                             </div>
                             <div class="tab-pane fade in" id="lecture-file">
                                 <iframe id="file-preview" src="" style="width: 100%; height: 450px" frameborder="0" scrolling="yes"></iframe>
