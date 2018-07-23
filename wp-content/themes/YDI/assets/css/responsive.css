@@ -91,6 +91,9 @@ Mobile First
         display: block;
         float: none;
     }
+    .lecture-details .lecture-container {
+        display: inline-block;
+    }
 }
 @media all and (min-width: 767px) and (max-width: 1024px) {
     #courses-list {
