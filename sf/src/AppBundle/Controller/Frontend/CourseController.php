@@ -155,7 +155,7 @@ class CourseController extends Controller
                 foreach ($assetParticipants as $assetParticipant) {
                     /** @var Asset $learnedAsset */
                     $learnedAsset = $assetParticipant->getAsset();
-                    if ($learnedAsset->getId() == $courseAsset->getId()) {
+                    if ($learnedAsset && $learnedAsset->getId() == $courseAsset->getId()) {
                         $completedAssets[] = $courseAsset;
                     }
                 }
