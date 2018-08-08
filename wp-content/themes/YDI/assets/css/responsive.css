@@ -34,6 +34,12 @@ Mobile First
     .grid .item .base-image img {
         height: 200px;
     }
+
+    #main-wrapper .azuremediaplayer-dimensions {
+        width: 100% !important;
+        margin: 0 auto;
+        overflow-y: hidden;
+    }
 }
 
 @media all and (min-width: 640px) {
@@ -97,6 +103,9 @@ Mobile First
     .lecture-details .lecture-container {
         display: inline-block;
     }
+    body #main-wrapper {
+        padding: 0 15px;
+    }
 }
 @media all and (min-width: 767px) and (max-width: 1024px) {
     #courses-list {
@@ -141,6 +150,10 @@ Tablet
     .elearning-wrapper .carousel .item {
         width: 31.5%;
         max-height: 450px;
+    }
+
+    #main-wrapper .azuremediaplayer-dimensions {
+        min-height: 450px !important;
     }
 }
 
