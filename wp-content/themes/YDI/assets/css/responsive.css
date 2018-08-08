@@ -151,10 +151,6 @@ Tablet
         width: 31.5%;
         max-height: 450px;
     }
-
-    #main-wrapper .azuremediaplayer-dimensions {
-        min-height: 450px !important;
-    }
 }
 
 @media all and (max-width: 1024px) {
