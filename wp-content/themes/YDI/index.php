@@ -23,19 +23,20 @@
                         <section id="block-block-7" class="block block-block block-odd">
                             <h2>BÁO CHÍ</h2>
                             <div class="content">
-                            <?php
-                            $check = true;
-                            $args = array( 'posts_per_page' => 7, 'category' => 53 );
-                            $myposts = get_posts( $args );
-                            foreach ( $myposts as $post ) : setup_postdata( $post );
-                                if($check) {
-                                    get_template_part('theme-parts/post/content', 'home');
-                                    $check = false;
-                                } else {
-                                    the_title( sprintf( '<li><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></li>' );
-                                }
-                            endforeach; // End of the loop.
-                            ?>
+                                <ul>
+                                <?php
+                                $check = true;
+                                $args = array( 'posts_per_page' => 7, 'category' => 53 );
+                                $myposts = get_posts( $args );
+                                foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
+                                    <?php if($check) {
+                                        get_template_part('theme-parts/post/content', 'home');
+                                        $check = false;
+                                    } else { ?>
+                                        <li><a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php echo $post->post_title; ?></a></li>
+                                    <?php } endforeach; // End of the loop.
+                                ?>
+                                </ul>
                             </div>
                         </section>
                     </div>

@@ -29,7 +29,7 @@
                 </div>
                 <div class="col2">
                     <div class="region region-user-menu">
-                        <?php // get_template_part( 'theme-parts/navigation/control' ); ?>
+                        <?php get_template_part( 'theme-parts/navigation/control' ); ?>
                         <?php get_template_part( 'theme-parts/navigation/top' ); ?>
                     </div>
                 </div>

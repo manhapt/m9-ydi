@@ -813,3 +813,10 @@
     font-size: 14px;
     color: #000;
 }
+#superfish-1 a {
+    font-size: 14px;
+    width: 130px;
+}
+#superfish-1 li#menu-item-2110 a {
+    background: url(../images/menu5.png) 0 0 no-repeat;
+}

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="title">
                         <i class="fa fa-user-graduate fa-2x fa-pull-left"></i>
-                        <h1>Dành cho giáo viên tin học</h1>
+                        <h1 title="Dành cho giáo viên tin học">Dành cho giáo viên tin học</h1>
                         <p class="sub-title">Bồi dưỡng kiến thức và phương pháp giảng dạy chương trình Tin học ứng dung và Khoa học máy tính!</p>
                     </div>
                     <!-- course item -->
@@ -15,20 +15,20 @@
                         <div class="slides">
                             {% for course in contributorCourses %}
                                 <div class="item">
-                                    <a class="base-image course-card"
+                                    <a title="{{ course.name }}" class="base-image course-card"
                                        href="{{ path('course_show', { 'id': course.id }) }}">
                                         <img data-lazy="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
                                              alt="{{ course.name }}"/>
                                     </a>
                                     <div class="details">
                                         <div class="description">
-                                            <h3>{{ course.name }}</h3>
+                                            <h3 title="{{ course.name }}">{{ course.name }}</h3>
                                             <p>{{ course.shortDescription }}</p>
                                         </div>
                                     </div>
                                     <div class="actions">
                                         <i class="fa fa-heart"></i><span class="count">{{ course.totalParticipant }} Học viên tham gia</span>
-                                        <a href="{{ path('course_show', { 'id': course.id }) }}" class="primary more">Tìm hiểu khóa học</a>
+                                        <a title="Tìm hiểu khóa học" href="{{ path('course_show', { 'id': course.id }) }}" class="primary more">Tìm hiểu khóa học</a>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="title">
                         <i class="fa fa-graduation-cap fa-2x fa-pull-left"></i>
-                        <h1>Dành cho Thanh thiếu niên</h1>
+                        <h1 title="Dành cho Thanh thiếu niên">Dành cho Thanh thiếu niên</h1>
                         <p class="sub-title">Trang bị kiến thức và kỹ năng CNTT và khoa học máy tính, phát triển tư duy, nâng cao hiệu quả học tập!</p>
                     </div>
                     <!-- course item -->
@@ -47,14 +47,14 @@
                         <div class="slides">
                             {% for course in subscriberCourses %}
                                 <div class="item">
-                                    <a class="base-image course-card"
+                                    <a title="{{ course.name }}" class="base-image course-card"
                                        href="{{ path('course_show', { 'id': course.id }) }}">
                                         <img data-lazy="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
                                              alt="{{ course.name }}"/>
                                     </a>
                                     <div class="details">
                                         <div class="description">
-                                            <h3>{{ course.name }}</h3>
+                                            <h3 title="{{ course.name }}">{{ course.name }}</h3>
                                             <p>{{ course.shortDescription }}</p>
                                         </div>
                                     </div>

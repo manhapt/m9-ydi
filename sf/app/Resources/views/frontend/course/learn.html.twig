@@ -7,7 +7,7 @@
                 <section class="section-title section-setting">
                     <div class="title">
                         <i class="fa fa-book-open fa-2x fa-pull-left"></i>
-                        <h1>{{ course.name }}</h1>
+                        <h1 title="{{ course.name }}">{{ course.name }}</h1>
                         {% if(course.shortDescription) %}
                             <p class="sub-title">{{ course.shortDescription }}</p>
                         {% endif %}
@@ -19,13 +19,11 @@
                         <section class="section_author section-setting">
                             {% if course.image %}
                                 <figure>
-                                    <img src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
+                                    <img title="{{ course.name }}" src="{{ asset('wp-content/uploads/courses/' ~ course.image) }}"
                                          alt="{{ course.name }}"/>
                                 </figure>
                             {% endif %}
-                            <a href="/e-learning/user/course">Khóa học của tôi</a>
-                            <span>Thông tin tài khoản</span>
-                            <span>Đăng xuất</span>
+                            <a title="Khóa học của tôi" href="/e-learning/user/course">Khóa học của tôi</a>
                         </section>
                     </div>
                     <div class="details col-right">
@@ -43,13 +41,13 @@
                                 {% for courseOption in courseOptions %}
                                     {% set optionCounter = optionCounter+1 %}
                                     <li class="item">
-                                        <h4>{{ courseOption.title }}</h4>
+                                        <h4 title="{{ courseOption.title }}">{{ courseOption.title }}</h4>
                                         <ul>
                                             {% for asset in courseOption.assets %}
                                                 {% set assetCounter = assetCounter+1 %}
                                                 <li class="child">
                                                     <i class="fas fa-2x fa-play-circle fa-pull-left"></i>
-                                                    <a href="{{ path('course_asset', { 'id': course.id, 'asset_id': asset.id }) }}">
+                                                    <a title="{{ asset.title }}" href="{{ path('course_asset', { 'id': course.id, 'asset_id': asset.id }) }}">
                                                         {{ asset.title }}
                                                     </a>
                                                 </li>
@@ -61,7 +59,7 @@
                             </ul>
                         </section>
                         <section class="section_actions section-setting actions-toolbar">
-                            <a class="button button-primary" href="{{ path('course_index') }}">Quay lại</a>
+                            <a class="button button-primary" title="Quay lại" href="{{ path('course_index') }}">Quay lại</a>
                         </section>
                     </div>
                 </div>

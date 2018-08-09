@@ -13,9 +13,7 @@ Mobile First
         margin: 0 auto;
         padding: 0;
         overflow-x: hidden;
-        width: 100%;
         height: auto;
-        max-width: 100%;
     }
     .col-left,
     .col-right {
@@ -140,7 +138,7 @@ Tablet
     #main-wrapper,
     .footer-wrapper {
         display: block;
-        max-width: 1050px;
+        /*max-width: 1050px;*/
         padding: 0;
     }
 
@@ -166,6 +164,15 @@ Tablet
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 1280px) {
+    #header,
+    #main-wrapper,
+    .footer-wrapper {
+        width: 100%;
     }
 }
 /*
@@ -176,7 +183,7 @@ Desktop
     #header,
     #main-wrapper,
     .footer-wrapper {
-        max-width: 1210px;
+        width: 1075px;
         overflow-x: visible;
     }
 }
