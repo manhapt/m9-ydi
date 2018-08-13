@@ -27,32 +27,6 @@
                         </section>
                     </div>
                     <div class="details col-right">
-                        <section class="section_benefit section-setting">
-                            <p class="title">Mục tiêu của khóa học</p>
-                            <div class="cover-require">
-                                <i class="fas fa-hand-point-right"></i>
-                                <span class="require">Kích hoạt các chức năng của não bộ trẻ ngay từ trong bụng mẹ thông qua các giác quan để trẻ nhanh hoàn thiện các năng lực và thông minh hơn.</span>
-                            </div>
-                            <div class="cover-require">
-                                <i class="fas fa-hand-point-right"></i>
-                                <span class="require">Định hình tính cách, phẩm chất tốt đẹp cho trẻ từ trong tiềm thức</span>
-                            </div>
-                        </section>
-                        <section class="section_requirement section-setting">
-                            <p class="title">Yêu cầu của khóa học</p>
-                            <div class="cover-require">
-                                <i class="fas fa-hand-point-right"></i>
-                                <span class="require">Máy tính/ thiết bị kết nối internet</span>
-                            </div>
-                            <div class="cover-require">
-                                <i class="fas fa-hand-point-right"></i>
-                                <span class="require">Có không gian để thực hành</span>
-                            </div>
-                            <div class="cover-require">
-                                <i class="fas fa-hand-point-right"></i>
-                                <span class="require">Có sự hỗ trợ của người thân và gia đình</span>
-                            </div>
-                        </section>
                         <section class="section_description section-setting">
                             <p class="title">Tổng quát</p>
                             <p class="content_description">{{ course.description |raw }}</p>
@@ -82,7 +56,7 @@
                         </section>
                         <section class="section_actions section-setting actions-toolbar">
                             <a class="button button-primary" title="Tham gia khóa học" href="{{ path('course_learn', { 'id': course.id }) }}">Tham gia khóa học</a>
-                            <a class="button button-primary" title="Quay lại" href="{{ path('course_index') }}">Quay lại</a>
+                            {#<a class="button button-primary" title="Quay lại" href="{{ path('course_index') }}">Quay lại</a>#}
                         </section>
                     </div>
                 </div>
