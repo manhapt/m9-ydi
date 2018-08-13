@@ -53,6 +53,7 @@
                                              alt="{{ course.name }}"/>
                                     </a>
                                     <div class="details">
+                                        <a href="{{ path('course_show', { 'id': course.id }) }}" class="primary more">Tìm hiểu khóa học</a>
                                         <div class="description">
                                             <h3 title="{{ course.name }}">{{ course.name }}</h3>
                                             <p>{{ course.shortDescription }}</p>
@@ -60,7 +61,6 @@
                                     </div>
                                     <div class="actions">
                                         <i class="fa fa-heart"></i><span class="count">{{ course.totalParticipant }} Học viên tham gia</span>
-                                        <a href="{{ path('course_show', { 'id': course.id }) }}" class="primary more">Tìm hiểu khóa học</a>
                                     </div>
                                 </div>
                             {% endfor %}
