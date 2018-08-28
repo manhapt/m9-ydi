@@ -20,7 +20,7 @@
             <div id="sidebar-first" class="column sidebar">
                 <div class="section">
                     <div class="region region-sidebar-second">
-                        <section id="block-block-7" class="block block-block block-odd">
+                        <section id="home-region-section" class="block block-block block-odd">
                             <h2>BÁO CHÍ</h2>
                             <div class="content">
                                 <ul>
@@ -33,7 +33,7 @@
                                         get_template_part('theme-parts/post/content', 'home');
                                         $check = false;
                                     } else { ?>
-                                        <li><a rel="bookmark" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php echo $post->post_title; ?></a></li>
+                                        <li><a rel="bookmark" href="<?php echo get_permalink($post); ?>" title="<?php echo $post->post_title; ?>"><?php echo $post->post_title; ?></a></li>
                                     <?php } endforeach; // End of the loop.
                                 ?>
                                 </ul>

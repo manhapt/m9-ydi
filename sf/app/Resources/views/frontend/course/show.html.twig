@@ -27,6 +27,9 @@
                         </section>
                     </div>
                     <div class="details col-right">
+                        <section class="section_actions section-setting actions-toolbar">
+                            <a class="button button-primary" title="Tham gia khóa học" href="{{ path('course_learn', { 'id': course.id }) }}">Tham gia khóa học</a>
+                        </section>
                         <section class="section_description section-setting">
                             <p class="title">Tổng quát</p>
                             <p class="content_description">{{ course.description |raw }}</p>
@@ -53,10 +56,6 @@
 
                                 {% endfor %}
                             </ul>
-                        </section>
-                        <section class="section_actions section-setting actions-toolbar">
-                            <a class="button button-primary" title="Tham gia khóa học" href="{{ path('course_learn', { 'id': course.id }) }}">Tham gia khóa học</a>
-                            {#<a class="button button-primary" title="Quay lại" href="{{ path('course_index') }}">Quay lại</a>#}
                         </section>
                     </div>
                 </div>

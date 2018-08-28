@@ -17,7 +17,7 @@
                         <?php
                         while (have_posts()) : the_post();
                             ?>
-                            <section id="block-block-7" class="block block-block block-odd">
+                            <section id="document-section" class="block block-block block-odd">
                                 <h2>
                                     <?php the_title(sprintf('<a href="%s" rel="bookmark">', esc_url(get_permalink())), '</a>'); ?>
                                 </h2>
@@ -29,10 +29,12 @@
                                                 'post_type' => 'tai_lieu',
                                                 'nopaging' => true, // to show all posts in this taxonomy, could also use 'numberposts' => -1 instead
                                             ));
-                                            foreach($posts as $post):
-                                                get_template_part( 'theme-parts/post/content', 'tailieu' );
-                                            endforeach;
-                                        ?>
+                                            foreach($posts as $post): ?>
+                                                <div class="tailieu">
+                                                    <?php the_post_thumbnail( 'tailieu-post-thumbnail' ); ?>
+                                                    <h5><a href="<?php echo get_permalink($post); ?>" rel="bookmark"><?php echo $post->post_title; ?></a></h5>
+                                                </div>
+                                         <?php endforeach; ?>
                                     </div>
                                 </div>
                             </section>
