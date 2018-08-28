@@ -4,7 +4,7 @@
             <aside id="sidebar-first" class="column sidebar" role="complementary" style="width:240px;">
                 <div class="section">
                     <div class="region region-sidebar-first">
-                        <section id="block-block-7" class="block block-block block-odd">
+                        <section id="city-section" class="block block-block block-odd">
                             <div class="content">
                                 <ul>
                                     <?php
@@ -31,7 +31,7 @@
             <aside id="sidebar-second" class="column sidebar" role="complementary" style="width:774px;">
                 <div class="section">
                     <div class="region region-sidebar-second">
-                        <section id="block-block-7" class="block block-block block-odd">
+                        <section id="region-section" class="block block-block block-odd">
                             <p style="background:#152C4A; border-radius:8px; -moz-border-radius:8px; -webkit-border-radius:8px; text-align:justify; color:#fff; padding:10px;">
                                 <strong><?php the_archive_title( '<a class="page-title">', '</a>' );?></strong>
                             </p>
@@ -65,10 +65,6 @@
                     </div><!-- /.section -->
             </aside><!-- /#sidebar-second -->
             <div id="content" class="column" role="main">
-
-
-
-
             </div><!-- /#content -->
         </div><!-- /#main -->
     </div>

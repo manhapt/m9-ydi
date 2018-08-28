@@ -17,7 +17,7 @@
                         <?php
                         while ( have_posts() ) : the_post();
                         ?>
-                        <section id="block-block-7" class="block block-block block-odd">
+                        <section id="teacher-section" class="block block-block block-odd">
                             <h2>
                                 <?php the_title( sprintf( '<a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a>' );?>
                             </h2>
