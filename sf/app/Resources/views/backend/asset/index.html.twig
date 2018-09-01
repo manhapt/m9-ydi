@@ -1,50 +1,50 @@
 {% extends 'backend/base.html.twig' %}
 
 {% block body %}
-    <h1>Assets list</h1>
+    <h1>{{ 'Asset list'|trans }}</h1>
 
-    <table>
+    {{ form_start(bulkForm) }}
+    <input class="button button-primary" type="submit" value="{{ 'Delete selected items'|trans }}">
+    <table id="asset-form">
         <thead>
             <tr>
-                <th style="display: none;">Id</th>
-                <th style="display: none;">Uuid</th>
-                <th>State</th>
-                <th>Name</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Options</th>
-                <th>Formatoption</th>
-                <th>Uri</th>
-                <th>Storageaccountname</th>
-                <th style="display: none;">Alternateid</th>
-                <th>Created</th>
-                <th>Modified</th>
-                <th>Actions</th>
+                <th>{{ 'Title'|trans }}</th>
+                <th>Video</th>
+                <th>PDF</th>
+                <th>Scorm</th>
+                <th>{{ knp_pagination_sortable(assets, 'Created'|trans, 'c.created') }}</th>
+                <th>{{ 'Modified'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
         {% for asset in assets %}
             <tr>
-                <td style="display: none;"><a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
-                <td style="display: none;">{{ asset.uuid }}</td>
-                <td>{{ asset.state }}</td>
-                <td>{{ asset.name }}</td>
-                <td>{{ asset.title }}</td>
-                <td>{{ asset.description }}</td>
-                <td>{{ asset.options }}</td>
-                <td>{{ asset.formatOption }}</td>
+                <td class="first">
+                    <input type="checkbox" name="idx[]" value="{{ asset.id }}" />
+                    {{ asset.title }}
+                </td>
                 <td>{{ asset.uri }}</td>
-                <td>{{ asset.storageAccountName }}</td>
-                <td style="display: none;">{{ asset.alternateId }}</td>
+                <td>{{ asset.document }}</td>
+                <td>{{ asset.scormPath }}</td>
                 <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if asset.modified %}{{ asset.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">Show</a>
+                <td class="last">
+                    <ul class="actions">
+                        <li class="show-action">
+                            <a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">{{ 'Show'|trans }}</a>
                         </li>
-                        <li>
-                            <a href="{{ path('admin_asset_edit', { 'id': asset.id }) }}">Edit</a>
+                        <li class="edit-action">
+                            <a href="{{ path('admin_asset_edit', { 'id': asset.id }) }}">{{ 'Edit'|trans }}</a>
+                        </li>
+                        <li class="delete-action">
+                            {% for idx, deleteAssetForm in deleteAssetForms %}
+                                {% if idx ==  asset.id  %}
+                                    {{ form_start(deleteAssetForm) }}
+                                    <input class="button button-primary" type="submit" value="{{ 'Delete'|trans }}">
+                                    {{ form_end(deleteAssetForm) }}
+                                {% endif %}
+                            {% endfor %}
                         </li>
                     </ul>
                 </td>
@@ -52,10 +52,15 @@
         {% endfor %}
         </tbody>
     </table>
+    {{ form_end(bulkForm) }}
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(assets) }}
+    </div>
 
     <ul>
         <li class="actions-toolbar">
-            <a class="button button-primary" href="{{ path('admin_asset_new') }}">Create a new asset</a>
+            <a class="button button-primary" href="{{ path('admin_asset_new') }}">{{ 'Create a new asset'|trans }}</a>
         </li>
     </ul>
 {% endblock %}

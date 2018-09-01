@@ -29,4 +29,18 @@ class AssetRepository extends \Doctrine\ORM\EntityRepository
 
         return $assets;
     }
+
+    /**
+     * @return Asset[]
+     */
+    public function findByAllCourses()
+    {
+        $assets = [];
+        $courses = $this->getEntityManager()->getRepository('AppBundle:Course')->findAll();
+        foreach ($courses as $course) {
+            $assets = array_merge($assets, $this->findByCourse($course));
+        }
+
+        return $assets;
+    }
 }

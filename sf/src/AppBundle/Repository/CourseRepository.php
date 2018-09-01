@@ -20,6 +20,7 @@ class CourseRepository extends \Doctrine\ORM\EntityRepository
                 COUNT(cp.username) as totalParticipant'
             )
             ->leftJoin('AppBundle:CourseParticipant', 'cp', 'WITH', 'cp.course=c.id')
-            ->groupBy('c.id');
+            ->groupBy('c.id')
+            ->orderBy('c.modified', 'DESC');
     }
 }

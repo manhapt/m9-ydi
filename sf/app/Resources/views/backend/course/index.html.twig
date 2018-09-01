@@ -1,50 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-        <h1>Danh sách khóa học</h1>
+        <h1>{{ 'Course list'|trans }}</h1>
 
         <table>
             <thead>
                 <tr>
-                    <th style="display: none;">Id</th>
-                    <th style="display: none;">Sku</th>
-                    <th>Name</th>
-                    <th style="display: none">Price</th> {# unuse field #}
-                    <th style="display: none">Typeid</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>Short Description</th>
-                    <th>{{ knp_pagination_sortable(courses, 'created', 'c.created') }}</th>
-                    <th>Modified</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>{{ 'Name'|trans }}</th>
+                    <th>{{ 'Image'|trans }}</th>
+                    <th>{{ 'Short Description'|trans }}</th>
+                    <th>{{ knp_pagination_sortable(courses, 'Created'|trans, 'c.created') }}</th>
+                    <th>{{ 'Modified'|trans }}</th>
+                    <th>{{ 'Actions'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
             {% for course in courses %}
                 <tr>
-                    <td style="display: none;"><a href="{{ path('admin_course_show', { 'id': course.id }) }}">{{ course.id }}</a></td>
-                    <td style="display: none;">{{ course.sku }}</td>
                     <td class="name">{{ course.name }}</td>
-                    <td style="display: none;">{{ course.price }}</td> {# unuse field #}
-                    <td style="display: none">{{ course.typeId }}</td>
                     <td>
                         {% if 0 %}
                             <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" alt="{{ course.name }}" />
                         {% endif %}
                     </td>
-                    <td>{{ course.description }}</td>
                     <td>{{ course.shortDescription }}</td>
                     <td>{% if course.created %}{{ course.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if course.modified %}{{ course.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{{ course.status }}</td>
                     <td>
                         <ul>
                             <li>
-                                <a class="action" href="{{ path('admin_course_show', { 'id': course.id }) }}">show</a>
+                                <a class="action" href="{{ path('admin_course_show', { 'id': course.id }) }}">{{ 'Show'|trans }}</a>
                             </li>
                             <li>
-                                <a class="action" href="{{ path('admin_course_edit', { 'id': course.id }) }}">edit</a>
+                                <a class="action" href="{{ path('admin_course_edit', { 'id': course.id }) }}">{{ 'Edit'|trans }}</a>
                             </li>
                         </ul>
                     </td>
@@ -59,7 +47,7 @@
 
         <ul>
             <li class="actions-toolbar">
-                <a class="button button-primary button-large" href="{{ path('admin_course_new') }}">Create a new course</a>
+                <a class="button button-primary button-large" href="{{ path('admin_course_new') }}">{{ 'Create a new course'|trans }}</a>
             </li>
         </ul>
 {% endblock %}

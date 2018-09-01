@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Asset.
  *
  * @ORM\Table(name="ydi_asset")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AssetRepository")
+ * @UniqueEntity(fields={"file"}, message="File with the same name is existed.")
  * @ORM\HasLifecycleCallbacks()
  */
 class Asset
@@ -30,6 +33,13 @@ class Asset
     private $uuid;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="encoded_uuid", type="string", length=255, nullable=true)
+     */
+    private $encodedUuid;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="state", type="integer", options={"default" = 0})
@@ -39,9 +49,90 @@ class Asset
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="job_uuid", type="string", length=255, nullable=true)
+     */
+    private $jobUuid;
+
+    /**
+     * Queued=0|Scheduled=1|Processing=2|Finished=3|Error=4|Canceled=5|Canceling=6
+     *
+     * @var int
+     *
+     * @ORM\Column(name="job_state", type="integer", options={"default" = 0})
+     */
+    private $jobState = 0;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true, unique=true)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file", type="string", length=255, nullable=true, unique=true)
+     * @Assert\File(
+     *     maxSize = "1024M",
+     *     mimeTypes = {
+     *         "video/mp4",
+     *         "video/quicktime",
+     *         "video/x-msvideo",
+     *         "video/x-ms-wmv",
+     *     },
+     *     mimeTypesMessage = "Please upload a valid video"
+     * )
+     */
+    private $file;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Assert\Image(
+     *     maxSize = "5M",
+     *     mimeTypes = {
+     *         "image/jpeg",
+     *         "image/pjpeg",
+     *         "image/png",
+     *         "image/jpg",
+     *         "image/gif",
+     *     }
+     * )
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="document", type="string", length=255, nullable=true)
+     * @Assert\File(
+     *     maxSize = "100M",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
+     */
+    private $document;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="scorm", type="string", length=255, nullable=true)
+     * @Assert\File(
+     *     maxSize = "200M",
+     *     mimeTypes = {"application/zip", "application/octet-stream", "application/x-zip-compressed", "multipart/x-zip"},
+     *     mimeTypesMessage = "Please upload a zip file"
+     * )
+     */
+    private $scorm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="scorm_path", type="string", length=255, nullable=true)
+     */
+    private $scormPath;
 
     /**
      * @var string
@@ -141,6 +232,22 @@ class Asset
     }
 
     /**
+     * @return string
+     */
+    public function getEncodedUuid()
+    {
+        return $this->encodedUuid;
+    }
+
+    /**
+     * @param string $encodedUuid
+     */
+    public function setEncodedUuid($encodedUuid)
+    {
+        $this->encodedUuid = $encodedUuid;
+    }
+
+    /**
      * Set state.
      *
      * @param int $state
@@ -165,6 +272,38 @@ class Asset
     }
 
     /**
+     * @return string
+     */
+    public function getJobUuid()
+    {
+        return $this->jobUuid;
+    }
+
+    /**
+     * @param string $jobUuid
+     */
+    public function setJobUuid($jobUuid)
+    {
+        $this->jobUuid = $jobUuid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getJobState()
+    {
+        return $this->jobState;
+    }
+
+    /**
+     * @param int $jobState
+     */
+    public function setJobState($jobState)
+    {
+        $this->jobState = $jobState;
+    }
+
+    /**
      * Set name.
      *
      * @param string $name
@@ -186,6 +325,102 @@ class Asset
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set file.
+     *
+     * @param string $file
+     *
+     * @return $this
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * @param string $document
+     */
+    public function setDocument($document)
+    {
+        $this->document = $document;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScorm()
+    {
+        return $this->scorm;
+    }
+
+    /**
+     * @param string $scorm
+     */
+    public function setScorm($scorm)
+    {
+        $this->scorm = $scorm;
+    }
+
+    /**
+     * Set scormPath.
+     *
+     * @param string $scormPath
+     *
+     * @return Asset
+     */
+    public function setScormPath($scormPath)
+    {
+        $this->scormPath = $scormPath;
+
+        return $this;
+    }
+
+    /**
+     * Get scormPath.
+     *
+     * @return string
+     */
+    public function getScormPath()
+    {
+        return $this->scormPath;
     }
 
     /**

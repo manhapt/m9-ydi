@@ -1,11 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Asset edit</h1>
+    <h1>{{ 'Asset edit'|trans }}</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input class="button button-primary" type="submit" value="Edit" />
+    <p>
+        <figure class="preview">
+            {% if asset.image %}
+                <img src="{{ asset('wp-content/uploads/courses/assets/' ~ asset.image.filename) }}" width="150"/>
+            {% endif %}
+            {% if asset.document %}
+                <p>Document path: {{ asset('wp-content/uploads/courses/assets/' ~ asset.document.filename) }}</p>
+            {% endif %}
+            {% if scorm_path %}
+                <p>Scorm path: {{ scorm_path }}</p>
+            {% endif %}
+        </figure>
+    </p>
+        <input class="button button-primary" type="submit" value="Save" />
     {{ form_end(edit_form) }}
 
     <ul>
@@ -13,7 +26,7 @@
             {{ form_start(delete_form) }}
             <input class="button button-primary" type="submit" value="Delete">
             {{ form_end(delete_form) }}
-            <a class="button button-primary" href="{{ path('admin_asset_index') }}">Back to the list</a>
+            <a class="button button-primary" href="{{ path('admin_asset_index') }}">{{ 'Back to the list'|trans }}</a>
         </li>
     </ul>
 {% endblock %}

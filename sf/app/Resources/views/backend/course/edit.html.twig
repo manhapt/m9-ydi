@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Course edit</h1>
+    <h1>{{ 'Course edit'|trans }}</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        {% if course.image %}
-            <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" width="400"/>
-        {% endif %}
-        <input class="button button-primary" type="submit" value="Edit" style="display: block;"/>
+        <figure class="preview">
+            {% if course.image %}
+                <img src="{{ asset('wp-content/uploads/courses/' ~ course.image.filename) }}" width="150"/>
+            {% endif %}
+        </figure>
+        <input class="button button-primary" type="submit" value="{{ 'Save'|trans }}" style="display: block;"/>
     {{ form_end(edit_form) }}
 
     <ul>
         <li class="actions-toolbar">
             <a class="button button-primary" href="{{ path('admin_course_asset', { 'id': course.id }) }}">
-                Manage Assets
+                {{ 'Manage Assets'|trans }}
             </a>
+            <a class="button button-primary" href="{{ path('admin_report_course', { 'id': course.id }) }}">{{ 'Report'|trans }}</a>
             {{ form_start(delete_form) }}
-            <input class="button button-primary" type="submit" value="Delete">
+            <input class="button button-primary" type="submit" value="{{ 'Delete'|trans }}">
             {{ form_end(delete_form) }}
-            <a class="button button-primary" href="{{ path('admin_course_index') }}">Back to the list</a>
+            <a class="button button-primary" href="{{ path('admin_course_index') }}">{{ 'Back to the list'|trans }}</a>
         </li>
     </ul>
 {% endblock %}

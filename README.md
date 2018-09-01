@@ -5,10 +5,10 @@ Requirements: PHP 5.6+
 - apache: enable mod rewrite
 ```
 <VirtualHost *:80>
-    DocumentRoot "C:/xampp/htdocs/www/wp"
+    DocumentRoot "C:/xampp/htdocs/www"
     ServerName ydi.local
     ServerAlias ydi.local
-	<Directory C:/xampp/htdocs/www/wp/>
+	<Directory C:/xampp/htdocs/www/>
 		Options Indexes FollowSymLinks Includes ExecCGI
 		AllowOverride All
 		Order allow,deny
@@ -20,15 +20,36 @@ Requirements: PHP 5.6+
 ```
 - Microsoft IIS: already configured in web.config file
 
-2. Setup wordpress
+- MySQL 5.7: 
+/etc/my.cnf
+[mysqld]
+#MySQL 5.7 to fix error incompatible with sql_mode=only_full_group_by
+sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+
+2. Setup Azure (For Azure portal only)
+Menu choose App Services > Choose service > Application settings 
+> Application settings:
+> Add new setting
+| PHP_INI_SCAN_DIR | /home/site/wwwroot/azure.config/ |
+
+Choose tab Development Tools > SSH
+Find php.ini directory:
+> php -i | grep "Scan this dir for additional .ini files"
+/usr/local/etc/php/conf.d/
+
+> cd /home/site/wwwroot/azure.config/
+> ln -s /usr/local/etc/php/conf.d/* .
+
+
+3. Setup wordpress
 - wp-config.php
-define('WP_SYMFONY_PATH', __DIR__.'/../sf/');
+define('WP_SYMFONY_PATH', __DIR__.'/sf/');
 define('WP_SYMFONY_ENVIRONMENT', 'dev');
 define('WP_SYMFONY_DEBUG', true);
 
 - Activate plugin "Ekino Wordpress Symfony"
 
-3. Setup symfony
+4. Setup symfony
 - Update database information in sf/app/config/parameters.yml
 - run composer install: 
 ```
@@ -41,7 +62,7 @@ php ../composer.phar install --no-progress --profile --prefer-dist --ignore-plat
 php bin/console doctrine:schema:update --force --dump-sql
 ```
 
-4. Setup CKEditor
+5. Setup CKEditor
 - Generate ckeditor + Symfony assets:
 ```
 bin/console ckeditor:install
@@ -55,3 +76,6 @@ TO
 cd {PATH_TO_m9-ydi}/wp
 ln -s {PATH_TO_m9-ydi}/sf/web/bundles bundles
 ```
+
+6. Generate translation files 
+ bin\console  translation:update vi --force

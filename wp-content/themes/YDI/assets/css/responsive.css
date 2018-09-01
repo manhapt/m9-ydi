@@ -1,0 +1,189 @@
+/*
+
+Mobile First
+--------------------------------------------------------------*/
+@media all and (min-width: 320px) {
+    #header,
+    #main-wrapper,
+    .footer-wrapper {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 0 auto;
+        padding: 0;
+        overflow-x: hidden;
+        height: auto;
+    }
+    .col-left,
+    .col-right {
+        float: none;
+        width: 100%;
+    }
+
+    .container .row {
+        padding: 0 15px;
+    }
+
+    .section-1 .col1 {
+        float: none;
+    }
+
+    .grid .item .base-image img {
+        height: 200px;
+    }
+
+    #main-wrapper .azuremediaplayer-dimensions {
+        width: 100% !important;
+        margin: 0 auto;
+        overflow: hidden;
+        height: 435px;
+    }
+}
+
+@media all and (min-width: 640px) {
+    .col-left {
+        float: left;
+        width: 18%;
+        text-align: center;
+    }
+
+    .col-right {
+        float: right;
+        width: 70%;
+        text-align: left;
+    }
+
+    .elearning-wrapper .carousel .item {
+        width: 48%;
+        float: left;
+        padding-right: 15px;
+    }
+
+    .section-1 .col1 {
+        float: left;
+    }
+}
+
+@media all and (max-width: 767px) {
+    body #header,
+    body .footer-wrapper {
+        padding: 15px 0;
+        overflow: hidden;
+    }
+
+    .region-footer .content > div {
+        float: none !important;
+        text-align: center !important;
+        margin-bottom: 10px;
+        width: 100% !important;
+    }
+
+    #header #logo {
+        display: block;
+        float: none;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    #courses-index {
+        overflow: hidden;
+    }
+    #courses-list .grid .details .description p {
+        height: auto;
+    }
+    #courses-list .actions {
+        text-align: center;
+    }
+    #courses-list .grid .actions a {
+        display: block;
+        float: none;
+    }
+    .lecture-details .lecture-container {
+        display: inline-block;
+    }
+    body #main-wrapper {
+        padding: 0 15px;
+    }
+}
+@media all and (min-width: 767px) and (max-width: 1024px) {
+    #courses-list {
+        overflow: hidden;
+    }
+}
+/*
+
+Tablet
+--------------------------------------------------------------*/
+
+@media all and (min-width: 960px) {
+    .col-left {
+        float: left;
+        width: 20%;
+        text-align: center;
+    }
+
+    .col-right {
+        float: right;
+        width: 78%;
+        text-align: left;
+    }
+    .elearning-wrapper .carousel .item {
+        margin-bottom: 1.5%;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    #header,
+    #main-wrapper,
+    .footer-wrapper {
+        display: block;
+        /*max-width: 1050px;*/
+        padding: 0;
+    }
+
+    .footer-wrapper {
+        padding: 30px 0 !important;
+    }
+
+    .elearning-wrapper .carousel .item {
+        width: 31.5%;
+        max-height: 450px;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .section-1 .col2 {
+        padding-right: 45px;
+    }
+
+    #header,
+    #footer {
+        padding: 0 15px;
+        overflow: hidden;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 1280px) {
+    #header,
+    #main-wrapper,
+    .footer-wrapper {
+        width: 100%;
+    }
+}
+/*
+
+Desktop
+--------------------------------------------------------------*/
+@media all and (min-width: 1200px) {
+    #header,
+    #main-wrapper,
+    .footer-wrapper {
+        width: 1075px;
+        overflow-x: visible;
+    }
+}
