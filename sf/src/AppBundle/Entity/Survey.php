@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Survey
@@ -62,6 +63,12 @@ class Survey
      * )
      */
     private $questions;
+
+    /**
+     * @var Asset
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Asset", mappedBy="survey")
+     */
+    private $asset;
 
     /**
      * Constructor.
@@ -207,6 +214,7 @@ class Survey
      */
     public function addQuestion(\AppBundle\Entity\Question $question)
     {
+        $question->setSurvey($this);
         $this->questions[] = $question;
 
         return $this;
@@ -230,6 +238,24 @@ class Survey
     public function getQuestions()
     {
         return $this->questions;
+    }
+
+    /**
+     * @return Asset
+     */
+    public function getAsset()
+    {
+        return $this->asset;
+    }
+
+    /**
+     * @param Asset $asset
+     * @return $this
+     */
+    public function setAsset($asset)
+    {
+        $this->asset = $asset;
+        return $this;
     }
 }
 

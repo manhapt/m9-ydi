@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Answer
@@ -27,6 +28,13 @@ class Answer
      * @ORM\Column(name="code", type="string", length=255)
      */
     private $code;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="position", type="integer", options={"default" = 0})
+     */
+    private $position;
 
     /**
      * @var string
@@ -76,6 +84,30 @@ class Answer
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * Set position.
+     *
+     * @param int $position
+     *
+     * @return $this
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 
     /**

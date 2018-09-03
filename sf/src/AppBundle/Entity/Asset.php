@@ -42,7 +42,7 @@ class Asset
     /**
      * @var int
      *
-     * @ORM\Column(name="state", type="integer", options={"default" = 0})
+     * @ORM\Column(name="state", type="integer", options={"default" = 0}, nullable=true)
      */
     private $state;
 
@@ -58,7 +58,7 @@ class Asset
      *
      * @var int
      *
-     * @ORM\Column(name="job_state", type="integer", options={"default" = 0})
+     * @ORM\Column(name="job_state", type="integer", options={"default" = 0}, nullable=true)
      */
     private $jobState = 0;
 
@@ -151,14 +151,14 @@ class Asset
     /**
      * @var int
      *
-     * @ORM\Column(name="options", type="integer", options={"default" = 0})
+     * @ORM\Column(name="options", type="integer", options={"default" = 0}, nullable=true)
      */
     private $options;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="format_option", type="integer", options={"default" = 0})
+     * @ORM\Column(name="format_option", type="integer", options={"default" = 0}, nullable=true)
      */
     private $formatOption;
 
@@ -196,6 +196,13 @@ class Asset
      * @ORM\Column(name="modified", type="datetime")
      */
     private $modified;
+
+    /**
+     * One Asset may has One Survey.
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Survey", inversedBy="asset", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $survey;
 
     /**
      * Get id.
@@ -658,5 +665,23 @@ class Asset
     public function preUpdate()
     {
         $this->modified = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    /**
+     * @return Survey|null
+     */
+    public function getSurvey()
+    {
+        return $this->survey;
+    }
+
+    /**
+     * @param mixed $survey
+     * @return $this
+     */
+    public function setSurvey($survey)
+    {
+        $this->survey = $survey;
+        return $this;
     }
 }

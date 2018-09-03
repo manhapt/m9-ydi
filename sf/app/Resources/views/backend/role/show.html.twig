@@ -26,14 +26,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('admin_role_index') }}">Back to the list</a>
+            <a href="{{ path('admin_role_index') }}">{{ 'Back to the list'|trans }}</a>
         </li>
         <li>
             <a href="{{ path('admin_role_edit', { 'id': role.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="{{ 'Delete'|trans }}">
             {{ form_end(delete_form) }}
         </li>
     </ul>

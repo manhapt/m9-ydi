@@ -39,7 +39,8 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <input class="button button-primary" type="submit" value="{{ 'Save'|trans }}" />
-    <a class="button button-primary" target="_blank" href="{{ path('admin_asset_new') }}">{{ 'Create a new asset'|trans }}</a><br/>
+    <a class="button button-primary" target="_blank" href="{{ path('admin_asset_new') }}">{{ 'Create a new asset'|trans }}</a>
+    <a class="button button-primary" target="_blank" href="{{ path('admin_survey_new') }}">{{ 'Create a new survey'|trans }}</a><br/>
     {{ form_end(form) }}
 
     <ul>

@@ -1,7 +1,3 @@
-app_survey:
-    resource: "@AppBundle/Controller/SurveyController.php"
-    type:     annotation
-
 app:
     resource: '@AppBundle/Controller/Frontend/'
     type: annotation

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Question creation'|trans }}</h1>
+
+    <script src="{{ absolute_url(asset('wp-includes/js/azure/jquery.collection.js')) }}"></script>
+
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery( document ).ready(function( $ ) {
+            $('.answer-collection').collection({allow_duplicate: true});
+        });
+    </script>
+    {% form_theme form 'jquery.collection.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_row(form.question) }}
+    {{ form_row(form.answerCode) }}
+    {{ form_row(form.answerHint) }}
+    {{ form_row(form.position) }}
+    {{ form_row(form.answers) }}
+
+    <input class="button button-primary" type="submit" value="{{ 'Create'|trans }}" />
+    {{ form_end(form) }}
+
+    <hr/>
+{% endblock %}

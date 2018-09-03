@@ -193,7 +193,7 @@
     text-decoration: none;
     text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
     margin: 15px 13px 3px 0;
-    padding: 12px 15px;
+    padding: 4px 8px;
     height: auto;
     line-height: 1.4285714;
     white-space: normal;
@@ -759,6 +759,9 @@
 }
 .elearning-wrapper #asset-form td.first {
     white-space: nowrap;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .elearning-wrapper #asset-form td.first input {
     margin-left: 0;
@@ -825,3 +828,63 @@
 #superfish-1 li#menu-item-2110 a {
     background: url(../images/menu5.png) 0 0 no-repeat;
 }
+.lttheme_gray {
+    background: #b5b5b5;
+    margin-top: 10px;
+}
+.lttheme_gray a {
+    text-decoration: none;
+}
+.lttheme_gray span {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 33px;
+    color: #555555;
+}
+.lttheme_wrapper .radio {
+    margin-right: 5px;
+}
+.lttheme_wrapper li {
+    margin-top: 5px;
+}
+
+img.showOnLight, span.showOnLight{display:none;}
+.lttheme_gray img.showOnLight, .light_theme span.showOnLight{display:none;}
+.lttheme_gray img.showOnDark, .light_theme span.showOnDark{display:inline-block;}
+
+.elearning-wrapper .answer-collection div > div > div > label {
+    margin-right: 165px;
+    line-height: 37px;
+}
+.elearning-wrapper .answer-collection div > div > div > input {
+    width: 500px;
+}
+.elearning-wrapper .answer-collection div:first-child{
+    clear: left;
+}
+.elearning-wrapper .answer-collection div > div {
+    float: left;
+}
+.elearning-wrapper .answer-collection .appbundle_question_answers-collection-actions {
+    float: left;
+    margin-left: 30px;
+}
+.elearning-wrapper .answer-collection .appbundle_question_answers-collection-actions a {
+    text-decoration: none;
+    padding: 5px;
+    line-height: 42px;
+    font-size: 19px;
+}
+.elearning-wrapper .answer-collection .appbundle_question_answers-collection-duplicate {
+    display: none;
+}
+.elearning-wrapper .answer-collection .appbundle_question_answers-collection-down {
+    float: right;
+    line-height: 35px !important;
+}
+.elearning-wrapper .answer-collection .appbundle_question_answers-collection-up {
+    float: right;
+    line-height: 35px !important;
+}
+.no-float {clear: both}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Survey edit'|trans }}</h1>
+
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input  class="button button-primary"  type="submit" value="{{ 'Save'|trans }}" />
+    {{ form_end(edit_form) }}
+
+    <table>
+        <tr><th>{{ 'Questions'|trans }}</th></tr>
+    {% for question in questions %}
+            <tr>
+                <td>
+                    {% for idx, deleteQuestionForm in deleteQuestionForms %}
+                        {% if idx ==  question.id  %}
+                            {{ form_start(deleteQuestionForm) }}
+                            <input class="button button-primary" type="submit" value="{{ 'Delete'|trans }}">
+                            <a class="button button-primary" href="{{ path('admin_question_edit', { 'id': question.id }) }}">{{ 'Edit'|trans }}</a>
+                            <a class="button button-primary" href="{{ path('admin_question_up', { 'id': question.id }) }}">▲</a>
+                            {{ form_end(deleteQuestionForm) }}
+                        {% endif %}
+                    {% endfor %}
+                    <div>
+                        {{ 'Question'|trans }} : {{ question.question }}
+                    </div>
+                    <div>{{ 'Answer code'|trans }} : {{ question.answerCode }}</div>
+                    <div>{{ 'Answer hint'|trans }} : {{ question.answerHint }}</div>
+                    <div>{{ 'Position'|trans }} : {{ question.position }}</div>
+                    <div>{{ 'Selections'|trans }}
+                        <ul>
+                            {% for answer in question.answers %}
+                                <li><input type="radio" name="{{ question.id }}" value="male"
+                                    {% if question.answerCode ==  answer.answer  %}
+                                        checked="checked"
+                                    {% endif %}
+                                    />{{ answer.answer }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+    {% endfor %}
+    </table>
+
+    <ul>
+        <li>
+            <a class="button button-primary" href="{{ path('admin_survey_question', { 'id': survey.id }) }}">{{ 'Create a new question'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_asset_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="{{ 'Delete'|trans }}">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

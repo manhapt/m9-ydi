@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Survey creation'|trans }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ 'Create'|trans }}" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_asset_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

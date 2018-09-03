@@ -6,6 +6,7 @@ use AppBundle\Entity\Asset;
 use AppBundle\Entity\AssetParticipant;
 use AppBundle\Entity\Course;
 use AppBundle\Entity\CourseParticipant;
+use AppBundle\Entity\Question;
 use AppBundle\Event\AssetLoadEvent;
 use AppBundle\Form\RoleTypes;
 use AppBundle\Repository\CourseRepository;
@@ -161,9 +162,24 @@ class CourseController extends Controller
                 }
             }
         }
-        
+
+        $sortedQuestions = [];
+        if ($asset->getSurvey()) {
+            /** @var Question $question */
+            foreach ($asset->getSurvey()->getQuestions() as $question) {
+                $sortedQuestions[] = $question;
+            }
+
+            usort($sortedQuestions, function($a, $b) {
+                /** @var Question $a */
+                /** @var Question $b */
+                return $a->getPosition() <=> $b->getPosition();
+            });
+        }
+
         $response = $this->render('frontend/course/asset.html.twig', array(
             'courseOptions' => $courseOptions,
+            'questions' => $sortedQuestions,
             'course' => $course,
             'asset' => $asset,
             'learnedAssets' => $completedAssets,

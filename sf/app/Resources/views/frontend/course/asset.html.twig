@@ -65,6 +65,29 @@
                     }
                 });
             }
+
+            $('.lttheme_wrapper').each(function(id,item) {
+                var idealanswer = $(item).find('.idealanswerbox');
+                var submit = $(item).find('.submit');
+                $(idealanswer).hide();
+                $(submit).click(function(e) {
+                    if(!$(this).hasClass('disabled')) {
+                        $(idealanswer).show();
+                    }
+                    e.preventDefault();
+                });
+
+                var showOnDark = $(item).find('.showOnDark');
+                var showOnLight = $(item).find('.showOnLight');
+                var radio = $(item).find('.radio');
+                $(showOnDark).click(false);
+                $(radio).click(function(e) {
+                    if(!$(this).hasClass('disabled')) {
+                        $(showOnLight).show();
+                        $(showOnDark).hide();
+                    }
+                });
+            });
         });
     </script>
     <section class="course-show lecture-details">
@@ -103,7 +126,11 @@
                             <li class="active">
                                 <a data-toggle="1" href="javascript:void(0)">
                                     <i class="fa fa-list"></i>
+                                    {% if asset.survey %}
+                                    <span title="Test">Test</span>
+                                    {% else %}
                                     <span title="Video">Video</span>
+                                    {% endif %}
                                 </a>
                             </li>
                             <li>
@@ -127,6 +154,34 @@
                                     </video>
                                 {% elseif asset.scorm %}
                                     <iframe style="width: 100%; height: 450px"  height="450" src="{{ app.request.getSchemeAndHttpHost() }}/wp-content/uploads/courses/assets/{{ asset.scorm }}/{{ asset.scormPath }}"></iframe>
+                                {% elseif asset.survey %}
+                                {# START OF SURVEY #}
+                                    <table>
+                                        <tr><th>{{ asset.survey.name }}</th></tr>
+                                        {% set questionCounter = 0 %}
+                                        {% for question in questions %}
+                                            {% set questionCounter = questionCounter+1 %}
+                                            <tr>
+                                                <td class="lttheme_wrapper">
+                                                    <div>{{ questionCounter }}. {{ question.question }}</div>
+                                                    <div>
+                                                        <ul>
+                                                            {% for answer in question.answers %}
+                                                                <li><input class="radio" type="radio" name="{{ question.id }}" value="male"/>{{ answer.answer }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    <div class="lttheme_gray">
+                                                        <a class="tileActionButton submit" href="#" style="width: 35.5417px; height: 35.5417px;">
+                                                            <img src="{{ absolute_url(asset('wp-content/themes/YDI/assets/images/dark.right.normal.png')) }}" alt="submit" class="showOnDark">
+                                                            <img src="{{ absolute_url(asset('wp-content/themes/YDI/assets/images/light.right.normal.png')) }}" alt="submit" class="showOnLight"></a>
+                                                        <span class="transparent idealanswerbox">{{ question.answerHint }}</span>
+                                                    </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                {# START OF SURVEY #}
                                 {% endif %}
                             </div>
                             <div class="tab-pane fade in" id="lecture-file">

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Question creation'|trans }}</h1>
+
+    <script src="{{ absolute_url(asset('wp-includes/js/azure/jquery.collection.js')) }}"></script>
+
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery( document ).ready(function( $ ) {
+            $('.answer-collection').collection({allow_duplicate: true});
+        });
+    </script>
+    {% form_theme edit_form 'jquery.collection.html.twig' %}
+    {{ form_start(edit_form) }}
+    {{ form_row(edit_form.question) }}
+    {{ form_row(edit_form.answerCode) }}
+    {{ form_row(edit_form.answerHint) }}
+    {{ form_row(edit_form.position) }}
+    {{ form_row(edit_form.answers) }}
+
+    <div class="no-float">
+        <input class="button button-primary" type="submit" value="{{ 'Save'|trans }}" style="display: block;"/>
+    </div>
+    {{ form_end(edit_form) }}
+
+    <ul class="no-float">
+        <li class="actions-toolbar">
+            {{ form_start(delete_form) }}
+            <input class="button button-primary" type="submit" value="{{ 'Delete'|trans }}">
+            {{ form_end(delete_form) }}
+            <a class="button button-primary" href="{{ path('admin_survey_edit', { 'id': question.survey.id }) }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Question
@@ -41,6 +42,13 @@ class Question
      * @ORM\Column(name="answer_hint", type="string", length=1000, nullable=true)
      */
     private $answerHint;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="position", type="integer", options={"default" = 0})
+     */
+    private $position;
 
     /**
      * @var Survey
@@ -152,6 +160,30 @@ class Question
     public function getAnswerHint()
     {
         return $this->answerHint;
+    }
+
+    /**
+     * Set position.
+     *
+     * @param int $position
+     *
+     * @return $this
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 
     /**

@@ -13,7 +13,6 @@
                 <th>PDF</th>
                 <th>Scorm</th>
                 <th>{{ knp_pagination_sortable(assets, 'Created'|trans, 'c.created') }}</th>
-                <th>{{ 'Modified'|trans }}</th>
                 <th>{{ 'Actions'|trans }}</th>
             </tr>
         </thead>
@@ -22,21 +21,26 @@
             <tr>
                 <td class="first">
                     <input type="checkbox" name="idx[]" value="{{ asset.id }}" />
-                    {{ asset.title }}
+                    {% if null !=  asset.survey  %}({{ 'Survey'|trans }}) {% endif %}{{ asset.title }}
                 </td>
                 <td>{{ asset.uri }}</td>
                 <td>{{ asset.document }}</td>
                 <td>{{ asset.scormPath }}</td>
-                <td>{% if asset.created %}{{ asset.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if asset.modified %}{{ asset.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if asset.created %}{{ asset.created|date('Y-m-d') }}{% endif %}</td>
                 <td class="last">
                     <ul class="actions">
+                        {% if null ==  asset.survey  %}
                         <li class="show-action">
                             <a href="{{ path('admin_asset_show', { 'id': asset.id }) }}">{{ 'Show'|trans }}</a>
                         </li>
                         <li class="edit-action">
                             <a href="{{ path('admin_asset_edit', { 'id': asset.id }) }}">{{ 'Edit'|trans }}</a>
                         </li>
+                        {% else %}
+                        <li class="edit-action">
+                            <a href="{{ path('admin_survey_edit', { 'id': asset.survey.id }) }}">{{ 'Edit'|trans }}</a>
+                        </li>
+                        {% endif %}
                         <li class="delete-action">
                             {% for idx, deleteAssetForm in deleteAssetForms %}
                                 {% if idx ==  asset.id  %}
@@ -61,6 +65,7 @@
     <ul>
         <li class="actions-toolbar">
             <a class="button button-primary" href="{{ path('admin_asset_new') }}">{{ 'Create a new asset'|trans }}</a>
+            <a class="button button-primary" href="{{ path('admin_survey_new') }}">{{ 'Create a new survey'|trans }}</a>
         </li>
     </ul>
 {% endblock %}

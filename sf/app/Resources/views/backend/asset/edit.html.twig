@@ -18,13 +18,13 @@
             {% endif %}
         </figure>
     </p>
-        <input class="button button-primary" type="submit" value="Save" />
+        <input class="button button-primary" type="submit" value="{{ 'Save'|trans }}" />
     {{ form_end(edit_form) }}
 
     <ul>
         <li class="actions-toolbar">
             {{ form_start(delete_form) }}
-            <input class="button button-primary" type="submit" value="Delete">
+            <input class="button button-primary" type="submit" value="{{ 'Delete'|trans }}">
             {{ form_end(delete_form) }}
             <a class="button button-primary" href="{{ path('admin_asset_index') }}">{{ 'Back to the list'|trans }}</a>
         </li>
