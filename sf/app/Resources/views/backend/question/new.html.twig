@@ -19,7 +19,9 @@
     {{ form_row(form.position) }}
     {{ form_row(form.answers) }}
 
-    <input class="button button-primary" type="submit" value="{{ 'Create'|trans }}" />
+    <div class="no-float">
+        <input class="button button-primary" type="submit" value="{{ 'Create'|trans }}" />
+    </div>
     {{ form_end(form) }}
 
     <hr/>

@@ -41,7 +41,7 @@ class SurveyController extends Controller
             $em->persist($survey);
             $em->flush();
 
-            return $this->redirectToRoute('admin_survey_edit', array('id' => $survey->getId()));
+            return $this->redirectToRoute('admin_survey_question', array('id' => $survey->getId()));
         }
 
         return $this->render('backend/survey/new.html.twig', array(
