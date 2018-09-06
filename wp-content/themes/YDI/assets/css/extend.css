@@ -896,4 +896,13 @@ img.showOnLight, span.showOnLight{display:none;}
     float: right;
     line-height: 35px !important;
 }
+.elearning-wrapper .scorm-full-btn a {
+    float: right;
+    margin-right: 28px;
+    position: absolute;
+    top: 53px;
+    right: 0;
+    width: 25px;
+    height: 25px;
+}
 .no-float {clear: both}

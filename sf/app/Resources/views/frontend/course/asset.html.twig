@@ -153,6 +153,7 @@
                                         <source src="{{ asset.uri }}{{ asset.name }}.ism/manifest" type="application/vnd.ms-sstr+xml" />
                                     </video>
                                 {% elseif asset.scorm %}
+                                    <div class="scorm-full-btn"><a target="_blank" href="{{ app.request.getSchemeAndHttpHost() }}/wp-content/uploads/courses/assets/{{ asset.scorm }}/{{ asset.scormPath }}">FULL</a></div>
                                     <iframe style="width: 100%; height: 450px"  height="450" src="{{ app.request.getSchemeAndHttpHost() }}/wp-content/uploads/courses/assets/{{ asset.scorm }}/{{ asset.scormPath }}"></iframe>
                                 {% elseif asset.survey %}
                                 {# START OF SURVEY #}
