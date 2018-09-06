@@ -608,6 +608,7 @@
 
 .tab-content > .tab-pane {
     display: none;
+    max-height: 450px;
 }
 
 .tab-content > .active {
@@ -627,7 +628,6 @@
     height: auto;
     overflow-y: scroll;
     width: 100%;
-    max-height: 435px;
 }
 
 .list-lecture-container .chap-title {
@@ -687,7 +687,6 @@
 }
 .list-lecture-container .chap-item:hover .item-container .chap-item-content {
     color: #FF8300;
-    font-weight: 600;
 }
 .chap-item a {
     text-decoration: none;
@@ -702,15 +701,10 @@
     padding-top: 10px;
     padding-bottom: 10px;
     color: #868686;
+    cursor: pointer;
     font-size: 14px;
     font-weight: 300;
-}
-.chap-item .item-container .chap-item-content:hover {
-    -webkit-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
-    cursor: pointer;
+    font-family: Arial, sans-serif;
 }
 
 #menu-item-2082 a {
