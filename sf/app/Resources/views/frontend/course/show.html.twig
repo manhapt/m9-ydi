@@ -7,10 +7,12 @@
                 <section class="section-title section-setting">
                     <div class="title">
                         <i class="fa fa-book-open fa-2x fa-pull-left"></i>
-                        <h1 title="{{ course.name }}">{{ course.name }}</h1>
-                        {% if(course.shortDescription) %}
-                            <p class="sub-title">{{ course.shortDescription }}</p>
-                        {% endif %}
+                        <div class="heading-text">
+                            <h1 title="{{ course.name }}">{{ course.name }}</h1>
+                            {% if(course.shortDescription) %}
+                                <p class="sub-title">{{ course.shortDescription }}</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </section>
                 <!-- course item -->

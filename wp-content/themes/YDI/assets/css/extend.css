@@ -286,10 +286,11 @@
 .course-show .title h1,
 #courses-list .title h1 {
     color: #1f4475;
-    display: inline;
+    display: block;
     font-weight: 600;
     margin-bottom: 10px;
     text-transform: capitalize;
+    padding: 10px 0 0;
 }
 
 .course-show .title .fa:before,
@@ -307,8 +308,17 @@
     padding-left: 58px;
 }
 
+.course-show .title .short-desc {
+    color: #333;
+    font-size: 14px;
+    font-style: italic;
+}
+
 .course-show .title .sub-title.process-text {
     padding-left: 0;
+    float: none;
+    display: inline-block;
+    margin-left: 10px;
 }
 
 .grid .item {
@@ -401,6 +411,10 @@
 }
 
 /********************************************* Course Show *******************************************/
+.heading-text {
+    display: block;
+    margin-left: 60px;
+}
 
 .course-show {
     /*background: #1e597e;*/
@@ -416,9 +430,11 @@
 
 .course-show .section-setting .title {
     color: #333;
+    display: inline-block;
     font-weight: 600;
     padding-bottom: 0;
     text-transform: none;
+    width: 100%;
 }
 
 .course-show .section_author,

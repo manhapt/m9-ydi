@@ -96,26 +96,28 @@
                 <section class="section-title section-setting">
                     <div class="title">
                         <i class="fa fa-book-open fa-2x fa-pull-left"></i>
-                        <h1 title="{{ course.name }}">{{ course.name }}</h1>
-                        {% if(course.shortDescription) %}
-                            <p class="sub-title">{{ course.shortDescription }}</p>
-                        {% endif %}
+                        <div class="heading-text">
+                            <h1 title="{{ course.name }}">{{ course.name }}</h1>
+                            {% if(course.shortDescription) %}
+                                <p class="short-desc">{{ course.shortDescription }}</p>
+                            {% endif %}
 
-                        {% set assetCounter = 0 %}
-                        {% set learnedCounter = 0 %}
-                        {% for courseOption in courseOptions %}
-                            {% for assetLink in courseOption.assets %}
-                                {% set assetCounter = assetCounter+1 %}
+                            {% set assetCounter = 0 %}
+                            {% set learnedCounter = 0 %}
+                            {% for courseOption in courseOptions %}
+                                {% for assetLink in courseOption.assets %}
+                                    {% set assetCounter = assetCounter+1 %}
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
-                        {% for learnedAsset in learnedAssets %}
-                            {% set learnedCounter = learnedCounter+1 %}
-                        {% endfor %}
+                            {% for learnedAsset in learnedAssets %}
+                                {% set learnedCounter = learnedCounter+1 %}
+                            {% endfor %}
 
-                        <p class="sub-title process-text">{{ 'Complete'|trans }}: </p>
-                        <div class="process meter">
-                            {% set percent = (learnedCounter/assetCounter) * 100 %}
-                            <span style="width: {{ percent }}%"></span>
+                            <div class="process meter">
+                                <p class="sub-title process-text">{{ 'Complete'|trans }}: </p>
+                                {% set percent = (learnedCounter/assetCounter) * 100 %}
+                                <span style="width: {{ percent }}%"></span>
+                            </div>
                         </div>
                     </div>
                 </section>
