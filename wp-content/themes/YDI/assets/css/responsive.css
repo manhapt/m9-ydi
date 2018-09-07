@@ -128,8 +128,8 @@ Tablet
         width: 78%;
         text-align: left;
     }
-    .elearning-wrapper .carousel .item {
-        /*margin-bottom: 1.5%;*/
+    #courses-index .grid .description h3 {
+        min-height: 48px;
     }
 }
 
