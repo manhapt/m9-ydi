@@ -129,7 +129,7 @@ Tablet
         text-align: left;
     }
     .elearning-wrapper .carousel .item {
-        margin-bottom: 1.5%;
+        /*margin-bottom: 1.5%;*/
     }
 }
 
@@ -138,7 +138,6 @@ Tablet
     #main-wrapper,
     .footer-wrapper {
         display: block;
-        /*max-width: 1050px;*/
         padding: 0;
     }
 
