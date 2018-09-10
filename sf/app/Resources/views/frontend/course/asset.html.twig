@@ -196,7 +196,9 @@
                                 {% for courseOption in courseOptions %}
                                     {% set optionCounter = optionCounter+1 %}
                                     {% for assetLink in courseOption.assets %}
-                                        <div class="fb-comments" xid="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}" data-width="100%" data-numposts="20"></div>
+                                        {% if (asset.id == assetLink.id) %}
+                                            <div class="fb-comments" xid="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}" data-width="100%" data-numposts="20"></div>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endfor %}
                         </div>
