@@ -233,7 +233,7 @@
                                                 <a class="fa" title="{{ assetLink.title }}"
                                                     {% if(assetLink.document) %}
                                                         data-target="{{ asset('wp-content/uploads/courses/assets/' ~ assetLink.document) }}"
-                                                        {% if(assetLink.file) %}
+                                                        {% if(assetLink.id) %}
                                                             href="{{ path('course_asset', { 'id': course.id, 'asset_id': assetLink.id }) }}"
                                                         {% endif %}
                                                     {% else %}
