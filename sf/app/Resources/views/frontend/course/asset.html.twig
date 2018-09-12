@@ -43,13 +43,14 @@
             // Toggle tabs - function
             function tabListener() {
                 dataTab.on('click', function () {
-                    var tabID = $(this).attr('data-toggle');
+                    var tabID = $(this).attr('data-toggle'),
+                        player = $('#azuremediaplayer video');
                     tabs.removeClass('active');
                     $('.lecture-player .tab-pane').hide();
                     $(this).parent().addClass('active');
-                    if (tabID == 1) {$('#lecture-video').show();$('#azuremediaplayer').get(0).play();}
-                    if (tabID == 2) {$('#lecture-file').show();if($('#azuremediaplayer').length) {$('#azuremediaplayer').get(0).pause();}}
-                    if (tabID == 3) {$('#lecture-tab-discussion').show();if($('#azuremediaplayer').length) {$('#azuremediaplayer').get(0).pause();}}
+                    if (tabID == 1) {$('#lecture-video').show();player.get(0).play();}
+                    if (tabID == 2) {$('#lecture-file').show();player.get(0).pause();}
+                    if (tabID == 3) {$('#lecture-tab-discussion').show();player.get(0).pause();}
                 });
             }
             // Event listener - lecture
@@ -61,7 +62,7 @@
                         $('#file-preview').attr('src', documentAvailable);
                         lectures.removeClass('current');$(this).parent().addClass('current');
                         tabs.removeClass('disabled');videoTab.addClass('disabled');
-                        $('#azuremediaplayer').get(0).pause();documentTab.find('a').click();
+                        $('#azuremediaplayer video').get(0).pause();documentTab.find('a').click();
                     }
                 });
             }
