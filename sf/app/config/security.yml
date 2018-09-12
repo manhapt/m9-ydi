@@ -30,4 +30,4 @@ security:
             anonymous: ~
 
     access_control:
-        - { path: ^/admin, roles: ROLE_WP_ADMINISTRATOR }
+        - { path: ^/wp-admin, roles: ROLE_WP_ADMINISTRATOR }
